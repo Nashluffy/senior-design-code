@@ -57,4 +57,4 @@ def decode(filename):
 
 
 if __name__ == '__main__':
-   decode("/home/nash/Code/SkyAudio/Sample.aif")
+   decode("/home/nash/Code/SkyAudio/SampleFiles/Sample.aif")
