@@ -37,8 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
     
     'core',
+=======
+>>>>>>> 61bf7cd8159981db35addc3b35efb8b1a3680cf7
     'fileupload',
     'storages',
 ]
