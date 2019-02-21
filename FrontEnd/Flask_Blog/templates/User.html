@@ -12,7 +12,7 @@
 		<nav class ="navbar fixed-top">
 			<div class ="container">
 				<form action = "http://localhost:5000/uploader" method="POST" enctype="multipart/form-data">
-					<input type="file" name="file"/>
+					<input type="file" name="file" onchange="readURL(this);" />
 					<input type ="submit"/>
 				</form>
 			</div>

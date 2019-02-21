@@ -1,4 +1,5 @@
 from flask import Flask, render_template, url_for, request
+from werkzeug import secure_filename
 app = Flask(__name__) #this give us an instantiated flask application
 
 #If I were to make a database call I would receive a list of post
@@ -36,6 +37,14 @@ def about():
 @app.route("/user")
 def user():
 	return render_template('User.html', title = 'User')
+
+@app.route("/uploader" , methods = ['GET', 'POST'])
+def upload_file():
+	if request.method == 'POST':
+		f = request.files['file']
+		f.save(secure_filename(f.filename))
+		return "file uploaded successfully"
+
 
 if __name__ == '__main__':
     app.run(debug=True)
