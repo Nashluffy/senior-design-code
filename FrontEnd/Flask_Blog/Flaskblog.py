@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 app = Flask(__name__) #this give us an instantiated flask application
 
 #If I were to make a database call I would receive a list of post
@@ -24,7 +24,7 @@ app = Flask(__name__) #this give us an instantiated flask application
 @app.route("/") #decorator
 @app.route("/home")
 def home():
-    return render_template('home.html', title = 'Hcdome')
+    return render_template('home.html', title = 'Home')
 
 
 
@@ -32,6 +32,10 @@ def home():
 def about():
     return render_template('about.html', title = 'about')
 
+
+@app.route("/user")
+def user():
+	return render_template('User.html', title = 'User')
 
 if __name__ == '__main__':
     app.run(debug=True)
