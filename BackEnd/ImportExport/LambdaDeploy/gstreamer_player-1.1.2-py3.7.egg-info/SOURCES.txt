@@ -1,0 +1,9 @@
+README.md
+setup.cfg
+setup.py
+gsp/__init__.py
+gstreamer_player.egg-info/PKG-INFO
+gstreamer_player.egg-info/SOURCES.txt
+gstreamer_player.egg-info/dependency_links.txt
+gstreamer_player.egg-info/requires.txt
+gstreamer_player.egg-info/top_level.txt
