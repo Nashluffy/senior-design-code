@@ -33,15 +33,8 @@ import botocore
 #Create event handler to handle S3 action
 def lambda_handler(event, context)
     for record in event['Records']:
-        bucket = record['s3']['bucket']['name']
-        key = record['s3']['object']['key'] 
-        download_path = '/tmp/{}{}'.format(uuid.uuid4(), key)
-        upload_path = '/tmp/resized-{}'.format(key)
-        
-        s3_client.download_file(bucket, key, download_path)
-        resize_image(download_path, upload_path)
-        s3_client.upload_file(upload_path, '{}resized'.format(bucket), key)
-
+        key = event['Records'][0]['s3']['object']['key']
+        print(key)
 #Create S3 resource & define properties
 s3 = boto3.resource('s3')
 BUCKET_NAME = 'django-file-storage'
