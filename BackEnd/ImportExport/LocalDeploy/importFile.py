@@ -31,7 +31,7 @@ import botocore
 
 
 #Create event handler to handle S3 action
-def lambda_handler(event, context)
+def lambda_handler(event, context):
     for record in event['Records']:
         key = event['Records'][0]['s3']['object']['key']
         print(key)
