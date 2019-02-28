@@ -31,41 +31,42 @@ import botocore
 
 
 #Create event handler to handle S3 action
-def lambda_handler(event, context):
-    for record in event['Records']:
-        key = event['Records'][0]['s3']['object']['key']
-        print(key)
+#def lambda_handler(event, context):
+#    for record in event['Records']:
+#        key = event['Records'][0]['s3']['object']['key']
+#        print(key)
+
 #Create S3 resource & define properties
-s3 = boto3.resource('s3')
-BUCKET_NAME = 'django-file-storage'
-IMPORT_FOLDER = 'RawFiles/{}'
-EXPORT_FOLDER = 'ConvertedFiles/{}'
-IMPORT_BUCKET = 'skyaudio.files.raw'
-EXPORT_BUCKET = 'skyaudio.files.converted'
+#s3 = boto3.resource('s3')
+#BUCKET_NAME = 'django-file-storage'
+#IMPORT_FOLDER = 'RawFiles/{}'
+#EXPORT_FOLDER = 'ConvertedFiles/{}'
+#IMPORT_BUCKET = 'skyaudio.files.raw'
+#EXPORT_BUCKET = 'skyaudio.files.converted'
 
 #Pulling file from AWS S3 Bucket
-def bucketPull(file_name):
-    try:
-        s3.Bucket(IMPORT_BUCKET).download_file(file_name, '/tmp/' + file_name) 
-        print("File downloaded to tmp directory succesfully!")
-    except botocore.exceptions.ClientError as e:
-        if e.response['Error']['Code'] == "404":
-            print("The object does not exist.")
-        else:
-            raise
+#def bucketPull(file_name):
+#    try:
+#        s3.Bucket(IMPORT_BUCKET).download_file(file_name, '/tmp/' + file_name) 
+#        print("File downloaded to tmp directory succesfully!")
+#    except botocore.exceptions.ClientError as e:
+#        if e.response['Error']['Code'] == "404":
+#            print("The object does not exist.")
+#        else:
+#            raise
 
 #Pushing the converted file back to the bucket
-def bucketPush(file_name):
-    try:
-        s3.Bucket(EXPORT_BUCKET).upload_file(('/tmp/' + file_name  + '.wav'), (file_name + '.wav')) #Upload call
-        print("File uploaded successfully!")
-    finally:
-        os.remove('/tmp/' + file_name + '.wav') #Delete converted file from tmp directory
-        os.remove('/tmp/' + file_name) #Delete converted
+#def bucketPush(file_name):
+#    try:
+#        s3.Bucket(EXPORT_BUCKET).upload_file(('/tmp/' + file_name  + '.wav'), (file_name + '.wav')) #Upload call
+#        print("File uploaded successfully!")
+#    finally:
+#        os.remove('/tmp/' + file_name + '.wav') #Delete converted file from tmp directory
+#        os.remove('/tmp/' + file_name) #Delete converted
 
 #Convert file
 def decode(file_name):
-    file_location = os.path.abspath(os.path.expanduser('/tmp/' + file_name))
+    file_location = os.path.abspath(os.path.expanduser(file_path + file_name))
     if not os.path.exists(file_location):
         print("File not found. Please check path.", file=sys.stderr)
         sys.exit(1)
@@ -89,7 +90,8 @@ def decode(file_name):
         sys.exit(1)
 
 if __name__ == '__main__':
+    file_path=input("Enter the file path: ")
     file_name=input("Enter the file name with extension: ")
-    bucketPull(file_name)
+    #bucketPull(file_name)
     decode(file_name)
-    bucketPush(file_name)
+    #bucketPush(file_name)

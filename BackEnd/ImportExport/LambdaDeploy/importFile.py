@@ -27,7 +27,8 @@ import contextlib
 import wave
 import boto3
 import botocore
-
+import traceback
+import audioread.gstdec
 
 #Create event handler to handle S3 action
 def lambda_handler(event, context):
@@ -36,8 +37,7 @@ def lambda_handler(event, context):
     bucketPull(file_name)
     decode(file_name)
     bucketPush(file_name)
-    #key = event['Records'][0]['s3']['object']['key']
-    #print(key)
+    
 
 #Create S3 resource & define properties
 s3 = boto3.resource('s3')
@@ -67,16 +67,19 @@ def bucketPush(file_name):
         os.remove('/tmp/' + file_name + '.wav') #Delete converted file from tmp directory
         os.remove('/tmp/' + file_name) #Delete converted
 
+
+
 #Convert file
 def decode(file_name):
     file_location = os.path.abspath(os.path.expanduser('/tmp/' + file_name))
+    #audioread.ffdec.available()
     if not os.path.exists(file_location):
         print("File not found. Please check path.", file=sys.stderr)
         sys.exit(1)
     else:
         print("File can be located")
     try:
-        with audioread.audio_open(file_location) as f:
+        with audioread.gstdec.GstAudioFile(file_location) as f:
             print('Input file: %i channels at %i Hz; %.1f seconds.' %
                   (f.channels, f.samplerate, f.duration),
                   file=sys.stderr)
@@ -90,6 +93,9 @@ def decode(file_name):
 
                 for buf in f:
                     of.writeframes(buf)
+
     except audioread.DecodeError:
-        print("File could not be decoded.", file=sys.stderr)
-        sys.exit(1)
+        exc_type, exc_value, exc_traceback = sys.exc_info()
+        traceback.print_tb(exc_traceback, limit = None, file=sys.stdout)
+    #    print("File could not be decoded.", file=sys.stderr)
+    #    sys.exit(1)
