@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-	{% if title %}
-		<title>Skyaudio - {{ title}}</title>
-	{%else%}
-		<title>Skyaudio</title>
-	{% endif %}
+
+	 <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" href="static/users.css">
+
+
+	
 </head>
 <body>
 	<header class ="site-header">
-		<nav class ="navbar fixed-top">
 			<div class ="container">
+				<h3> in header</h3>
+				<p class ="something"> Text goes here </p>
 				<form action = "http://localhost:5000/uploader" method="POST" enctype="multipart/form-data">
 					<input type="file" name="file" onchange="readURL(this);" />
 					<input type ="submit"/>
@@ -18,5 +22,6 @@
 			</div>
 		</nav>
 	</header>
+	<a href = "click" class ="button"> python script </a>
 </body>
 </html>
