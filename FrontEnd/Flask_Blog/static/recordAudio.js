@@ -12,9 +12,10 @@ function getPermission(){
 
          // Success callback
          .then(function(stream) { //Successful creation of a media stream
-            var mediaRecorder = new MediaRecorder(stream);
-            console.log("Stream & MediaRecorder created successfully");
-            return mediaRecorder;
+               var mR = new MediaRecorder(stream);
+               console.log("Hit me");
+               console.log("Stream & MediaRecorder created successfully");
+               return mR;
          })
 
          // Error callback
@@ -25,21 +26,23 @@ function getPermission(){
    } else {
       console.log('getUserMedia not supported on your browser!');
    }
+     
 }
 //Creates new media recorder instance and passes it the stream directly.
 //At this point, the stream is ready to be captured into a Blob (file-like object of immutable, raw data)
 
-window.onload = function(){getPermission()};
-startButton.onclick = function(){startRecording(mediaRecorder)};
-stopButton.onclick = function(){stopRecording(mediaRecorder)};
 
-function startRecording(mediaRecorder){
-  mediaRecorder.start();
-  console.log(mediaRecorder.state);
-  console.log("Recording started");
+startButton.onclick = function(){startRecording()};
+stopButton.onclick = function(){stopRecording()};
+
+async function startRecording(){
+      var mediaRecorder = await getPermission();
+      mediaRecorder.start();
+      console.log(mediaRecorder.state);
+      console.log("Recording started");
 }   
-function stopRecording(mediaRecorder){
+
+function stopRecording(){
   mediaRecorder.stop();
   console.log("Recording stopped");
 }       
-

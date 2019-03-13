@@ -2,7 +2,7 @@ var stopButton = document.getElementById('stop_button');
 var startButton = document.getElementById('start_button');
 
 //Gets audio permission from browser & creates media stream if successful
-function getPermission(){
+async function getPermission(){
    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) { //Checking for getUserMedia support
       console.log('getUserMedia supported.'); 
       navigator.mediaDevices.getUserMedia (
@@ -31,12 +31,11 @@ function getPermission(){
 //Creates new media recorder instance and passes it the stream directly.
 //At this point, the stream is ready to be captured into a Blob (file-like object of immutable, raw data)
 
-
+var mediaRecorder = await getPermission();
 startButton.onclick = function(){startRecording()};
 stopButton.onclick = function(){stopRecording()};
 
-async function startRecording(){
-      var mediaRecorder = await getPermission();
+function startRecording(){
       mediaRecorder.start();
       console.log(mediaRecorder.state);
       console.log("Recording started");
