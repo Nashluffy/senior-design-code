@@ -7,10 +7,11 @@ stopButton.disabled = true; //Disable stopping recording when not recording in t
 var blobReadyEvent = new Event ('blobReady');
 
 var wavesurferConstraints = {
-   container: document.getElementById('waveform'),
-   waveColor: 'violet',
-   progressColor: 'purple',
-   backend: 'WebAudio'
+   container        :   document.getElementById('waveform'),
+   waveColor        :   'violet',
+   progressColor    :   'purple',
+   backend          :   'WebAudio',
+   plugins          :   [WaveSurfer.microphone.create()]
 }
 var getmediaConstraints = 
 {
