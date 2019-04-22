@@ -1,19 +1,15 @@
+//List DOM elements
 var stopButton = document.getElementById('stop_button');
 var startButton = document.getElementById('start_button');
 var audioPlayback = document.getElementById('audio_playback');
-stopButton.disabled = true; //Disable stopping recording when not recording in the first place
-//Gets audio permission from browser & creates a new MediaStream on success
+var downloadButton = document.getElementById('download');
+stopButton.disabled = true;
+audioPlayback.disabled = true; 
 
+
+
+//List custom events
 var micOn = new Event ('micOn');
-
-/*var micInputConstraints = {
-   container        :   document.getElementById('micInput'),
-   waveColor        :   'violet',
-   progressColor    :   'purple',
-   backend          :   'WebAudio',
-   plugins: [WaveSurfer.microphone.create()]
-}
-*/
 
 var wavesurferConstraints = {
    container        :   document.getElementById('waveform'),
@@ -21,6 +17,7 @@ var wavesurferConstraints = {
    progressColor    :   'purple',
    backend          :   'WebAudio',
 }
+
 var getmediaConstraints = 
 {
    audio: true
@@ -50,6 +47,12 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
          var blob = new Blob(chunks, {'type' : 'audio/ogg; codecs=opus'}); //Creating a new blob
          chunks = []; //Reset our chunks 
          var blobUrl = window.URL.createObjectURL(blob);
+         var a = document.createElement("a");
+         a.href = blobUrl;
+         a.download = "TESTING";
+         document.body.appendChild(a);
+         a.click();
+         audioPlayback.disabled = false;
          audioPlayback.src = blobUrl;
          console.log('Access your blob here: ' + blobUrl);
          var wavesurfer = WaveSurfer.create(wavesurferConstraints);
@@ -63,8 +66,14 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
        console.log('getUserMedia not supported on your browser!');
     }
 
+function blobToFile(theBlob, fileName){
+    //A Blob() is almost a File() - it's just missing the two properties below which we will add
+    theBlob.lastModifiedDate = new Date();
+    theBlob.name = fileName;
+    return theBlob;
+}
+
 audioPlayback.addEventListener("micOn", function(stream){
-   console.log('Hey you hit the custom event!');
    var micInputWaveSurfer = WaveSurfer.create({
       container        :   document.getElementById('micInput'),
       waveColor        :   'violet',
