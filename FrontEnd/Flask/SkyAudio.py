@@ -13,7 +13,7 @@ application.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 @application.route("/")
 def index():
     return "Hello World!"
-sfgsdfgsdfgdfsg
+
 
 def allowed_file(filename):
     return '.' in filename and \
