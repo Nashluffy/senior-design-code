@@ -38,6 +38,10 @@ def about():
 def user():
 	return render_template('User.html', title = 'User')
 
+@app.route("/record")
+def record():
+	return render_template('record.html', title = 'Record')
+
 @app.route("/uploader" , methods = ['GET', 'POST'])
 def upload_file():
 	if request.method == 'POST':
