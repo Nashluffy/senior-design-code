@@ -1,6 +1,6 @@
 from flask import Flask, flash, redirect, send_from_directory, render_template, url_for, request, Response
 from werkzeug import secure_filename
-import os
+import os, boto3
 
 #UPLOAD_FOLDER = '/home/ec2-user/SkyAudio/SkyAudio/FrontEnd/Flask/tmp/'
 UPLOAD_FOLDER = '/tmp'
@@ -9,6 +9,8 @@ ALLOWED_EXTENSIONS = set(['txt', 'mp3', 'wav', 'pdf', 'png', 'jpg', 'jpeg', 'gif
 application = Flask(__name__) 
 application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 application.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+
+s3_client = boto3.resource('s3')
 
 @application.route("/")
 def index():
@@ -19,24 +21,10 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@application.route('/', methods=['GET', 'POST'])
-def upload_file():
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        # if user does not select file, browser also
-        # submit an empty part without filename
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('uploaded_file',
-                                    filename=filename))
+@application.route('/download', methods=['GET'])
+def download_file():
+    if request.method == 'GET':
+        return "Got it working"
     return '''
     <!doctype html>
     <title>Upload new File</title>
@@ -46,6 +34,13 @@ def upload_file():
       <input type=submit value=Upload>
     </form>
     '''
+
+
+@application.route('/', methods=['POST'])
+def upload_file():
+    if request.method == 'POST':
+        if file and allowed_file(file.filename):
+
 @application.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(application.config['UPLOAD_FOLDER'],
