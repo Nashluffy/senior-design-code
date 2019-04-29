@@ -1,16 +1,18 @@
-from flask import Flask, flash, redirect, send_from_directory, render_template, url_for, request, Response
+from flask import send_file,Flask, flash, redirect, send_from_directory, render_template, url_for, request, Response
 from werkzeug import secure_filename
 import os, boto3
 
 #UPLOAD_FOLDER = '/home/ec2-user/SkyAudio/SkyAudio/FrontEnd/Flask/tmp/'
 UPLOAD_FOLDER = '/tmp'
 ALLOWED_EXTENSIONS = set(['txt', 'mp3', 'wav', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+bucket = 'skyaudio-curltest'
+
 
 application = Flask(__name__) 
 application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 application.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
-s3_client = boto3.resource('s3')
+s3_client = boto3.client('s3')
 
 @application.route("/")
 def index():
@@ -24,23 +26,21 @@ def allowed_file(filename):
 @application.route('/download', methods=['GET'])
 def download_file():
     if request.method == 'GET':
-        return "Got it working"
-    return '''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form method=post enctype=multipart/form-data>
-      <input type=file name=file>
-      <input type=submit value=Upload>
-    </form>
-    '''
-
+        filename = request.form['file']
+        s3_client.download_file(bucket, filename, UPLOAD_FOLDER + '/' + filename)
+        file = UPLOAD_FOLDER + '/' + filename
+        return send_file(file)
 
 @application.route('/', methods=['POST'])
 def upload_file():
     if request.method == 'POST':
+        file = request.files['file']
         if file and allowed_file(file.filename):
-
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
+            response = s3_client.upload_file(UPLOAD_FOLDER + '/' + filename, bucket, file.filename)
+            os.remove(UPLOAD_FOLDER + '/' + filename)
+        return 'Successfully uploaded to S3'    
 @application.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(application.config['UPLOAD_FOLDER'],
