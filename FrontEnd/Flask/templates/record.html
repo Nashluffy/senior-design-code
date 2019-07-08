@@ -10,6 +10,7 @@
          <input id="addtrack" type="button" value="Add new track" />
       </form>
     <article class="clip">
+        <input id="download" type = "button" value = "Download Recording" />
         <audio id="audio_playback" controls></audio>
         <div id="waveform"></div>
         <div id="micInput"></div>
@@ -20,5 +21,4 @@
    <script type=text/javascript src="{{url_for('static', filename='recordAudio.js') }}"></script>
    <script src="https://unpkg.com/wavesurfer.js@2.2.1/dist/wavesurfer.min.js"></script>
    <script type=text/javascript src="{{url_for('static', filename='microphone_plugin.js') }}"></script>
-   <!--<script src="https://unpkg.com/wavesurfer.js@2.2.1/dist/plugin/wavesurfer.microphone.min.js"></script>-->
 </html>
