@@ -66,6 +66,13 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
        console.log('getUserMedia not supported on your browser!');
     }
 
+function blobToFile(theBlob, fileName){
+    //A Blob() is almost a File() - it's just missing the two properties below which we will add
+    theBlob.lastModifiedDate = new Date();
+    theBlob.name = fileName;
+    return theBlob;
+}
+
 audioPlayback.addEventListener("micOn", function(stream){
    var micInputWaveSurfer = WaveSurfer.create({
       container        :   document.getElementById('micInput'),
