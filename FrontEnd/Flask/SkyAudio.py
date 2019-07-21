@@ -1,6 +1,8 @@
 from flask import send_file,Flask, flash, redirect, send_from_directory, render_template, url_for, request, Response
 from werkzeug import secure_filename
+from flask_bootstrap import Bootstrap
 import os, boto3
+
 
 #UPLOAD_FOLDER = '/home/ec2-user/SkyAudio/SkyAudio/FrontEnd/Flask/tmp/'
 UPLOAD_FOLDER = '/tmp'
@@ -8,7 +10,8 @@ ALLOWED_EXTENSIONS = set(['txt', 'mp3', 'wav', 'pdf', 'png', 'jpg', 'jpeg', 'gif
 bucket = 'skyaudio-curltest'
 
 
-application = Flask(__name__) 
+application = Flask(__name__)
+Bootstrap(application)
 application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 application.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
@@ -16,7 +19,7 @@ s3_client = boto3.client('s3')
 
 @application.route("/")
 def index():
-    return "Hello World!"
+    return render_template('index.html', title = 'Testing')
 
 
 def allowed_file(filename):
@@ -40,7 +43,7 @@ def upload_file():
             file.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
             response = s3_client.upload_file(UPLOAD_FOLDER + '/' + filename, bucket, file.filename)
             os.remove(UPLOAD_FOLDER + '/' + filename)
-        return 'Successfully uploaded to S3'    
+        return 'Successfully uploaded to S3'
 @application.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(application.config['UPLOAD_FOLDER'],
