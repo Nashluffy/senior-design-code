@@ -8,3 +8,5 @@ Added a line
 ## Security articles to checkout 
 * [Kill the Password](https://www.wired.com/2012/11/ff-mat-honan-password-hacker/)
 * ~~[Migrate from HTTP to HTTPS](https://www.keycdn.com/blog/http-to-https)~~
+
+[Useful Diagram](/home/leedagr8/Documents/Screenshot from 2019-07-28 20-25-13.png)
