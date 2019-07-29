@@ -9,4 +9,4 @@ Added a line
 * [Kill the Password](https://www.wired.com/2012/11/ff-mat-honan-password-hacker/)
 * ~~[Migrate from HTTP to HTTPS](https://www.keycdn.com/blog/http-to-https)~~
 
-[Useful Diagram](Pictures/2019-07-28 20-25-13.png)
+[Useful Diagram](Pictures/Screenshot from 2019-07-28 20-25-13.png)
