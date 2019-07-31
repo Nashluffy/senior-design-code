@@ -25,7 +25,7 @@ def index():
     if request.method == 'POST':
         waveform = request.form.get('waveform')
         with ClusterRpcProxy(CONFIG) as rpc:
-            result = rpc.SigProc.hello(name="TestingBaseRPC")
+            result = rpc.SigProc.reverbSmallRoom(waveform)
         return result
 
 
