@@ -11,12 +11,13 @@ from pysndfx import AudioEffectsChain
 inf = '~/SkyAudio/SkyAudio/SampleFiles/Sample.wav'
 outf = '~/SkyAudio/SkyAudio/SampleFiles/reverb'
 
-def SmallRoom():
+def SmallRoom(waveform):
     try:
         fx = (AudioEffectsChain().reverb(34, 60, 20, 100, 20, 0, False))
         outf = outf + 'SmallRoom.wav'
-        pysndfx.fx(inf, outf)
+        pysndfx.fx(waveform, outf)
         print('Successfully applied small room!')
+        return outf
     except:
         print ('Something wrong with SoX')
 
@@ -45,5 +46,3 @@ def BigRoom():
         print('Sucessfully applied big hall!')
     except:
         print('Something wrong with SoX')
-
-
