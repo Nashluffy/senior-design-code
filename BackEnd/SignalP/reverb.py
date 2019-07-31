@@ -16,8 +16,7 @@ def SmallRoom(waveform):
         fx = (AudioEffectsChain().reverb(34, 60, 20, 100, 20, 0, False))
         outf = outf + 'SmallRoom.wav'
         pysndfx.fx(waveform, outf)
-        print('Successfully applied small room!')
-        return outf
+        return 'Successfully applied small room!'
     except:
         print ('Something wrong with SoX')
 
