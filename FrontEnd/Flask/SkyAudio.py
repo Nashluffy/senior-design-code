@@ -26,7 +26,7 @@ def index():
         waveform = request.form.get('waveform')
         with ClusterRpcProxy(CONFIG) as rpc:
             result = rpc.SigProc.reverbSmallRoom(waveform)
-        return result
+        return json.dumps({'status':'OK', 'waveform':result})
 
 
     elif request.method == 'GET':
