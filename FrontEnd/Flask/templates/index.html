@@ -210,6 +210,7 @@
             Audio Recording</div>
           <div class="card-body">
             <body>
+               <p id="textbox" ></p>
                <input id="start_button" type="button" value="Start Recording" />
                <input id="stop_button" type="button" value="Stop Recording" />
              <form action="/" method="POST">
@@ -504,54 +505,6 @@
                     <td>$163,000</td>
                   </tr>
                   <tr>
-                    <td>Michelle House</td>
-                    <td>Integration Specialist</td>
-                    <td>Sidney</td>
-                    <td>37</td>
-                    <td>2011/06/02</td>
-                    <td>$95,400</td>
-                  </tr>
-                  <tr>
-                    <td>Suki Burks</td>
-                    <td>Developer</td>
-                    <td>London</td>
-                    <td>53</td>
-                    <td>2009/10/22</td>
-                    <td>$114,500</td>
-                  </tr>
-                  <tr>
-                    <td>Prescott Bartlett</td>
-                    <td>Technical Author</td>
-                    <td>London</td>
-                    <td>27</td>
-                    <td>2011/05/07</td>
-                    <td>$145,000</td>
-                  </tr>
-                  <tr>
-                    <td>Gavin Cortez</td>
-                    <td>Team Leader</td>
-                    <td>San Francisco</td>
-                    <td>22</td>
-                    <td>2008/10/26</td>
-                    <td>$235,500</td>
-                  </tr>
-                  <tr>
-                    <td>Martena Mccray</td>
-                    <td>Post-Sales support</td>
-                    <td>Edinburgh</td>
-                    <td>46</td>
-                    <td>2011/03/09</td>
-                    <td>$324,050</td>
-                  </tr>
-                  <tr>
-                    <td>Unity Butler</td>
-                    <td>Marketing Designer</td>
-                    <td>San Francisco</td>
-                    <td>47</td>
-                    <td>2009/12/09</td>
-                    <td>$85,675</td>
-                  </tr>
-                  <tr>
                     <td>Howard Hatfield</td>
                     <td>Office Manager</td>
                     <td>San Francisco</td>
@@ -792,6 +745,7 @@
   <script type=text/javascript src="{{url_for('static', filename='recordAudio.js') }}"></script>
   <script src="https://unpkg.com/wavesurfer.js@2.2.1/dist/wavesurfer.min.js"></script>
   <script type=text/javascript src="{{url_for('static', filename='microphone_plugin.js') }}"></script>
+  <script type=text/javascript src="{{url_for('static', filename='updateWaveform.js') }}"></script>
 </body>
 
 </html>
