@@ -21,7 +21,7 @@ s3_client = boto3.client('s3')
 @application.route("/", methods=['GET','POST'])
 def index():
 
-    if request.method == 'POST'
+    if request.method == 'POST':
         if 'Submit' in request.form:
             waveform = request.form.get('waveform')
             with ClusterRpcProxy(CONFIG) as rpc:
