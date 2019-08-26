@@ -21,13 +21,13 @@ s3_client = boto3.client('s3')
 @application.route("/", methods=['GET','POST'])
 def index():
 
-    if request.method == 'POST':
-        if 'Submit' in request.form:
+    if request.method == 'POST'::
+        selectedItem = request.form.get('SigProcMenu')
+        if selectedItem == 'Reverb: Small Room':
             waveform = request.form.get('waveform')
             with ClusterRpcProxy(CONFIG) as rpc:
                 result = rpc.SigProc.reverbSmallRoom(waveform)
-            return "hello world"
-        elif 'Test Nameko Services' in request.form:
+        elif selectedItem == 'Test Nameko Services' :
             with ClusterRpcProxy(CONFIG) as rpc:
                 result = rpc.SigProc.hello(name="World!")
             return result
