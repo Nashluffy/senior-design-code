@@ -3,3 +3,4 @@ pytest
 flask_bootstrap
 nameko
 boto3
+py_compile

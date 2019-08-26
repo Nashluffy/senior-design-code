@@ -31,7 +31,7 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            python ~/repo/FrontEnd/Flask/SkyAudio.py
+            python -m py_compile ~/repo/FrontEnd/Flask/SkyAudio.py
 
       - store_artifacts:
           path: test-reports
