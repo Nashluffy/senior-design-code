@@ -2,4 +2,4 @@ flask
 pytest
 flask_bootstrap
 nameko
-
+boto3
