@@ -29,7 +29,7 @@ def index():
                 result = rpc.SigProc.reverbSmallRoom(waveform)
         elif selectedItem == 'Test Nameko Services' :
             with ClusterRpcProxy(CONFIG) as rpc:
-                result = rpc.SigProc.hello(name="World!")
+                result = rpc.SigProc.hello(name="World, RPC is up and functioning")
             return result
 
     elif request.method == 'GET':
