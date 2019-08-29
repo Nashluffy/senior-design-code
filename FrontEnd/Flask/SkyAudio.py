@@ -1,7 +1,7 @@
 from flask import send_file,Flask, flash, redirect, send_from_directory, render_template, url_for, request, Response
 from werkzeug import secure_filename
 from flask_bootstrap import Bootstrap
-from nameko.standalone.rpc import ClusterRpcProxy
+#from nameko.standalone.rpc import ClusterRpcProxy
 import os, boto3
 
 
