@@ -18,7 +18,7 @@ application.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 s3_client = boto3.client('s3')
 
-@application.route("/", methods=['GET','POST'])
+@application.route("/home", methods=['GET','POST'])
 def index():
 
     if request.method == 'POST':
@@ -47,7 +47,7 @@ def download_file():
         file = UPLOAD_FOLDER + '/' + filename
         return send_file(file)
 
-@application.route('/', methods=['POST'])
+@application.route('/home', methods=['POST'])
 def upload_file():
     if request.method == 'POST':
         file = request.files['file']
@@ -57,14 +57,15 @@ def upload_file():
             response = s3_client.upload_file(UPLOAD_FOLDER + '/' + filename, bucket, file.filename)
             os.remove(UPLOAD_FOLDER + '/' + filename)
         return 'Successfully uploaded to S3'
+
 @application.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(application.config['UPLOAD_FOLDER'],
                                filename)
 
-@application.route("/home")
+@application.route("/")
 def home():
-    return render_template('home.html', title = 'Home')
+    return render_template('login.html', title = 'Login')
 
 
 @application.route("/about")
