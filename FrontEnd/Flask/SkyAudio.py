@@ -9,7 +9,7 @@ import os, boto3
 UPLOAD_FOLDER = '/tmp'
 ALLOWED_EXTENSIONS = set(['txt', 'mp3', 'wav', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 bucket = 'skyaudio-curltest'
-CONFIG = {'AMQP_URI': "amqp://guest:guest@localhost"}
+CONFIG = {'AMQP_URI': "amqp://guest:guest@54.226.64.199"}
 
 application = Flask(__name__)
 Bootstrap(application)
