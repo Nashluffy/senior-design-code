@@ -225,10 +225,13 @@
                     <option value="ReverbSmallRoom" selected>Reverb: Small Room</option>
                     <option value="ReverbCaveEffect">Reverb: Cave Effect</option>
                     <option value="ReverbConcertHall">Reverb: Concert Hall</option>
-                    <option value="MoreComingSoon!">More Coming Soon!</option>
-                    </select>
+		    <option value="Test Nameko Services">Test Nameko Services</option>
+		    <option value="MoreComingSoon!">More Coming Soon!</option>
+                    
+		    </select>
                 </div>
-                <input type="submit" value="Submit" />
+                <input type="submit" name="backend" value="Submit" />
+                <input type="submit" name="backend" value="Test Nameko Services" />
              </form>
             </body>
           </div>
@@ -723,7 +726,7 @@
 
   <!-- Bootstrap core JavaScript-->
   <script src="{{url_for('static',  filename='vendor/jquery/jquery.min.js')}}"></script>
-  <script src="{{url_for('static',  filename='vendorbootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{url_for('static',  filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
   <!-- Core plugin JavaScript-->
   <script src="{{url_for('static',  filename='vendor/jquery-easing/jquery.easing.min.js')}}"></script>

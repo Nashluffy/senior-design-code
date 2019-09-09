@@ -1,16 +1,20 @@
 from flask import send_file,Flask, flash, redirect, send_from_directory, render_template, url_for, request, Response
 from werkzeug import secure_filename
 from flask_bootstrap import Bootstrap
-#from nameko.standalone.rpc import ClusterRpcProxy
+from nameko.standalone.rpc import ClusterRpcProxy
 import os, boto3
+
+SERVER_IP = os.environ.get('SERVER_IP')
+RABBITMQ_USER = os.environ.get('RABBITMQ_USER')
+RABBITMQ_PASS = os.environ.get('RABBITMQ_PASS')
 
 
 #UPLOAD_FOLDER = '/home/ec2-user/SkyAudio/SkyAudio/FrontEnd/Flask/tmp/'
 UPLOAD_FOLDER = '/tmp'
 ALLOWED_EXTENSIONS = set(['txt', 'mp3', 'wav', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 bucket = 'skyaudio-curltest'
-CONFIG = {'AMQP_URI': "amqp://guest:guest@localhost"}
-
+AMQP_URI = 'amqp://' + str(RABBITMQ_USER) + ':' + str(RABBITMQ_PASS) + '@' + str(SERVER_IP)
+CONFIG = {'AMQP_URI': AMQP_URI}
 application = Flask(__name__)
 Bootstrap(application)
 application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -21,13 +25,17 @@ s3_client = boto3.client('s3')
 @application.route("/", methods=['GET','POST'])
 def index():
 
-
     if request.method == 'POST':
-        waveform = request.form.get('a')
-        with ClusterRpcProxy(CONFIG) as rpc:
-            result = rpc.SigProc.reverbSmallRoom(waveform)
-        return json.dumps({'status':'OK', 'waveform':result})
 
+        selectedItem = request.form.get('SigProcMenu')
+        if selectedItem == 'Reverb: Small Room':
+            waveform = request.form.get('waveform')
+            with ClusterRpcProxy(CONFIG) as rpc:
+                result = rpc.SigProc.reverbSmallRoom(waveform)
+        elif selectedItem == 'Test Nameko Services' :
+            with ClusterRpcProxy(CONFIG) as rpc:
+                result = rpc.SigProc.hello(name="World, RPC is up and functioning")
+            return result
 
     elif request.method == 'GET':
         return render_template('index.html',title = 'Testing')
