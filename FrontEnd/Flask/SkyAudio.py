@@ -13,7 +13,8 @@ RABBITMQ_PASS = os.environ.get('RABBITMQ_PASS')
 UPLOAD_FOLDER = '/tmp'
 ALLOWED_EXTENSIONS = set(['txt', 'mp3', 'wav', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 bucket = 'skyaudio-curltest'
-CONFIG = {'AMQP_URI': 'amqp://'+ RABBITMQ_USER +':' + RABBITMQ_PASS +'@' + SERVER_IP}
+AMQP_URI = 'amqp://' + str(RABBITMQ_USER) + ':' + str(RABBITMQ_PASS) + '@' + str(SERVER_IP)
+CONFIG = {'AMQP_URI': AMQP_URI}
 application = Flask(__name__)
 Bootstrap(application)
 application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
