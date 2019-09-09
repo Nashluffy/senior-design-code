@@ -4,13 +4,17 @@ from flask_bootstrap import Bootstrap
 from nameko.standalone.rpc import ClusterRpcProxy
 import os, boto3
 
+SERVER_IP = os.environ.get('SERVER_IP')
+RABBITMQ_USER = os.environ.get('RABBITMQ_USER')
+RABBITMQ_PASS = os.environ.get('RABBITMQ_PASS')
+
 
 #UPLOAD_FOLDER = '/home/ec2-user/SkyAudio/SkyAudio/FrontEnd/Flask/tmp/'
 UPLOAD_FOLDER = '/tmp'
 ALLOWED_EXTENSIONS = set(['txt', 'mp3', 'wav', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 bucket = 'skyaudio-curltest'
-CONFIG = {'AMQP_URI': "amqp://guest:guest@localhost"}
-
+AMQP_URI = 'amqp://' + str(RABBITMQ_USER) + ':' + str(RABBITMQ_PASS) + '@' + str(SERVER_IP)
+CONFIG = {'AMQP_URI': AMQP_URI}
 application = Flask(__name__)
 Bootstrap(application)
 application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
