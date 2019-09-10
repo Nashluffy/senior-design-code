@@ -4,8 +4,7 @@ var startButton = document.getElementById('start_button');
 var audioPlayback = document.getElementById('audio_playback');
 var downloadButton = document.getElementById('download');
 stopButton.disabled = true;
-audioPlaybackch.disabled = true;
-
+audioPlayback.disabled = true;
 
 
 //List custom events
@@ -52,10 +51,6 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         }
         mediaRecorder.ondataavailable = function(e) { chunks.push(e.data) }; //on data available event handler
         mediaRecorder.onstop = function(e) { //on stop event handler
-            var clipName = prompt("Enter a name for your sound clip: "); // Find how to put name of clip into blob file
-
-            var blob = new Blob(chunks, { 'type': 'audio/wav; codecs=opus' }); //Creating a new blob
-
 
             // Promise- return either data you want or an error takes time to fetch. 
 
@@ -90,6 +85,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             blobPromise.catch((postErrors) => {
                 console.log(postErrors);
             })
+
         }
     }
     var onError = function(err) { console.log("Something went wrong!" + err); }
