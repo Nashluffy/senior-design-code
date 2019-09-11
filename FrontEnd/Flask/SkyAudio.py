@@ -5,13 +5,17 @@ from nameko.standalone.rpc import ClusterRpcProxy
 from flask_cors import CORS
 import os, boto3
 
+SERVER_IP = os.environ.get('SERVER_IP')
+RABBITMQ_USER = os.environ.get('RABBITMQ_USER')
+RABBITMQ_PASS = os.environ.get('RABBITMQ_PASS')
+
 
 #UPLOAD_FOLDER = '/home/ec2-user/SkyAudio/SkyAudio/FrontEnd/Flask/tmp/'
 UPLOAD_FOLDER = '/tmp'
 ALLOWED_EXTENSIONS = set(['txt', 'mp3', 'wav', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 bucket = 'skyaudio-curltest'
-CONFIG = {'AMQP_URI': "amqp://guest:guest@localhost"}
-
+AMQP_URI = 'amqp://' + str(RABBITMQ_USER) + ':' + str(RABBITMQ_PASS) + '@' + str(SERVER_IP)
+CONFIG = {'AMQP_URI': "amqp://dev_user:dev_pass@54.226.64.199:5672"}
 application = Flask(__name__)
 Bootstrap(application)
 application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -24,6 +28,7 @@ s3_client = boto3.client('s3')
 def index():
 
     if request.method == 'POST':
+
         selectedItem = request.form.get('SigProcMenu')
         if selectedItem == 'Reverb: Small Room':
             waveform = request.form.get('waveform')
