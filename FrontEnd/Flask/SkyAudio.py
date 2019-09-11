@@ -34,6 +34,7 @@ def index():
             waveform = request.form.get('waveform')
             with ClusterRpcProxy(CONFIG) as rpc:
                 result = rpc.SigProc.reverbSmallRoom(waveform)
+            return result
         elif selectedItem == 'Test Nameko Services' :
             with ClusterRpcProxy(CONFIG) as rpc:
                 result = rpc.SigProc.hello(name="World, RPC is up and functioning")
