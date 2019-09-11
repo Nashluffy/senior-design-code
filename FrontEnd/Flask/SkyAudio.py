@@ -2,6 +2,7 @@ from flask import send_file,Flask, flash, redirect, send_from_directory, render_
 from werkzeug import secure_filename
 from flask_bootstrap import Bootstrap
 from nameko.standalone.rpc import ClusterRpcProxy
+from flask_cors import CORS
 import os, boto3
 
 
@@ -15,6 +16,7 @@ application = Flask(__name__)
 Bootstrap(application)
 application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 application.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+CORS(application)
 
 s3_client = boto3.client('s3')
 
