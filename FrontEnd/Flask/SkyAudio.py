@@ -41,6 +41,10 @@ def index():
             with ClusterRpcProxy(CONFIG) as rpc:
                 result = rpc.SigProc.hello(name="World, RPC is up and functioning")
             return result
+        else:
+            req = request.get_json()
+            print(req)
+            return 'Success'
 
     elif request.method == 'GET':
         return render_template('index.html',title = 'Testing')
@@ -57,16 +61,16 @@ def download_file():
         file = UPLOAD_FOLDER + '/' + filename
         return send_file(file)
 
-@application.route('/', methods=['POST'])
-def upload_file():
-    if request.method == 'POST':
-        file = request.files['file']
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
-            response = s3_client.upload_file(UPLOAD_FOLDER + '/' + filename, bucket, file.filename)
-            os.remove(UPLOAD_FOLDER + '/' + filename)
-        return 'Successfully uploaded to S3'
+#@application.route('/', methods=['POST'])
+#def upload_file():
+#    if request.method == 'POST':
+#        file = request.files['file']
+#        if file and allowed_file(file.filename):
+#            filename = secure_filename(file.filename)
+#            file.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
+#            response = s3_client.upload_file(UPLOAD_FOLDER + '/' + filename, bucket, file.filename)
+#            os.remove(UPLOAD_FOLDER + '/' + filename)
+#        return 'Successfully uploaded to S3'
 @application.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(application.config['UPLOAD_FOLDER'],

@@ -51,25 +51,26 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         }
         mediaRecorder.ondataavailable = function(e) { chunks.push(e.data) }; //on data available event handler
         mediaRecorder.onstop = function(e) { //on stop event handler
-
+            var blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' }); //Creating a new blob
+	    var blobUrl = window.URL.createObjectURL(blob);
             // Promise- return either data you want or an error takes time to fetch. 
 
             //Promise - used for when you want a value but don't know how long it'll take to get it
             //Fetch - used for when you need a promise that uses HTTP request methods
 
-            var blobPromise = fetch("https://skyaudio.org/", {
+            var blobPromise = fetch('http://localhost:5000/', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/octet-stream'
-                },
-                body: blob
+                headers: new Headers( {
+                    'Content-Type': 'application/json'
+                }),
+                body: JSON.stringify('Hello Leon') 
             })
 
             blobPromise.then((successfulPost) => {
                 console.log(successfulPost);
 
                 chunks = []; //Reset our chunks
-                var blobUrl = window.URL.createObjectURL(blob);
+                
                 var a = document.createElement("a");
                 a.href = blobUrl;
                 a.download = clipName;
