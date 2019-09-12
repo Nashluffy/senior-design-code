@@ -46,8 +46,10 @@ def index():
                     name="World, RPC is up and functioning")
            return result
         else:
-            if 'blob' in request.form:
+             
+            if 'blob' in request.files:
                 print('hit file')
+                
             elif 'test' in request.form:
                 print ('hit test')
             else:

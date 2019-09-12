@@ -54,14 +54,16 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
             var clipName = prompt("Enter a name for your sound clip: ");
             var blob = new Blob(chunks, { 'type': 'audio/wav; codecs=0' }); //Creating a new blob
-            console.log("mediarecorder done");
+            chunks = [];
+	    console.log("mediarecorder done");
+	    
             // Promise- return either data you want or an error takes time to fetch. 
 
             //Promise - used for when you want a value but don't know how long it'll take to get it
             //Fetch - used for when you need a promise that uses HTTP request methods
 	    var formData = new FormData();
-	    formData.append('blob.wav', blob);
-	    formData.append('test','testing');
+	    formData.append('blob', blob, 'blob.wav');
+	    formData.append('test', 'test');
 
             var blobPromise = fetch("http://127.0.0.1:5000/", {
 
