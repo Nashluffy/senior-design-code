@@ -68,9 +68,6 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             var blobPromise = fetch("http://127.0.0.1:5000/", {
 
                 method: 'POST',
-                //headers: new Headers({
-                //    'Content-Type': 'application/json'
-                //}),
                 body: formData
             })
 

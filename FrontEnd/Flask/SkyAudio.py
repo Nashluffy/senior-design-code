@@ -3,7 +3,7 @@ from werkzeug import secure_filename
 from flask_bootstrap import Bootstrap
 from nameko.standalone.rpc import ClusterRpcProxy
 from flask_cors import CORS
-import os, boto3
+import os, boto3, wave
 
 SERVER_IP = os.environ.get('SERVER_IP')
 RABBITMQ_USER = os.environ.get('RABBITMQ_USER')
@@ -49,7 +49,10 @@ def index():
              
             if 'blob' in request.files:
                 print('hit file')
-                
+                filename = 'download.wav'
+                file = request.files['blob']
+                file.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
+                return 'success'
             elif 'test' in request.form:
                 print ('hit test')
             else:
