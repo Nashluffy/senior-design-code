@@ -2,7 +2,7 @@
 var stopButton = document.getElementById('stop_button');
 var startButton = document.getElementById('start_button');
 var audioPlayback = document.getElementById('audio_playback');
-var downloadButton = document.getElementById('download');
+var reverbSmallRoom = document.getElementById('SigProcMenu').namedItem("ReverbSmallRoom");
 stopButton.disabled = true;
 audioPlayback.disabled = true;
 
@@ -52,12 +52,15 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         mediaRecorder.ondataavailable = function(e) { chunks.push(e.data) }; //on data available event handler
         mediaRecorder.onstop = function(e) { //on stop event handler
 
+            var clipName = prompt("Enter a name for your sound clip: ");
+            var blob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' }); //Creating a new blob
+            console.log("mediarecorder done");
             // Promise- return either data you want or an error takes time to fetch. 
 
             //Promise - used for when you want a value but don't know how long it'll take to get it
             //Fetch - used for when you need a promise that uses HTTP request methods
 
-            var blobPromise = fetch("https://skyaudio.org/", {
+            var blobPromise = fetch("https://127.0.0.1:5000/", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/octet-stream'
@@ -68,22 +71,10 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             blobPromise.then((successfulPost) => {
                 console.log(successfulPost);
 
-                chunks = []; //Reset our chunks
-                var blobUrl = window.URL.createObjectURL(blob);
-                var a = document.createElement("a");
-                a.href = blobUrl;
-                a.download = clipName;
-                document.body.appendChild(a);
-                a.click();
-                audioPlayback.disabled = false;
-                audioPlayback.src = blobUrl;
-                console.log('Access your blob here: ' + blobUrl);
-                var wavesurfer = WaveSurfer.create(wavesurferConstraints);
-                wavesurfer.load(blobUrl);
             })
 
             blobPromise.catch((postErrors) => {
-                console.log(postErrors);
+                console.log("error occured " + postErrors);
             })
 
         }
@@ -112,3 +103,22 @@ audioPlayback.addEventListener("micOn", function(stream) {
 
     micInputWaveSurfer.microphone.start();
 })
+
+
+/* Excess code may reference later
+
+var downloadButton = document.getElementById('download');
+
+      // chunks = []; //Reset our chunks
+      // var blobUrl = window.URL.createObjectURL(blob);
+    // var a = document.createElement("a");
+   // a.href = blobUrl;
+     // a.download = clipName;
+     // document.body.appendChild(a);
+     // a.click();
+     // audioPlayback.disabled = false;
+    // audioPlayback.src = blobUrl;
+  // console.log('Access your blob here: ' + blobUrl);
+   // var wavesurfer = WaveSurfer.create(wavesurferConstraints);
+    // wavesurfer.load(blobUrl);
+*/
