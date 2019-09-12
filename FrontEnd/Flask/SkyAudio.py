@@ -2,8 +2,8 @@ from flask import send_file, Flask, flash, redirect, send_from_directory, render
 from werkzeug import secure_filename
 from flask_bootstrap import Bootstrap
 from nameko.standalone.rpc import ClusterRpcProxy
-import os
-import boto3
+from flask_cors import CORS
+import os, boto3
 
 SERVER_IP = os.environ.get('SERVER_IP')
 RABBITMQ_USER = os.environ.get('RABBITMQ_USER')
@@ -22,6 +22,7 @@ application = Flask(__name__)
 Bootstrap(application)
 application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 application.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+CORS(application)
 
 s3_client = boto3.client('s3')
 
@@ -36,11 +37,18 @@ def index():
             waveform = request.form.get('waveform')
             with ClusterRpcProxy(CONFIG) as rpc:
                 result = rpc.SigProc.reverbSmallRoom(waveform)
-        elif selectedItem == 'Test Nameko Services':
+            return result
+        elif selectedItem == 'Test Nameko Services' :
+            req = request.get_json()
+            print(req)
             with ClusterRpcProxy(CONFIG) as rpc:
                 result = rpc.SigProc.hello(
                     name="World, RPC is up and functioning")
             return result
+        else:
+            req = request.get_json()
+            print(req)
+            return 'Success'
 
     elif request.method == 'GET':
         return render_template('index.html', title='Testing')
@@ -60,21 +68,16 @@ def download_file():
         file = UPLOAD_FOLDER + '/' + filename
         return send_file(file)
 
-
-@application.route('/', methods=['POST'])
-def upload_file():
-    if request.method == 'POST':
-        file = request.files['file']
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(
-                application.config['UPLOAD_FOLDER'], filename))
-            response = s3_client.upload_file(
-                UPLOAD_FOLDER + '/' + filename, bucket, file.filename)
-            os.remove(UPLOAD_FOLDER + '/' + filename)
-        return 'Successfully uploaded to S3'
-
-
+#@application.route('/', methods=['POST'])
+#def upload_file():
+#    if request.method == 'POST':
+#        file = request.files['file']
+#        if file and allowed_file(file.filename):
+#            filename = secure_filename(file.filename)
+#            file.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
+#            response = s3_client.upload_file(UPLOAD_FOLDER + '/' + filename, bucket, file.filename)
+#            os.remove(UPLOAD_FOLDER + '/' + filename)
+#        return 'Successfully uploaded to S3'
 @application.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(application.config['UPLOAD_FOLDER'],

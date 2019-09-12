@@ -61,11 +61,12 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             //Fetch - used for when you need a promise that uses HTTP request methods
 
             var blobPromise = fetch("https://127.0.0.1:5000/", {
+
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/octet-stream'
-                },
-                body: blob
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                }),
+                body: JSON.stringify('Hello Leon')
             })
 
             blobPromise.then((successfulPost) => {
