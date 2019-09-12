@@ -39,15 +39,21 @@ def index():
                 result = rpc.SigProc.reverbSmallRoom(waveform)
             return result
         elif selectedItem == 'Test Nameko Services' :
-            req = request.get_json()
-            print(req)
-            with ClusterRpcProxy(CONFIG) as rpc:
+           req = request.get_json()
+           print(req)
+           with ClusterRpcProxy(CONFIG) as rpc:
                 result = rpc.SigProc.hello(
                     name="World, RPC is up and functioning")
-            return result
+           return result
         else:
-            req = request.get_json()
-            print(req)
+            if 'blob' in request.form:
+                print('hit file')
+            elif 'test' in request.form:
+                print ('hit test')
+            else:
+                print('nothing found')
+            #req = request.get_json()
+            #print(req)
             return 'Success'
 
     elif request.method == 'GET':
