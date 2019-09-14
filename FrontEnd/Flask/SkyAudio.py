@@ -47,7 +47,7 @@ def download_file():
         file = UPLOAD_FOLDER + '/' + filename
         return send_file(file)
 
-@application.route('/home', methods=['POST'])
+'''@application.route('/home', methods=['POST'])
 def upload_file():
     if request.method == 'POST':
         file = request.files['file']
@@ -57,7 +57,7 @@ def upload_file():
             response = s3_client.upload_file(UPLOAD_FOLDER + '/' + filename, bucket, file.filename)
             os.remove(UPLOAD_FOLDER + '/' + filename)
         return 'Successfully uploaded to S3'
-
+'''
 @application.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(application.config['UPLOAD_FOLDER'],
