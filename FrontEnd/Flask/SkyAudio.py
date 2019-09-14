@@ -68,14 +68,14 @@ def home():
     return render_template('login.html', title = 'Login')
 
 
-@application.route("/about")
-def about():
-    return render_template('about.html', title = 'about')
+@application.route("/register")
+def register():
+    return render_template('register.html', title = 'Register New')
 
 
-@application.route("/user")
-def user():
-	return render_template('User.html', title = 'User')
+@application.route("/forgot-password")
+def forgot():
+	return render_template('forgot-password.html', title = 'Password')
 
 
 @application.route("/record")
