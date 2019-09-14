@@ -9,14 +9,15 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin - Register</title>
+  <title>Register New User</title>
 
   <!-- Custom fonts for this template-->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <script src="{{url_for('static', filename ='vendor/fontawesome-free/css/all.min.css')}}"></script>
 
   <!-- Custom styles for this template-->
-  <link href="css/sb-admin.css" rel="stylesheet">
+  <link href="{{url_for('static', filename ='css/sb-admin.css')}}" rel="stylesheet">
 
+<div class="display-3 mx-auto mt-5">SkyAudio</div>
 </head>
 
 <body class="bg-dark">
@@ -64,11 +65,11 @@
               </div>
             </div>
           </div>
-          <a class="btn btn-primary btn-block" href="login.html">Register</a>
+          <a class="btn btn-primary btn-block" href="/home">Register</a>
         </form>
         <div class="text-center">
-          <a class="d-block small mt-3" href="login.html">Login Page</a>
-          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+          <a class="d-block small mt-3" href="/">Login Page</a>
+          <a class="d-block small" href="/forgot-password">Forgot Password?</a>
         </div>
       </div>
     </div>
