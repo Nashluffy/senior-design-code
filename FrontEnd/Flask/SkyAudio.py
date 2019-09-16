@@ -12,7 +12,7 @@ RABBITMQ_PASS = os.environ.get('RABBITMQ_PASS')
 
 
 #UPLOAD_FOLDER = '/home/ec2-user/SkyAudio/SkyAudio/FrontEnd/Flask/tmp/'
-UPLOAD_FOLDER = '/tmp'
+UPLOAD_FOLDER = '/tmp/SkyAudio/'
 ALLOWED_EXTENSIONS = set(
     ['txt', 'mp3', 'wav', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 bucket = 'skyaudio-curltest'
@@ -51,9 +51,10 @@ def index():
                 filename = 'download.wav'
                 file = request.files['blob']
                 file.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
+                print(os.path.join(application.config['UPLOAD_FOLDER'], filename))
                 with ClusterRpcProxy(CONFIG) as rpc:
-                    result = rpc.SigProc.reverbSmallRoom()
-                return result
+                    result = rpc.SigProc.reverbSmallRoom(file)
+                return 'success'
             elif 'test' in request.form:
                 print ('hit test')
             else:
