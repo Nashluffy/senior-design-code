@@ -31,7 +31,6 @@ s3_client = boto3.client('s3')
 def index():
 
     if request.method == 'POST':
-
         selectedItem = request.form.get('SigProcMenu')
         if selectedItem == 'Reverb: Small Room':
             waveform = request.form.get('waveform')
@@ -39,8 +38,6 @@ def index():
                 result = rpc.SigProc.reverbSmallRoom(waveform)
             return result
         elif selectedItem == 'Test Nameko Services' :
-           req = request.get_json()
-           print(req)
            with ClusterRpcProxy(CONFIG) as rpc:
                 result = rpc.SigProc.hello(
                     name="World, RPC is up and functioning")
@@ -52,13 +49,14 @@ def index():
                 filename = 'download.wav'
                 file = request.files['blob']
                 file.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
-                return 'success'
+                with ClusterRpcProxy(CONFIG) as rpc:
+                    result = rpc.SigProc.reverbSmallRoom()
+                return result
             elif 'test' in request.form:
                 print ('hit test')
             else:
                 print('nothing found')
-            #req = request.get_json()
-            #print(req)
+            
             return 'Success'
 
     elif request.method == 'GET':
