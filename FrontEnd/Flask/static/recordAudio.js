@@ -65,7 +65,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 	    formData.append('blob', blob, 'blob.wav');
 	    formData.append('test', 'test');
 
-            var blobPromise = fetch("http://127.0.0.1:5000/", {
+            var blobPromise = fetch("http://skyaudio.org/", {
 
                 method: 'POST',
                 body: formData

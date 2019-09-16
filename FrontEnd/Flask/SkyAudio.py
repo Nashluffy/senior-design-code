@@ -4,6 +4,7 @@ from flask_bootstrap import Bootstrap
 from nameko.standalone.rpc import ClusterRpcProxy
 from flask_cors import CORS
 import os, boto3, wave
+import logging
 
 SERVER_IP = os.environ.get('SERVER_IP')
 RABBITMQ_USER = os.environ.get('RABBITMQ_USER')
@@ -22,7 +23,8 @@ application = Flask(__name__)
 Bootstrap(application)
 application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 application.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
-CORS(application)
+#CORS(application)
+CORS(application, resources={r"/api/*": {"origins": "*"}})
 
 s3_client = boto3.client('s3')
 
@@ -125,3 +127,8 @@ def record():
 
 if __name__ == '__main__':
     application.run()
+
+if __name__ != '__main__':
+    gunicorn_logger = logging.getLogger('gunicorn.error')
+    application.logger.handlers = gunicorn_logger.handlers
+    application.logger.setLevel(gunicorn_logger.level)
