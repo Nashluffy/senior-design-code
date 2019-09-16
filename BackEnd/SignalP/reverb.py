@@ -8,8 +8,8 @@ from pysndfx import AudioEffectsChain
     #Wet Gain
     #Wet Only
 
-inf = '/tmp/download.wav'
-outf = '/tmp/processed.wav'
+inf = '/home/ec2-user/SkyAudio/SkyAudio/FrontEnd/Flask/tmp/download.wav'
+outf = '/home/ec2-user/SkyAudio/SkyAudio/FrontEnd/Flask/tmp/processed.wav'
 
 def SmallRoom():
     try:

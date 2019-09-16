@@ -12,7 +12,7 @@ RABBITMQ_PASS = os.environ.get('RABBITMQ_PASS')
 
 
 #UPLOAD_FOLDER = '/home/ec2-user/SkyAudio/SkyAudio/FrontEnd/Flask/tmp/'
-UPLOAD_FOLDER = '/tmp/SkyAudio/'
+UPLOAD_FOLDER = 'tmp/SkyAudio/'
 ALLOWED_EXTENSIONS = set(
     ['txt', 'mp3', 'wav', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 bucket = 'skyaudio-curltest'
@@ -24,7 +24,7 @@ Bootstrap(application)
 application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 application.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 CORS(application)
-#CORS(application, resources={r"/api/*": {"origins": "*"}})
+
 
 s3_client = boto3.client('s3')
 
@@ -53,7 +53,7 @@ def index():
                 file.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
                 print(os.path.join(application.config['UPLOAD_FOLDER'], filename))
                 with ClusterRpcProxy(CONFIG) as rpc:
-                    result = rpc.SigProc.reverbSmallRoom(file)
+                    result = rpc.SigProc.reverbSmallRoom()
                 return 'success'
             elif 'test' in request.form:
                 print ('hit test')
