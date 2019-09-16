@@ -23,8 +23,8 @@ application = Flask(__name__)
 Bootstrap(application)
 application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 application.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
-#CORS(application)
-CORS(application, resources={r"/api/*": {"origins": "*"}})
+CORS(application)
+#CORS(application, resources={r"/api/*": {"origins": "*"}})
 
 s3_client = boto3.client('s3')
 
