@@ -15,14 +15,13 @@ RABBITMQ_PASS = os.environ.get('RABBITMQ_PASS')
 UPLOAD_FOLDER = 'tmp/SkyAudio/'
 ALLOWED_EXTENSIONS = set(
     ['txt', 'mp3', 'wav', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
-bucket = 'skyaudio-curltest'
 AMQP_URI = 'amqp://' + str(RABBITMQ_USER) + ':' + \
     str(RABBITMQ_PASS) + '@' + str(SERVER_IP)
 CONFIG = {'AMQP_URI': "amqp://dev_user:dev_pass@54.226.64.199:5672"}
+#CONFIG = {'AMQP_URI': AMQP_URI}
 application = Flask(__name__)
 Bootstrap(application)
 application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-application.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 CORS(application)
 
 
@@ -34,18 +33,14 @@ def index():
 
     if request.method == 'POST':
         selectedItem = request.form.get('SigProcMenu')
-        if selectedItem == 'Reverb: Small Room':
+        if selectedItem == 'ReverbSmallRoom':
             waveform = request.form.get('waveform')
             with ClusterRpcProxy(CONFIG) as rpc:
-                result = rpc.SigProc.reverbSmallRoom(waveform)
-            return result
-        elif selectedItem == 'Test Nameko Services' :
+                result = rpc.SigProc.reverbSmallRoom()
+        elif selectedItem == 'TestNamekoServices' :
            with ClusterRpcProxy(CONFIG) as rpc:
-                result = rpc.SigProc.hello(
-                    name="World, RPC is up and functioning")
-           return result
-        else:
-             
+                result = rpc.SigProc.hello(name="World, RPC is up and functioning")
+        else:        
             if 'blob' in request.files:
                 print('hit file')
                 filename = 'download.wav'
@@ -54,14 +49,8 @@ def index():
                 print(os.path.join(application.config['UPLOAD_FOLDER'], filename))
                 with ClusterRpcProxy(CONFIG) as rpc:
                     result = rpc.SigProc.reverbSmallRoom()
-                return 'success'
-            elif 'test' in request.form:
-                print ('hit test')
-            else:
-                print('nothing found')
-            
-            return 'Success'
-
+        return result
+     
     elif request.method == 'GET':
         return render_template('index.html', title='Testing')
 
