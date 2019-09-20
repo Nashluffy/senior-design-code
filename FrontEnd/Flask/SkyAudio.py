@@ -36,9 +36,10 @@ def index():
         if selectedItem == 'ReverbSmallRoom':
             waveform = request.form.get('waveform')
             with ClusterRpcProxy(CONFIG) as rpc:
-                result = rpc.SigProc.reverbSmallRoom()
-            return send_file(os.path.join(application.config['UPLOAD_FOLDER'], 'processed.wav')
-        elif selectedItem == 'TestNamekoServices' :
+                result2 = rpc.SigProc.reverbSmallRoom()
+            
+            result = 'FIX ME: REPLACE WITH SEND_FILE'
+        elif selectedItem == 'TestNamekoServices':
            with ClusterRpcProxy(CONFIG) as rpc:
                 result = rpc.SigProc.hello(name="World, RPC is up and functioning")
         else:        
@@ -50,7 +51,7 @@ def index():
                 print(os.path.join(application.config['UPLOAD_FOLDER'], filename))
                 with ClusterRpcProxy(CONFIG) as rpc:
                     result = rpc.SigProc.reverbSmallRoom()
-        return result
+        return send_file(os.path.join(application.config['UPLOAD_FOLDER'], 'processed.wav'))
      
     elif request.method == 'GET':
         return render_template('index.html', title='Testing')
