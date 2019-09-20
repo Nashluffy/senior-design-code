@@ -54,9 +54,8 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         mediaRecorder.ondataavailable = function(e) { chunks.push(e.data) }; //on data available event handler
         mediaRecorder.onstop = function(e) { //on stop event handler
 
-            var clipName = prompt("Enter a name for your sound clip: ");
+            //var clipName = prompt("Enter a name for your sound clip: ");
             var blob = new Blob(chunks, { 'type': 'audio/wav; codecs=0' }); //Creating a new blob
-            console.log("blob going to database is: " + blob.type + "name is " + blob.name)
             chunks = [];
             console.log("mediarecorder done");
 
@@ -64,33 +63,26 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
             //Promise - used for when you want a value but don't know how long it'll take to get it
             //Fetch - used for when you need a promise that uses HTTP request methods
-            // var formData = new FormData();
-            // formData.append('blob', blob, 'blob.wav');
-            // formData.append('test', 'test');
-            console.log('Blob from data ' + blob.text())
+            var formData = new FormData();
+            formData.append('blob', blob, 'blob.wav');
+            formData.append('test', 'test');
+            //console.log('Blob from data ' + blob.text())
             var blobPromise = fetch('/', {
 
                 method: 'POST',
                 headers: { 'Content-type': 'application/octet-stream' },
-                body: blob
+                body: formData
             })
 
             blobPromise.then((resp) => {
-                resp.clone().blob()
-                console.log(resp.stream())
-            })
-
-            blobPromise.then((theBlob) => {
+                return resp.clone().blob()
+            }).then((theBlob) => {
                 console.log("did theblob come? " + theBlob.type);
 
-
-                var blobData = [];
-                blobData.push(theBlob)
-                console.log(theBlob);
-                var blobUrl = window.URL.createObjectURL(new Blob(blobData, { 'type': 'audio/wav; codecs=0' }));
+                var blobUrl = window.URL.createObjectURL(theBlob);
                 var a = document.createElement("a");
                 a.href = blobUrl;
-                a.download = clipName;
+                a.download = theBlob.fileName;
                 document.body.appendChild(a);
                 a.click();
                 audioPlayback.disabled = false;
@@ -161,3 +153,8 @@ var downloadButton = document.getElementById('download');
 // blobPromise.then(response => {
 //     response.blob()
 // })
+
+
+// var blobData = [];
+// blobData.push(theBlob)
+// console.log(theBlob);
