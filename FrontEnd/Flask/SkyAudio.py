@@ -49,9 +49,12 @@ def index():
                 file = request.files['blob']
                 file.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
                 print(os.path.join(application.config['UPLOAD_FOLDER'], filename))
-                with ClusterRpcProxy(CONFIG) as rpc:
-                    result = rpc.SigProc.reverbSmallRoom()
-        return send_file(os.path.join(application.config['UPLOAD_FOLDER'], 'processed.wav'))
+                # with ClusterRpcProxy(CONFIG) as rpc:
+                #     print("in with statement")
+                #     result = rpc.SigProc.reverbSmallRoom()
+                #     print("result is ")
+        #return send_file(os.path.join(application.config['UPLOAD_FOLDER'], 'processed.wav'))
+        return send_file('/home/leedagr8/Downloads/TESTING (1).ogg', attachment_filename='Testing.ogg')
      
     elif request.method == 'GET':
         return render_template('index.html', title='Testing')

@@ -56,6 +56,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
             var clipName = prompt("Enter a name for your sound clip: ");
             var blob = new Blob(chunks, { 'type': 'audio/wav; codecs=0' }); //Creating a new blob
+            console.log("blob going to database is: " + blob.type + "name is " + blob.name)
             chunks = [];
             console.log("mediarecorder done");
 
@@ -63,40 +64,30 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
             //Promise - used for when you want a value but don't know how long it'll take to get it
             //Fetch - used for when you need a promise that uses HTTP request methods
-            var formData = new FormData();
-            formData.append('blob', blob, 'blob.wav');
-            formData.append('test', 'test');
-
+            // var formData = new FormData();
+            // formData.append('blob', blob, 'blob.wav');
+            // formData.append('test', 'test');
+            console.log('Blob from data ' + blob.text())
             var blobPromise = fetch('/', {
 
                 method: 'POST',
                 headers: { 'Content-type': 'application/octet-stream' },
-                body: formData
+                body: blob
             })
 
             blobPromise.then((resp) => {
-                console.log('Successfull response \n' + resp);
-
-                return resp.blob();
-
+                resp.clone().blob()
+                console.log(resp.stream())
             })
 
-            blobPromise.catch((postErrors) => {
-                console.log("error occured " + postErrors);
-            })
-
-            // blobPromise.then((fetch('/', {
-            //     method: 'GET',
-            //     header: { 'Content-type': 'application/octet-stream' }
-            // })))
-            // blobPromise.then(response => {
-            //     response.blob()
-            // })
             blobPromise.then((theBlob) => {
-                console.log("did theblob come? " + theBlob):
+                console.log("did theblob come? " + theBlob.type);
 
 
-                    var blobUrl = window.URL.createObjectURL(theBlob);
+                var blobData = [];
+                blobData.push(theBlob)
+                console.log(theBlob);
+                var blobUrl = window.URL.createObjectURL(new Blob(blobData, { 'type': 'audio/wav; codecs=0' }));
                 var a = document.createElement("a");
                 a.href = blobUrl;
                 a.download = clipName;
@@ -108,8 +99,8 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 var wavesurfer = WaveSurfer.create(wavesurferConstraints);
                 wavesurfer.load()
             })
-            blobPromise.catch((error) => {
-                console.log("error occured when getting blob back " + error)
+            blobPromise.catch((postErrors) => {
+                console.log("error occured " + postErrors);
             })
 
 
@@ -161,3 +152,12 @@ var downloadButton = document.getElementById('download');
    var wavesurfer = WaveSurfer.create(wavesurferConstraints);
    */
 // wavesurfer.load(blobUrl);
+
+
+// blobPromise.then((fetch('/', {
+//     method: 'GET',
+//     header: { 'Content-type': 'application/octet-stream' }
+// })))
+// blobPromise.then(response => {
+//     response.blob()
+// })
