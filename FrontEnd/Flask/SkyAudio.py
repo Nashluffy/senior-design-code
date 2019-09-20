@@ -37,6 +37,7 @@ def index():
             waveform = request.form.get('waveform')
             with ClusterRpcProxy(CONFIG) as rpc:
                 result = rpc.SigProc.reverbSmallRoom()
+            return send_file(os.path.join(application.config['UPLOAD_FOLDER'], 'processed.wav')
         elif selectedItem == 'TestNamekoServices' :
            with ClusterRpcProxy(CONFIG) as rpc:
                 result = rpc.SigProc.hello(name="World, RPC is up and functioning")
