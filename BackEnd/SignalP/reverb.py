@@ -1,4 +1,6 @@
+import pysndfx
 from pysndfx import AudioEffectsChain
+
 #Reverb takes 7 parameters:
     #Reverberance
     #High-Frequency Damping
@@ -13,13 +15,16 @@ outf = '/home/ec2-user/SkyAudio/SkyAudio/FrontEnd/Flask/tmp/processed.wav'
 
 def SmallRoom():
     try:
-        fx = (AudioEffectsChain().reverb(34, 60, 20, 100, 20, 0, False))
-        pysndfx.fx(inf, outf)
-        print ('Successfully applied small room!')
+        fx = (
+             AudioEffectsChain()
+             .reverb(34, 60, 20, 100, 20, 0, False)
+        )
+        fx(inf, outf)
+        print('Successfully applied small room!')
         return 'Successfully applied small room!'
     except Exception as e:
-        print (e)
-        return 'Something wrong with SoX'
+        print(e)
+        return e
 
 def TestMe():
      print('Reverb hit')
@@ -50,3 +55,4 @@ def BigRoom():
         print('Sucessfully applied big hall!')
     except:
         print('Something wrong with SoX')
+

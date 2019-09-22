@@ -17,7 +17,7 @@ ALLOWED_EXTENSIONS = set(
     ['txt', 'mp3', 'wav', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 AMQP_URI = 'amqp://' + str(RABBITMQ_USER) + ':' + \
     str(RABBITMQ_PASS) + '@' + str(SERVER_IP)
-CONFIG = {'AMQP_URI': "amqp://dev_user:dev_pass@54.226.64.199:5672"}
+CONFIG = {'AMQP_URI': "amqp://dev_user:dev_pass@34.227.109.165:5672"}
 #CONFIG = {'AMQP_URI': AMQP_URI}
 application = Flask(__name__)
 Bootstrap(application)
@@ -53,8 +53,8 @@ def index():
                 #     print("in with statement")
                 #     result = rpc.SigProc.reverbSmallRoom()
                 #     print("result is ")
-        #return send_file(os.path.join(application.config['UPLOAD_FOLDER'], 'processed.wav'))
-        return send_file('/home/leedagr8/Downloads/02 Bored To Death.mp3', attachment_filename='Testing.ogg')
+        return send_file(os.path.join(application.config['UPLOAD_FOLDER'], 'RHCP.mp3'))
+        #return send_file('/home/leedagr8/Downloads/02 Bored To Death.mp3', attachment_filename='Testing.ogg')
      
     elif request.method == 'GET':
         return render_template('index.html', title='Testing')
