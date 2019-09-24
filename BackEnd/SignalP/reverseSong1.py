@@ -1,7 +1,7 @@
 
 from pydub import AudioSegment
 
-song = AudioSegment.from_wav("sd1audiotest.wav")
+song = AudioSegment.from_wav("test.wav")
 backwards = song.reverse()
-backwards.export("audiotest.mp3", format = "mp3")
+backwards.export("revreseSong.wav", format = "wav")
 
