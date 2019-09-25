@@ -3,137 +3,137 @@
 
 <head>
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-  <title>SkyAudio</title>
+    <title>SkyAudio</title>
 
-  <!-- Custom fonts for this template-->
-  <link href="{{url_for('static',  filename='vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <!-- Custom fonts for this template-->
+    <link href="{{url_for('static',  filename='vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
 
-  <!-- Page level plugin CSS-->
-  <link href="{{url_for('static',  filename='vendor/datatables/dataTables.bootstrap4.css')}}" rel="stylesheet">
+    <!-- Page level plugin CSS-->
+    <link href="{{url_for('static',  filename='vendor/datatables/dataTables.bootstrap4.css')}}" rel="stylesheet">
 
-  <!-- Custom styles for this template-->
-  <link href="{{url_for('static',  filename='css/sb-admin.css')}}" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="{{url_for('static',  filename='css/sb-admin.css')}}" rel="stylesheet">
 
-  <link rel="stylesheet" href="/FrontEnd/Flask/static/css/index.css" >
+    <link rel="stylesheet" href="/FrontEnd/Flask/static/css/index.css">
 
 </head>
 
 <body id="page-top">
 
-  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-    <a class="navbar-brand mr-1 " href="index.html">SkyAudio</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+        <a class="navbar-brand mr-1 " href="index.html">SkyAudio</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="index.html">
-          <i class="fa fa-cloud"></i>
-          <span>Dashboard</span>
-        </a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Songs</span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">
+                    <i class="fa fa-cloud"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Songs</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+        </ul>
+
+        <!-- Navbar -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav ml-auto d-flex ">
+                <li class="nav-item dropdown no-arrow mx-1">
+                    <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-bell fa-fw"></i>
+                        <span class="badge badge-danger">9+</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown no-arrow mx-1">
+                    <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <i class="fas fa-envelope fa-fw"></i>
+                        <span class="badge badge-danger">7</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown no-arrow">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user-circle fa-fw"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="#">Activity Log</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+                    </div>
+                </li>
+            </ul>
         </div>
-      </li>
-    </ul>
+    </nav>
 
-    <!-- Navbar -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div id="wrapper">
 
-    <ul class="navbar-nav ml-auto d-flex ">
-      <li class="nav-item dropdown no-arrow mx-1">
-        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-bell fa-fw"></i>
-          <span class="badge badge-danger">9+</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown no-arrow mx-1">
-        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          <i class="fas fa-envelope fa-fw"></i>
-          <span class="badge badge-danger">7</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown no-arrow">
-        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-user-circle fa-fw"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-          <a class="dropdown-item" href="#">Settings</a>
-          <a class="dropdown-item" href="#">Activity Log</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
-        </div>
-      </li>
-    </ul>
-    </div>
-  </nav>
+        <div id="content-wrapper">
 
-  <div id="wrapper">
+            <div class="container-fluid">
 
-    <div id="content-wrapper">
+                <!-- Breadcrumbs-->
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="#">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active">Overview</li>
+                </ol>
 
-      <div class="container-fluid">
+                <!-- Input File -->
 
-        <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="#">Dashboard</a>
-          </li>
-          <li class="breadcrumb-item active">Overview</li>
-        </ol>
+                <div class="jumbotron ">
+                    <div class="container">
+                        <h1> File insert will go here</h1>
+                    </div>
+                </div>
 
-        <!-- Input File -->
+                <!-- Audio Record-->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fas fa-chart-area"></i> Audio Recording</div>
+                    <div class="card-body">
 
-        <div class="jumbotron ">
-          <div class="container">
-            <h1> File insert will go here</h1>
-          </div>
-        </div>
-
-        <!-- Audio Record-->
-        <div class="card mb-3">
-          <div class="card-header">
-            <i class="fas fa-chart-area"></i>
-            Audio Recording</div>
-          <div class="card-body">
-            <body>
-               <input id="start_button" type="button" value="Start Recording" />
-               <input id="stop_button" type="button" value="Stop Recording" />
-             <form action="/" method="POST">
-                <div>
-                    <article class="clip">
-                      <div id="waveform"></div>
-                      <div id="micInput"></div>
-                    </article>
-                    <audio id="audio_playback" controls></audio>
-                    <div></div>
-                    <select name="SigProcMenu">
+                        <body>
+                            <input id="start_button" type="button" value="Start Recording" />
+                            <input id="stop_button" type="button" value="Stop Recording" />
+                            <form action="/" method="POST">
+                                <div>
+                                    <article class="clip">
+                                        <div id="waveform"></div>
+                                        <div id="micInput"></div>
+                                    </article>
+                                    <audio id="audio_playback" controls></audio>
+                                    <div></div>
+                                    <select name="SigProcMenu">
                     <option value="ReverbSmallRoom" selected>Reverb: Small Room</option>
                     <option value="ReverbCaveEffect">Reverb: Cave Effect</option>
                     <option value="ReverbConcertHall">Reverb: Concert Hall</option>
@@ -141,78 +141,78 @@
 		    <option value="MoreComingSoon!">More Coming Soon!</option>
                     
 		    </select>
+                                </div>
+                                <input type="submit" name="backend" value="Submit" />
+                                <input type="submit" name="backend" value="Test Nameko Services" />
+                            </form>
+                        </body>
+                    </div>
+                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                 </div>
-                <input type="submit" name="backend" value="Submit" />
-                <input type="submit" name="backend" value="Test Nameko Services" />
-             </form>
-            </body>
-          </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+
+                <!-- Sticky Footer -->
+                <footer class="sticky-footer">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright © SkyAudio 2019</span>
+                        </div>
+                    </div>
+                </footer>
+
+            </div>
+            <!-- /.content-wrapper -->
+
         </div>
+        <!-- /#wrapper -->
 
-      <!-- Sticky Footer -->
-      <footer class="sticky-footer">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright © SkyAudio 2019</span>
-          </div>
-        </div>
-      </footer>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-    </div>
-    <!-- /.content-wrapper -->
-
-  </div>
-  <!-- /#wrapper -->
-
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
-
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="login.html">Logout</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Bootstrap core JavaScript-->
-  <script src="{{url_for('static',  filename='vendor/jquery/jquery.min.js')}}"></script>
-  <script src="{{url_for('static',  filename='vendorbootstrap/js/bootstrap.bundle.min.js')}}"></script>
+        <!-- Bootstrap core JavaScript-->
+        <script src="{{url_for('static',  filename='vendor/jquery/jquery.min.js')}}"></script>
+        <script src="{{url_for('static',  filename='vendorbootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
-  <!-- Core plugin JavaScript-->
-  <script src="{{url_for('static',  filename='vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="{{url_for('static',  filename='vendor/jquery-easing/jquery.easing.min.js')}}"></script>
 
-  <!-- Page level plugin JavaScript-->
-  <script src="{{url_for('static',  filename='vendor/chart.js/Chart.min.js')}}"></script>
-  <script src="{{url_for('static',  filename='vendor/datatables/jquery.dataTables.js')}}"></script>
-  <script src="{{url_for('static',  filename='vendor/datatables/dataTables.bootstrap4.js')}}"></script>
+        <!-- Page level plugin JavaScript-->
+        <script src="{{url_for('static',  filename='vendor/chart.js/Chart.min.js')}}"></script>
+        <script src="{{url_for('static',  filename='vendor/datatables/jquery.dataTables.js')}}"></script>
+        <script src="{{url_for('static',  filename='vendor/datatables/dataTables.bootstrap4.js')}}"></script>
 
-  <!-- Custom scripts for all pages-->
-  <script src="{{url_for('static',  filename='js/sb-admin.min.js')}}"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="{{url_for('static',  filename='js/sb-admin.min.js')}}"></script>
 
-  <!-- Demo scripts for this page-->
-  <script src="{{url_for('static',  filename='js/demo/datatables-demo.js')}}"></script>
-  <script src="{{url_for('static',  filename='js/demo/chart-area-demo.js')}}"></script>
+        <!-- Demo scripts for this page-->
+        <script src="{{url_for('static',  filename='js/demo/datatables-demo.js')}}"></script>
+        <script src="{{url_for('static',  filename='js/demo/chart-area-demo.js')}}"></script>
 
 
-  <!-- Scripts for recording audio -->
-  <script type=text/javascript src="{{url_for('static', filename='recordAudio.js') }}"></script>
-  <script src="https://unpkg.com/wavesurfer.js@2.2.1/dist/wavesurfer.min.js"></script>
-  <script type=text/javascript src="{{url_for('static', filename='microphone_plugin.js') }}"></script>
+        <!-- Scripts for recording audio -->
+        <script type=text/javascript src="{{url_for('static', filename='recordAudio.js') }}"></script>
+        <script src="https://unpkg.com/wavesurfer.js@2.2.1/dist/wavesurfer.min.js"></script>
+        <script type=text/javascript src="{{url_for('static', filename='microphone_plugin.js') }}"></script>
 </body>
 
 </html>
