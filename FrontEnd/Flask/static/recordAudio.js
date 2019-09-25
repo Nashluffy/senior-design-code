@@ -66,7 +66,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             var formData = new FormData();
             formData.append('blob', blob, 'blob.wav');
             formData.append('test', 'test');
-            //console.log('Blob from data ' + blob.text())
+            console.log('Blob from data ' + formData)
             var blobPromise = fetch('/', {
 
                 method: 'POST',
@@ -82,7 +82,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 var blobUrl = window.URL.createObjectURL(theBlob);
                 var a = document.createElement("a");
                 a.href = blobUrl;
-                a.download = theBlob.fileName;
+                a.download = theBlob.name;
                 document.body.appendChild(a);
                 a.click();
                 audioPlayback.disabled = false;

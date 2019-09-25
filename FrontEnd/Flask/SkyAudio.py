@@ -54,7 +54,7 @@ def index():
                 #     result = rpc.SigProc.reverbSmallRoom()
                 #     print("result is ")
         #return send_file(os.path.join(application.config['UPLOAD_FOLDER'], 'processed.wav'))
-        return send_file('/home/leedagr8/Downloads/02 Bored To Death.mp3', attachment_filename='Testing.ogg')
+        return send_file('/home/leedagr8/Downloads/02 Bored To Death.mp3', attachment_filename='Testing.mp3')
      
     elif request.method == 'GET':
         return render_template('index.html', title='Testing')
