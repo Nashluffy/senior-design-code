@@ -9,5 +9,6 @@ Added a line
 * [Kill the Password](https://www.wired.com/2012/11/ff-mat-honan-password-hacker/)
 * ~~[Migrate from HTTP to HTTPS](https://www.keycdn.com/blog/http-to-https)~~
 * [Idea of interface features](https://alemangui.github.io/pizzicato/#quadrafuzz)
+* [Javascripture](https://www.javascripture.com/Blob)
 
 ![Useful Diagram](https://github.com/Nashluffy/SkyAudio/blob/master/Pictures/Screenshot%20from%202019-07-28%2020-25-13.png)
