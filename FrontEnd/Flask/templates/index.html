@@ -21,12 +21,15 @@
     <link href="{{url_for('static',  filename='css/sb-admin.css')}}" rel="stylesheet">
 
     <link rel="stylesheet" href="../static/css/index.css">
+    <link rel="stylesheet" href="/FrontEnd/Flask/static/css/index.css">
+
 
 </head>
 
 <body id="page-top">
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
         <a class="navbar-brand mr-1 " href="index.html">SkyAudio</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -173,6 +176,7 @@
                     </div>
                 </div>
 
+
                 <!-- Audio Record-->
                 <div class="card mb-3">
                     <div class="card-header">
@@ -180,9 +184,9 @@
                     <div class="card-body">
 
                         <body>
+                            <p id="textbox"></p>
                             <input id="start_button" type="button" value="Start Recording" />
                             <input id="stop_button" type="button" value="Stop Recording" />
-                            <form action="/" method="POST">
                                 <div>
                                     <article class="clip">
                                         <div id="waveform"></div>
@@ -190,14 +194,16 @@
                                     </article>
                                     <audio id="audio_playback" controls></audio>
                                     <div></div>
-                                    <select name="SigProcMenu">
-                    <option value="ReverbSmallRoom" selected>Reverb: Small Room</option>
-                    <option value="ReverbCaveEffect">Reverb: Cave Effect</option>
-                    <option value="ReverbConcertHall">Reverb: Concert Hall</option>
-		    <option value="Test Nameko Services">Test Nameko Services</option>
-		    <option value="MoreComingSoon!">More Coming Soon!</option>
-                    
-		    </select>
+
+				    <form action="/" method="POST">
+                                    <select id="SigProcMenu" name="SigProcMenu">
+                                        <option value="ReverbSmallRoom" selected>Reverb: Small Room</option>
+                                        <option value="ReverbCaveEffect">Reverb: Cave Effect</option>
+                                        <option value="ReverbConcertHall">Reverb: Concert Hall</option>
+		                        <option value="TestNamekoServices">Test Nameko Services</option>
+		                        <option value="MoreComingSoon!">More Coming Soon!</option>
+       
+		                    </select>
                                 </div>
                                 <input type="submit" name="backend" value="Submit" />
                                 <input type="submit" name="backend" value="Test Nameko Services" />
@@ -264,11 +270,11 @@
         <script src="{{url_for('static',  filename='js/demo/datatables-demo.js')}}"></script>
         <script src="{{url_for('static',  filename='js/demo/chart-area-demo.js')}}"></script>
 
-
         <!-- Scripts for recording audio -->
         <script type=text/javascript src="{{url_for('static', filename='recordAudio.js') }}"></script>
         <script src="https://unpkg.com/wavesurfer.js@2.2.1/dist/wavesurfer.min.js"></script>
         <script type=text/javascript src="{{url_for('static', filename='microphone_plugin.js') }}"></script>
+        <script type=text/javascript src="{{url_for('static', filename='updateWaveform.js') }}"></script>
 </body>
 
 </html>

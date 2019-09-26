@@ -1,4 +1,6 @@
+import pysndfx
 from pysndfx import AudioEffectsChain
+
 #Reverb takes 7 parameters:
     #Reverberance
     #High-Frequency Damping
@@ -8,17 +10,25 @@ from pysndfx import AudioEffectsChain
     #Wet Gain
     #Wet Only
 
-inf = '~/SkyAudio/SkyAudio/SampleFiles/Sample.wav'
-outf = '~/SkyAudio/SkyAudio/SampleFiles/reverb'
+inf = '/home/ec2-user/SkyAudio/SkyAudio/FrontEnd/Flask/tmp/download.wav'
+outf = '/home/ec2-user/SkyAudio/SkyAudio/FrontEnd/Flask/tmp/processed.wav'
 
-def SmallRoom(waveform):
+def SmallRoom():
     try:
-        fx = (AudioEffectsChain().reverb(34, 60, 20, 100, 20, 0, False))
-        outf = outf + 'SmallRoom.wav'
-        pysndfx.fx(waveform, outf)
+        fx = (
+             AudioEffectsChain()
+             .reverb(34, 60, 20, 100, 20, 0, False)
+        )
+        fx(inf, outf)
+        print('Successfully applied small room!')
         return 'Successfully applied small room!'
-    except:
-        print ('Something wrong with SoX')
+    except Exception as e:
+        print(e)
+        return e
+
+def TestMe():
+     print('Reverb hit')
+     return ('Hit me')
 
 def ReflectiveRoom():
     try:
@@ -45,3 +55,4 @@ def BigRoom():
         print('Sucessfully applied big hall!')
     except:
         print('Something wrong with SoX')
+
