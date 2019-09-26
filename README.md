@@ -13,5 +13,8 @@ Added a line
 # Resources used for Web Development
 * [Javascripture](https://www.javascripture.com/Blob)
 * [Allow website to be accessible by phone](https://stackoverflow.com/questions/7023052/configure-flask-dev-server-to-be-visible-across-the-network)
- * [Javscript resource](https://javascript.info/)
+
+* [Javscript resource](https://javascript.info/)
+* [Pizzicato](https://alemangui.github.io/pizzicato/#dub-delay)
+ 
 ![Useful Diagram](https://github.com/Nashluffy/SkyAudio/blob/master/Pictures/Screenshot%20from%202019-07-28%2020-25-13.png)
