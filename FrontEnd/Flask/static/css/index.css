@@ -1,8 +1,23 @@
-body {
+#page-top {
     font-family: 'Merriweather', serif;
-    background-color: #ededed;
+    background-color: #536390;
     color: #212121;
     padding: 1.618rem;
     line-height: 1.618;
     font-size: 16px;
+}
+
+.card-header {
+    text-align: center;
+    font-size: 20px;
+}
+
+.container-image {
+    text-align: center;
+    background-image: url("../Pics/AudioMusic_493760158.png");
+}
+
+#logo {
+    margin-left: auto;
+    margin-right: auto;
 }

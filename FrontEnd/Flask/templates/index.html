@@ -19,6 +19,8 @@
 
     <!-- Custom styles for this template-->
     <link href="{{url_for('static',  filename='css/sb-admin.css')}}" rel="stylesheet">
+
+    <link rel="stylesheet" href="../static/css/index.css">
     <link rel="stylesheet" href="/FrontEnd/Flask/static/css/index.css">
 
 
@@ -101,19 +103,76 @@
 
             <div class="container-fluid">
 
-                <!-- Breadcrumbs-->
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="#">Dashboard</a>
-                    </li>
-                    <li class="breadcrumb-item active">Overview</li>
-                </ol>
 
                 <!-- Input File -->
 
-                <div class="jumbotron ">
-                    <div class="container">
-                        <h1> File insert will go here</h1>
+                <div class="container-image">
+                    <img id="logo" src="../static/Pics/Asset 2xxxhdpi.png" alt="logo" width="40%" height="30%">
+                </div>
+
+                <!-- Audio Record-->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fas fa-headphones-alt"></i> Track 1</div>
+                    <div class="card-body">
+
+                        <body>
+                            <input id="start_button" type="button" value="Start Recording" />
+                            <input id="stop_button" type="button" value="Stop Recording" />
+                            <form action="/" method="POST">
+                                <div>
+                                    <article class="clip">
+                                        <div id="waveform" style="background: purple"></div>
+                                        <div id="micInput"></div>
+                                    </article>
+                                    <audio id="audio_playback" controls></audio>
+                                    <div></div>
+                                    <select name="SigProcMenu">
+                    <option value="ReverbSmallRoom" selected>Reverb: Small Room</option>
+                    <option value="ReverbCaveEffect">Reverb: Cave Effect</option>
+                    <option value="ReverbConcertHall">Reverb: Concert Hall</option>
+		    <option value="Test Nameko Services">Test Nameko Services</option>
+		    <option value="MoreComingSoon!">More Coming Soon!</option>
+                    
+		    </select>
+                                </div>
+                                <input type="submit" name="backend" value="Submit" />
+                                <input type="submit" name="backend" value="Test Nameko Services" />
+                            </form>
+                        </body>
+                    </div>
+                </div>
+
+                <!-- Audio Record-->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fas fa-headphones-alt"></i> Track 2</div>
+                    <div class="card-body">
+
+                        <body>
+                            <input id="start_button" type="button" value="Start Recording" />
+                            <input id="stop_button" type="button" value="Stop Recording" />
+                            <form action="/" method="POST">
+                                <div>
+                                    <article class="clip">
+                                        <div id="waveform"></div>
+                                        <div id="micInput"></div>
+                                    </article>
+                                    <audio id="audio_playback" controls></audio>
+                                    <div></div>
+                                    <select name="SigProcMenu">
+                    <option value="ReverbSmallRoom" selected>Reverb: Small Room</option>
+                    <option value="ReverbCaveEffect">Reverb: Cave Effect</option>
+                    <option value="ReverbConcertHall">Reverb: Concert Hall</option>
+		    <option value="Test Nameko Services">Test Nameko Services</option>
+		    <option value="MoreComingSoon!">More Coming Soon!</option>
+                    
+		    </select>
+                                </div>
+                                <input type="submit" name="backend" value="Submit" />
+                                <input type="submit" name="backend" value="Test Nameko Services" />
+                            </form>
+                        </body>
                     </div>
                 </div>
 
@@ -121,7 +180,7 @@
                 <!-- Audio Record-->
                 <div class="card mb-3">
                     <div class="card-header">
-                        <i class="fas fa-chart-area"></i> Audio Recording</div>
+                        <i class="fas fa-headphones-alt"></i> Track 3</div>
                     <div class="card-body">
 
                         <body>
@@ -151,7 +210,6 @@
                             </form>
                         </body>
                     </div>
-                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
                 </div>
 
                 <!-- Sticky Footer -->
