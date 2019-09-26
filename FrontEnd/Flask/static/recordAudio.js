@@ -24,6 +24,7 @@ var getmediaConstraints = {
 }
 
 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+
     //navigator is the web browser that it's running on (JS object)
     //making sure the features you need are compatible with the browser you're running on
 
@@ -36,6 +37,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         startButton.onclick = function() {
             stopButton.disabled = false; //Enable stopping now that we are recording
             mediaRecorder.start();
+
             mediaRecorder.ondataavailable = e => {
                 chunks.push(e.data);
             }
@@ -45,7 +47,6 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         //1) send the blob the backend
         //2) then the user will select an effect
         //3) 
-
         stopButton.onclick = function() {
             mediaRecorder.stop();
             stopButton.disabled = true;
@@ -53,6 +54,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         }
         mediaRecorder.ondataavailable = function(e) { chunks.push(e.data) }; //on data available event handler
         mediaRecorder.onstop = function(e) { //on stop event handler
+
 
             //var clipName = prompt("Enter a name for your sound clip: ");
             var blob = new Blob(chunks, { 'type': 'audio/wav; codecs=0' }); //Creating a new blob
@@ -94,10 +96,6 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             blobPromise.catch((postErrors) => {
                 console.log("error occured " + postErrors);
             })
-
-
-
-
         }
     }
     var onError = function(err) { console.log("Something went wrong!" + err); }
