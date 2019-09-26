@@ -8,8 +8,8 @@ from pysndfx import AudioEffectsChain
     #Wet Gain
     #Wet Only
 
-inf = '~/SkyAudio/SkyAudio/SampleFiles/Sample.wav'
-outf = '~/SkyAudio/SkyAudio/SampleFiles/mastering'
+inf = 'test.wav'
+outf = 'outputMastering.wav'
 
 def SmallRoom():
     try:
@@ -22,7 +22,7 @@ def SmallRoom():
             .compand(0.2, 1, 2.0, -20, -20, -20)
         )
         outf = outf + 'Simple.wav'
-        pysndfx.fx(inf, outf)
+        fx(inf, outf)
         print('Successfully applied simple mastering!')
     except:
         print ('Something wrong with SoX')

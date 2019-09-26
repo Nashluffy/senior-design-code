@@ -8,6 +8,6 @@ fx = (
     .normalize()
     .compand(0.2, 1, 2.0, -20, -20, -20)
 )
-inf = 'sd1audiotest.wav'
-outf = 'masteringSimple.wav'
+inf = 'test.wav'
+outf = 'outputMatseringSimple.wav'
 fx(inf, outf)
