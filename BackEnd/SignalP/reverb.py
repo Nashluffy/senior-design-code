@@ -1,4 +1,6 @@
 from pysndfx import AudioEffectsChain
+
+
 #Reverb takes 7 parameters:
     #Reverberance
     #High-Frequency Damping
@@ -8,50 +10,45 @@ from pysndfx import AudioEffectsChain
     #Wet Gain
     #Wet Only
 
-inf = 'test.wav'
-outf = 'output.wav'
+inf = "files/download.wav"
+outdir = "files/output"
 
 def SmallRoom():
     try:
         fx = (AudioEffectsChain().reverb(34, 60, 20, 100, 20, 0, False))
-        outf = 'outputReverbSmallRoom.wav'
+        outf = outdir + 'ReverbSmallRoom.wav'
         fx(inf, outf)
-        print ('Successfully applied small room!')
         return 'Successfully applied small room!'
     except Exception as e:
         print (e)
-        return 'Something wrong with SoX'
-
-def TestMe():
-     print('Reverb hit')
-     return ('Hit me')
+        return e
 
 def ReflectiveRoom():
     try:
         fx = (AudioEffectsChain().reverb(80, 10, 10, 100, 40, 4, False).normalize())
-        outf = 'ReflectiveRoom.wav'
+        outf = outdir + 'ReverbReflectiveRoom.wav'
         fx(inf, outf)
         print('Sucessfully applied reflective room!')
-    except:
-        print('Something wrong with SoX')
+    except Exception as e:
+        print(e)
+        return e
 
 def ReflectiveCave():
     try:
         fx = (AudioEffectsChain().reverb(100, 50, 100, 100, 50, 0, False))
-        outf = 'ReflectiveCave.wav'
+        outf = outdir + 'ReverbReflectiveCave.wav'
         fx(inf, outf)
         print('Successfully applied reflective cave!')
-    except:
-        print('Something wrong with SoX')
+    except Exception as e:
+        print(e)
+        return e
+
 def BigRoom():
     try:
         fx = (AudioEffectsChain().reverb(80, 75, 100, 50, 20, 0, False))
-        outf = 'BigHall.wav'
+        outf = outdir + 'ReverbBigHall.wav'
         fx(inf, outf)
         print('Sucessfully applied big hall!')
-    except:
-        print('Something wrong with SoX')
-SmallRoom()
-ReflectiveRoom()
-ReflectiveCave()
-BigRoom()
+    except Exception as e:
+        print(e)
+        return e
