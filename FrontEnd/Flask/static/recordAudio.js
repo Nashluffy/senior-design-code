@@ -72,7 +72,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             var blobPromise = fetch('/', {
 
                 method: 'POST',
-                headers: { 'Content-type': 'application/octet-stream' },
+               // headers: { 'Content-type': 'application/octet-stream' },
                 body: formData
             })
 
