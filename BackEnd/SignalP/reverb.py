@@ -1,5 +1,6 @@
 from pysndfx import AudioEffectsChain
-
+import os
+import shutil
 
 #Reverb takes 7 parameters:
     #Reverberance
@@ -10,14 +11,23 @@ from pysndfx import AudioEffectsChain
     #Wet Gain
     #Wet Only
 
-inf = "files/download.wav"
-outdir = "files/output"
+inf = "download.wav"
+outdir = "processed.wav"
+
+def getFile():
+    shutil.move('/opt/app/src/download.wav', '/usr/app/src/download.wav')
+
+def setFile():
+    shutil.move('/usr/app/src/processed.wav', '/opt/app/src/processed.wav')
+
 
 def SmallRoom():
     try:
+        getFile()
         fx = (AudioEffectsChain().reverb(34, 60, 20, 100, 20, 0, False))
-        outf = outdir + 'ReverbSmallRoom.wav'
+        outf = outdir
         fx(inf, outf)
+        setFile()
         return 'Successfully applied small room!'
     except Exception as e:
         print (e)
@@ -25,30 +35,36 @@ def SmallRoom():
 
 def ReflectiveRoom():
     try:
+        getFile()
         fx = (AudioEffectsChain().reverb(80, 10, 10, 100, 40, 4, False).normalize())
-        outf = outdir + 'ReverbReflectiveRoom.wav'
+        outf = outdir
         fx(inf, outf)
-        print('Sucessfully applied reflective room!')
+        setFile()
+        return 'Successfully applied reflective room!'
     except Exception as e:
         print(e)
         return e
 
 def ReflectiveCave():
     try:
+        getFile()
         fx = (AudioEffectsChain().reverb(100, 50, 100, 100, 50, 0, False))
-        outf = outdir + 'ReverbReflectiveCave.wav'
+        outf = outdir 
         fx(inf, outf)
-        print('Successfully applied reflective cave!')
+        setFile()
+        return 'Successfully applied reflective cave!'
     except Exception as e:
         print(e)
         return e
 
 def BigRoom():
     try:
+        getFile()
         fx = (AudioEffectsChain().reverb(80, 75, 100, 50, 20, 0, False))
-        outf = outdir + 'ReverbBigHall.wav'
+        outf = outdir
         fx(inf, outf)
-        print('Sucessfully applied big hall!')
+        setFile()
+        return 'Sucessfully applied big hall!'
     except Exception as e:
         print(e)
         return e

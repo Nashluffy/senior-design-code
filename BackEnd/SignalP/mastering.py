@@ -1,4 +1,6 @@
 from pysndfx import AudioEffectsChain
+import os
+import shutil
 #Reverb takes 7 parameters:
     #Reverberance
     #High-Frequency Damping
@@ -8,22 +10,28 @@ from pysndfx import AudioEffectsChain
     #Wet Gain
     #Wet Only
 
-inf = 'test.wav'
-outf = 'outputMastering.wav'
+inf = 'download.wav'
+outf = 'processed.wav'
+
+
+def getFile():
+    shutil.move('/opt/app/src/download.wav', '/usr/app/src/download.wav')
+
+def setFile():
+    shutil.move('/usr/app/src/processed.wav', '/opt/app/src/processed.wav')
+
+
+
 
 def SmallRoom():
     try:
-        fx = (
-            AudioEffectsChain()
-            .equalizer(10000, 1, 3)
-            .equalizer(20, 1, -10)
-            .limiter(3)
-            .normalize()
-            .compand(0.2, 1, 2.0, -20, -20, -20)
-        )
-        outf = outf + 'Simple.wav'
+        getFile()
+        fx = (AudioEffectsChain().equalizer(10000, 1, 3).equalizer(20, 1, -10).limiter(3).normalize().compand(0.2, 1, 2.0, -20, -20, -20))
+        outf = outf 
         fx(inf, outf)
-        print('Successfully applied simple mastering!')
-    except:
-        print ('Something wrong with SoX')
+        setFile()
+        return 'Successfully applied simple mastering!'
+    except Exception as e:
+        print(e)
+        return e
 
