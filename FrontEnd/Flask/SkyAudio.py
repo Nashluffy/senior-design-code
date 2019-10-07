@@ -45,15 +45,17 @@ def index():
         else:        
             if 'blob' in request.files:
                 print('hit file')
-                filename = 'download.wav'
+                filename = 'download.ogg'
                 file = request.files['blob']
                 file.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
                 print(os.path.join(application.config['UPLOAD_FOLDER'], filename))
-                # with ClusterRpcProxy(CONFIG) as rpc:
-                #     print("in with statement")
-                #     result = rpc.SigProc.reverbSmallRoom()
-                #     print("result is ")
-        return send_file(os.path.join(application.config['UPLOAD_FOLDER'], 'RHCP.mp3'))
+                with ClusterRpcProxy(CONFIG) as rpc:
+                    print("in with statement")
+                    result = rpc.SigProc.reverbSmallRoom()
+                    print("result is ")
+            else:
+                print('No file found')
+        return send_file(os.path.join(application.config['UPLOAD_FOLDER'], 'processed.ogg'))
         #return send_file('/home/leedagr8/Downloads/02 Bored To Death.mp3', attachment_filename='Testing.ogg')
      
     elif request.method == 'GET':

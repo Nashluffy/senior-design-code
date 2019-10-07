@@ -1,7 +1,8 @@
 from pysndfx import AudioEffectsChain
 import os
 import shutil
-
+import pydub
+from pydub import AudioSegment
 #Reverb takes 7 parameters:
     #Reverberance
     #High-Frequency Damping
@@ -11,14 +12,15 @@ import shutil
     #Wet Gain
     #Wet Only
 
-inf = "download.wav"
-outdir = "processed.wav"
+inf = "download.ogg"
+outdir = "processed.ogg"
 
 def getFile():
-    shutil.move('/opt/app/src/download.wav', '/usr/app/src/download.wav')
+    AudioSegment.from_file('/opt/app/src/download.ogg').export('/opt/app/src/download.ogg', format="ogg")
+    shutil.move('/opt/app/src/download.ogg', '/usr/app/src/download.ogg')
 
 def setFile():
-    shutil.move('/usr/app/src/processed.wav', '/opt/app/src/processed.wav')
+    shutil.move('/usr/app/src/processed.ogg', '/opt/app/src/processed.ogg')
 
 
 def SmallRoom():
