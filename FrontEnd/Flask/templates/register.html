@@ -16,8 +16,8 @@
   <script src="{{url_for('static', filename= 'amazon-cognito-identity.min.js')}}"></script>  
   <script src="{{url_for('static', filename ='config.js')}}"></script>
   <!-- Custom fonts for this template-->
-  <script src="{{url_for('static', filename ='vendor/fontawesome-free/css/all.min.css')}}"></script>
 
+  
   <!-- Custom styles for this template-->
   <link href="{{url_for('static', filename ='css/sb-admin.css')}}" rel="stylesheet">
 
@@ -136,8 +136,8 @@
 			cognitoUser = result.user;
 			console.log('user name is ' + cognitoUser.getUsername());
 			//change elements of page
-			document.getElementById("titleheader").innerHTML = "Check your email for a verification link";
-			
+			//document.getElementById("titleheader").innerHTML = "Check your email for a verification link";
+			alert("Check email for verification link");
 		});
 	  }
 	</script>
