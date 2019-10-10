@@ -51,7 +51,7 @@ def index():
                 print(os.path.join(application.config['UPLOAD_FOLDER'], filename))
                 with ClusterRpcProxy(CONFIG) as rpc:
                     print("in with statement")
-                    result = rpc.SigProc.reverbSmallRoom()
+                    result = rpc.SigProc.miscReverseSong()
                     print("result is ")
             else:
                 print('No file found')
