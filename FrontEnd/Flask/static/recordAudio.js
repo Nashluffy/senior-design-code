@@ -16,11 +16,16 @@ audioPlayback.disabled = true;
 //List custom events
 var micOn = new Event('micOn');
 
-var wavesurferConstraints = {
+const wavesurferConstraints = {
     container: document.getElementById('waveform'),
-    waveColor: 'violet',
-    progressColor: 'purple',
+    waveColor: 'blue',
+    progressColor: 'red',
     backend: 'WebAudio',
+    plugins: [
+        WaveSurfer.cursor.create({
+            showTime: true
+        })
+    ]
 }
 
 var getmediaConstraints = {
@@ -58,59 +63,62 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             console.log(blob.size);
             console.log("bye")
 
-            process.onclick = function(blob) {
+            // process.onclick = function(blob) {
 
-                if (reverbSmallRoom.onclick) {
-                    if (blob.size == 0) {
-                        console.log('Error fetching blob');
-                    } else {
-                        var smallRoomTransfer = new FormData();
-                        smallRoomTransfer.append('blob', blobUrl);
-                        smallRoomTransfer.append('smallRoom', 'reverbSmallRoom');
-                    }
-                } else if (reverbCaveEffect.onclick) {
-                    if (blob.size == 0) {
-                        console.log('Error fetching blob');
-                    } else {
-                        var caveTransfer = new FormData();
-                        caveTransfer.append('blob', blobUrl);
-                        caveTransfer.append('caveEffect', 'reverbCaveEffect');
-                    }
-                } else if (ReverbConcertHall.onclick) {
-                    if (blob.size == 0) {
-                        console.log('Error fetching blob');
-                    } else {
-                        var concertTransfer = new FormData();
-                        concertTransfer.append('blob', blobUrl);
-                        concertTransfer.append('concertEffect', 'reverbConcertEffect');
-                    }
-                } else {
-                    if (!ReverbConcertHall.click || !reverbCaveEffect.click || !reverbSmallRoom.click) {
-                        alert("Please select an effect");
-                    } else {
-                        reverbPromise = fetch('/', {
-                            method: 'POST',
-                            body: reverbTransfer
-                        }).promise.then((resp) => {
-                            return resp.clone().blob();
-                        }).then((theBlob) => {
-                            var blobUrl = window.URL.createObjectURL(blob);
-                            var a = document.createElement("a");
-                            a.href = blobUrl;
-                            if (blobUrl.size() > 0) {
-                                console.log("blob is size is greater than 0. blob has successfully worked")
-                            } else {
-                                alert('Error in returning blob');
-                            }
-                        })
-                    }
-                }
-            }
+            //     if (reverbSmallRoom.onclick) {
+            //         if (blob.size == 0) {
+            //             console.log('Error fetching blob');
+            //         } else {
+            //             var smallRoomTransfer = new FormData();
+            //             smallRoomTransfer.append('blob', blobUrl);
+            //             smallRoomTransfer.append('smallRoom', 'reverbSmallRoom');
+            //         }
+            //     } else if (reverbCaveEffect.onclick) {
+            //         if (blob.size == 0) {
+            //             console.log('Error fetching blob');
+            //         } else {
+            //             var caveTransfer = new FormData();
+            //             caveTransfer.append('blob', blobUrl);
+            //             caveTransfer.append('caveEffect', 'reverbCaveEffect');
+            //         }
+            //     } else if (ReverbConcertHall.onclick) {
+            //         if (blob.size == 0) {
+            //             console.log('Error fetching blob');
+            //         } else {
+            //             var concertTransfer = new FormData();
+            //             concertTransfer.append('blob', blobUrl);
+            //             concertTransfer.append('concertEffect', 'reverbConcertEffect');
+            //         }
+            //     } else {
+            //         if (!ReverbConcertHall.click || !reverbCaveEffect.click || !reverbSmallRoom.click) {
+            //             alert("Please select an effect");
+            //         } else {
+            //             reverbPromise = fetch('/', {
+            //                 method: 'POST',
+            //                 body: reverbTransfer
+            //             }).promise.then((resp) => {
+            //                 return resp.clone().blob();
+            //             }).then((theBlob) => {
+            //                 var blobUrl = window.URL.createObjectURL(blob);
+            //                 var a = document.createElement("a");
+            //                 a.href = blobUrl;
+            //                 if (blobUrl.size() > 0) {
+            //                     console.log("blob is size is greater than 0. blob has successfully worked")
+            //                 } else {
+            //                     alert('Error in returning blob');
+            //                 }
+            //             })
+            //         }
+            //     }
+            // }
 
-            save.onclick = () => a.download = "New track";
+            // save.onclick = () => a.download = "New track";
             // a.download = "TESTING";
             //document.body.appendChild(a);
             //a.click();
+            var blobUrl = window.URL.createObjectURL(blob);
+            var a = document.createElement("a");
+            a.href = blobUrl;
             audioPlayback.disabled = false;
             audioPlayback.src = blobUrl;
             console.log('Access your blob here: ' + blobUrl);
@@ -131,14 +139,14 @@ function blobToFile(theBlob, fileName) {
     return theBlob;
 }
 
-audioPlayback.addEventListener("micOn", function(stream) {
-    var micInputWaveSurfer = WaveSurfer.create({
-        container: document.getElementById('micInput'),
-        waveColor: 'violet',
-        progressColor: 'purple',
-        backend: 'WebAudio',
-        plugins: [WaveSurfer.microphone.create()],
-    })
+// audioPlayback.addEventListener("micOn", function(stream) {
+//     var micInputWaveSurfer = WaveSurfer.create({
+//         container: document.getElementById('micInput'),
+//         waveColor: 'violet',
+//         progressColor: 'purple',
+//         backend: 'WebAudio',
+//         plugins: [WaveSurfer.microphone.create()],
+//     })
 
-    micInputWaveSurfer.microphone.start();
-})
+//     micInputWaveSurfer.microphone.start();
+//})
