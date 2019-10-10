@@ -73,12 +73,17 @@
                     <div class="card-body">
 
                         <body>
-                            <input id="start_button" type="button" value="Start Recording" />
-                            <input id="stop_button" type="button" value="Stop Recording" />
+                            <div class="inp">
+                                <div class="recor">
+                                    <input id="start_button" type="button" value="Start Recording" />
+                                    <input id="stop_button" type="button" value="Stop Recording" />
+                                    <input id="file" type="file" title=" " />
+                                </div>
+                            </div>
                             <form action="/" method="POST">
                                 <div>
                                     <article class="clip">
-                                        <div id="waveform" style="background: purple"></div>
+                                        <div id="waveform"></div>
                                         <div id="micInput"></div>
                                     </article>
                                     <audio id="audio_playback" controls></audio>
@@ -87,13 +92,10 @@
                     <option value="ReverbSmallRoom" selected>Reverb: Small Room</option>
                     <option value="ReverbCaveEffect">Reverb: Cave Effect</option>
                     <option value="ReverbConcertHall">Reverb: Concert Hall</option>
-		    <option value="Test Nameko Services">Test Nameko Services</option>
-		    <option value="MoreComingSoon!">More Coming Soon!</option>
-                    
 		    </select>
                                 </div>
-                                <input type="submit" name="backend" value="Submit" />
-                                <input type="submit" name="backend" value="Test Nameko Services" />
+                                <input type="submit" name="backend" value="Process" />
+                                <input type="submit" name="backend" value="Save Track" />
                             </form>
                         </body>
                     </div>
@@ -106,8 +108,13 @@
                     <div class="card-body">
 
                         <body>
-                            <input id="start_button" type="button" value="Start Recording" />
-                            <input id="stop_button" type="button" value="Stop Recording" />
+                            <div class="inp">
+                                <input id="start_button" type="button" value="Start Recording" />
+                                <input id="stop_button" type="button" value="Stop Recording" />
+                            </div>
+                            <div>
+                                <input id="file" type="file" title="  " />
+                            </div>
                             <form action="/" method="POST">
                                 <div>
                                     <article class="clip">
@@ -120,13 +127,12 @@
                     <option value="ReverbSmallRoom" selected>Reverb: Small Room</option>
                     <option value="ReverbCaveEffect">Reverb: Cave Effect</option>
                     <option value="ReverbConcertHall">Reverb: Concert Hall</option>
-		    <option value="Test Nameko Services">Test Nameko Services</option>
-		    <option value="MoreComingSoon!">More Coming Soon!</option>
+		   
                     
 		    </select>
                                 </div>
-                                <input type="submit" name="backend" value="Submit" />
-                                <input type="submit" name="backend" value="Test Nameko Services" />
+                                <input type="submit" name="backend" value="Process" />
+                                <input type="submit" name="backend" value="Save Track" />
                             </form>
                         </body>
                     </div>
@@ -139,8 +145,13 @@
                     <div class="card-body">
 
                         <body>
-                            <input id="start_button" type="button" value="Start Recording" />
-                            <input id="stop_button" type="button" value="Stop Recording" />
+                            <div class="inp">
+                                <input id="start_button" type="button" value="Start Recording" />
+                                <input id="stop_button" type="button" value="Stop Recording" />
+                            </div>
+                            <div>
+                                <input id="file" type="file" title=" " />
+                            </div>
                             <form action="/" method="POST">
                                 <div>
                                     <article class="clip">
@@ -150,16 +161,13 @@
                                     <audio id="audio_playback" controls></audio>
                                     <div></div>
                                     <select name="SigProcMenu">
-                    <option value="ReverbSmallRoom" selected>Reverb: Small Room</option>
-                    <option value="ReverbCaveEffect">Reverb: Cave Effect</option>
-                    <option value="ReverbConcertHall">Reverb: Concert Hall</option>
-		    <option value="Test Nameko Services">Test Nameko Services</option>
-		    <option value="MoreComingSoon!">More Coming Soon!</option>
-                    
+                    <option value="ReverbSmallRoom" id ="smallroom" selected>Reverb: Small Room</option>
+                    <option value="ReverbCaveEffect" id = "cave">Reverb: Cave Effect</option>
+                    <option value="ReverbConcertHall" id = "concert">Reverb: Concert Hall</option>            
 		    </select>
                                 </div>
-                                <input type="submit" name="backend" value="Submit" />
-                                <input type="submit" name="backend" value="Test Nameko Services" />
+                                <input type="button" id="process" value="Process" />
+                                <input type="button" id="save" value="Save Track" />
                             </form>
                         </body>
                     </div>
@@ -168,7 +176,7 @@
                 <!-- Sticky Footer -->
                 <footer class="sticky-footer">
                     <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
+                        <div class="copyright text-center my-left">
                             <span>Copyright © SkyAudio 2019</span>
                         </div>
                     </div>

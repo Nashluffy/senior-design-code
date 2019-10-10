@@ -22,7 +22,7 @@ s3_client = boto3.client('s3')
 def index():
 
     if request.method == 'POST':
-        selectedItem = request.form.get('SigProcMenu')
+        selectedItem = request.form.get('process')
         if selectedItem == 'Reverb: Small Room':
             waveform = request.form.get('waveform')
             with ClusterRpcProxy(CONFIG) as rpc:

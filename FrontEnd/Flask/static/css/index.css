@@ -24,26 +24,9 @@
     margin-right: auto;
 }
 
-
-/* .list {
-    font-family: sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    color: #edf0f1;
-    text-decoration: none;
-}
-
-.prof {
-    font-family: sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    color: #edf0f1;
-    text-decoration: none;
-} */
-
 nav {
     width: 98%;
-    height: 100px;
+    height: 75px;
 }
 
 ul li {
@@ -77,4 +60,25 @@ ul li a {
 
 .nav-item:hover {
     color: white;
+}
+
+.sticky-footer {
+    height: 15px;
+}
+
+input[type='file'] {
+    color: transparent;
+}
+
+.inp {
+    text-align: center;
+}
+
+.recor {
+    display: inline-block;
+    padding: 5px 15px;
+}
+
+#file {
+    display: inline-block;
 }
