@@ -23,7 +23,14 @@ const wavesurferConstraints = {
     backend: 'WebAudio',
     plugins: [
         WaveSurfer.cursor.create({
-            showTime: true
+            showTime: true,
+            opacity: 1,
+            customShowTimeStyle: {
+                'background-color': '#000',
+                color: '#fff',
+                padding: '2px',
+                'font-size': '10px'
+            }
         })
     ]
 }
