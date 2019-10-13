@@ -10,7 +10,11 @@
   <meta name="author" content="">
 
   <title>Welcome!</title>
-
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> 
+  <script src="{{url_for('static', filename= 'amazon-cognito-auth.min.js')}}"></script>
+  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.16.min.js"></script> 
+  <script src="{{url_for('static', filename= 'amazon-cognito-identity.min.js')}}"></script>  
+  <script src="{{url_for('static', filename ='config.js')}}"></script>
   <!-- Custom fonts for this template-->
   <script src="{{url_for('static', filename='vendor/fontawesome-free/css/all.min.css')}}"></script>
 
@@ -48,7 +52,7 @@
                 </label>
               </div>
             </div>
-            <input class="btn btn-primary btn-block" type="submit" value="Login">
+            <button class="btn btn-primary btn-block" type="button" onclick="signIn()" value="Login">Login</button>
             <!-- <a class="btn btn-primary btn-block" href="/home">Login</a>-->
           </form>
           <div class="text-center">
@@ -66,6 +70,42 @@
     <!-- Core plugin JavaScript-->
     <script src="{{url_for('static', filename='vendor/jquery-easing/jquery.easing.min.js')}}"></script>
 
-</body>
+  <script type="text/javascript">
+      function signIn(){
+          var authenticateData = {
+            Username : document.getElementById("inputEmail").value,
+            Password : document.getElementById("inputPassword").value,
+          };
 
+          var authenticateDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticateData);
+
+          var poolData = {
+            UserPoolId : _config.cognito.userPoolId,
+            ClientId : _config.cognito.clientId
+          };
+
+          var userPool =  new AmazonCognitoIdentity.CognitoUserPool(poolData);
+
+          var userData = {
+            Username: document.getElementById("inputEmail").value,
+            Pool : userPool,
+          };
+
+          var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+
+          cognitoUser.authenticateUser(authenticateDetails, {
+            onSuccess: function (result) {
+                            var accessToken = result.getAccessToken().getJwtToken();
+                            console.log(accessToken);
+                            location.href = "http://127.0.0.1:5000/home"
+            },
+
+            onFailure: function(err) {
+              alert("error :(");
+            },
+          });
+      }
+</script>
+
+</body>
 </html>
