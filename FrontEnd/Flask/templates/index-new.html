@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>SkyAudio</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="{{url_for('static',  filename='vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+
+
+    <!-- Custom styles for this template-->
+    <link href="{{url_for('static',  filename='css/sb-admin.css')}}" rel="stylesheet">
+
+    <link rel="stylesheet" href="../static/css/index.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="../static/css/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="../static/css/css/mdb.min.css" rel="stylesheet">
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <script src="https://unpkg.com/wavesurfer.js@3.1.0/dist/plugin/wavesurfer.cursor.min.js"></script>
+
+
+</head>
+
+<body id="page-top">
+
+
+
+    <nav>
+        <ul class="nav_links">
+            <li class="homerout"><a href="#">SkyAudio</a></li>
+            <li>
+                <a href="#" class="nav-item">Logout</a>
+            </li>
+            <li>
+                <a href="#" class="nav-item"> Projects</a>
+            </li>
+
+        </ul>
+
+    </nav>
+    <!-- <a class="logo"><button>Profile</button></a> -->
+
+    <div id="wrapper">
+
+        <div id="content-wrapper">
+
+            <div class="container-fluid">
+
+
+                <!-- Input File -->
+
+                <div class="container-image">
+                    <img id="logo" src="../static/Pics/Asset 2xxxhdpi.png" alt="logo" width="40%" height="30%">
+
+                </div>
+
+                <!-- Audio Record-->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fas fa-headphones-alt"></i> Track 1</div>
+                    <div class="card-body">
+
+                        <body>
+                            <div class="inp">
+                                <div class="recor">
+                                    <input id="start_button" type="button" value="Start Recording" />
+                                    <input id="stop_button" type="button" value="Stop Recording" />
+                                    <input id="file" type="file" title=" " />
+                                </div>
+                            </div>
+                            <form action="/" method="POST">
+                                <div>
+                                    <article class="clip">
+                                        <div id="waveform"></div>
+                                        <div id="micInput"></div>
+                                    </article>
+                                    <audio id="audio_playback" controls></audio>
+                                    <div></div>
+                                    <select name="SigProcMenu">
+                    <option value="ReverbSmallRoom" selected>Reverb: Small Room</option>
+                    <option value="ReverbCaveEffect">Reverb: Cave Effect</option>
+                    <option value="ReverbConcertHall">Reverb: Concert Hall</option>
+		    </select>
+                                </div>
+                                <input type="submit" name="backend" value="Process" />
+                                <input type="submit" name="backend" value="Save Track" />
+                            </form>
+                        </body>
+                    </div>
+                </div>
+
+                <!-- Audio Record-->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fas fa-headphones-alt"></i> Track 2</div>
+                    <div class="card-body">
+
+                        <body>
+                            <div class="inp">
+                                <input id="start_button" type="button" value="Start Recording" />
+                                <input id="stop_button" type="button" value="Stop Recording" />
+                            </div>
+                            <div>
+                                <input id="file" type="file" title="  " />
+                            </div>
+                            <form action="/" method="POST">
+                                <div>
+                                    <article class="clip">
+                                        <div id="waveform"></div>
+                                        <div id="micInput"></div>
+                                    </article>
+                                    <audio id="audio_playback" controls></audio>
+                                    <div></div>
+                                    <select name="SigProcMenu">
+                    <option value="ReverbSmallRoom" selected>Reverb: Small Room</option>
+                    <option value="ReverbCaveEffect">Reverb: Cave Effect</option>
+                    <option value="ReverbConcertHall">Reverb: Concert Hall</option>
+		   
+                    
+		    </select>
+                                </div>
+                                <input type="submit" name="backend" value="Process" />
+                                <input type="submit" name="backend" value="Save Track" />
+                            </form>
+                        </body>
+                    </div>
+                </div>
+
+                <!-- Audio Record-->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fas fa-headphones-alt"></i> Track 3</div>
+                    <div class="card-body">
+
+                        <body>
+                            <div class="inp">
+                                <input id="start_button" type="button" value="Start Recording" />
+                                <input id="stop_button" type="button" value="Stop Recording" />
+                            </div>
+                            <div>
+                                <input id="file" type="file" title=" " />
+                            </div>
+                            <form action="/" method="POST">
+                                <div>
+                                    <article class="clip">
+                                        <div id="waveform"></div>
+                                        <div id="micInput"></div>
+                                    </article>
+                                    <audio id="audio_playback" controls></audio>
+                                    <div></div>
+                                    <select name="SigProcMenu">
+                    <option value="ReverbSmallRoom" id ="smallroom" selected>Reverb: Small Room</option>
+                    <option value="ReverbCaveEffect" id = "cave">Reverb: Cave Effect</option>
+                    <option value="ReverbConcertHall" id = "concert">Reverb: Concert Hall</option>            
+		    </select>
+                                </div>
+                                <input type="button" id="process" value="Process" />
+                                <input type="button" id="save" value="Save Track" />
+                            </form>
+                        </body>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <!-- /.content-wrapper -->
+
+        </div>
+        <!-- /#wrapper -->
+
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="login.html">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap core JavaScript-->
+        <script src="{{url_for('static',  filename='vendor/jquery/jquery.min.js')}}"></script>
+        <script src="{{url_for('static',  filename='vendorbootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+        <!-- Core plugin JavaScript-->
+        <script src="{{url_for('static',  filename='vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+
+        <!-- Page level plugin JavaScript-->
+        <script src="{{url_for('static',  filename='vendor/chart.js/Chart.min.js')}}"></script>
+        <script src="{{url_for('static',  filename='vendor/datatables/jquery.dataTables.js')}}"></script>
+        <script src="{{url_for('static',  filename='vendor/datatables/dataTables.bootstrap4.js')}}"></script>
+
+        <!-- Custom scripts for all pages-->
+        <script src="{{url_for('static',  filename='js/sb-admin.min.js')}}"></script>
+
+        <!-- Demo scripts for this page-->
+        <script src="{{url_for('static',  filename='js/demo/datatables-demo.js')}}"></script>
+        <script src="{{url_for('static',  filename='js/demo/chart-area-demo.js')}}"></script>
+
+
+        <!-- Scripts for recording audio -->
+        <script type=text/javascript src="{{url_for('static', filename='recordAudio.js') }}"></script>
+        <script src="https://unpkg.com/wavesurfer.js@2.2.1/dist/wavesurfer.min.js"></script>
+        <script type=text/javascript src="{{url_for('static', filename='microphone_plugin.js') }}"></script>
+</body>
+
+</html>
