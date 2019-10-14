@@ -28,9 +28,18 @@ const wavesurferConstraints = {
             customShowTimeStyle: {
                 'background-color': '#000',
                 color: '#fff',
-                padding: '2px',
-                'font-size': '10px'
+                padding: '4px',
+                'font-size': '14px'
             }
+        }),
+        WaveSurfer.regions.create({
+            regions: [{
+                drag: true,
+                start: 1,
+                end: 3,
+                color: 'hsla(400, 100%, 30%, 0.5)',
+                resize: true
+            }]
         })
     ]
 }
