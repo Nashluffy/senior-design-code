@@ -1,6 +1,8 @@
+/* @import url('https://fonts.googleapis.com/css?family=Montserrat:500'); */
+
 #page-top {
     font-family: 'Merriweather', serif;
-    background-color: #536390;
+    background-color: #081B33;
     color: #212121;
     padding: 1.618rem;
     line-height: 1.618;
@@ -20,4 +22,63 @@
 #logo {
     margin-left: auto;
     margin-right: auto;
+}
+
+nav {
+    width: 98%;
+    height: 75px;
+}
+
+ul li {
+    list-style: none;
+    float: right;
+    line-height: 100px;
+}
+
+ul li a {
+    font-family: 'Courier New', Courier, monospace;
+    padding: 0 20px;
+}
+
+.homerout {
+    float: left;
+    line-height: 100px;
+    font-size: 24px;
+    color: aliceblue;
+}
+
+.nav-item {
+    display: inline-block;
+    padding: 5px 20px;
+    font-size: 20px;
+    color: aqua;
+}
+
+.homerout:hover {
+    color: white;
+}
+
+.nav-item:hover {
+    color: white;
+}
+
+.sticky-footer {
+    height: 15px;
+}
+
+input[type='file'] {
+    color: transparent;
+}
+
+.inp {
+    text-align: center;
+}
+
+.recor {
+    display: inline-block;
+    padding: 5px 15px;
+}
+
+#file {
+    display: inline-block;
 }
