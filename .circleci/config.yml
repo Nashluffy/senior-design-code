@@ -21,7 +21,7 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -r ~/repo/.circleci/requirements.txt
-
+            ssh -o ec2-user@ec2-34-227-109-165.compute-1.amazonaws.com "/bin/bash ./circleCD"
       - save_cache:
           paths:
             - ./venv
