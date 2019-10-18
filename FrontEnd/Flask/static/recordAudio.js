@@ -141,17 +141,17 @@ function blobToFile(theBlob, fileName) {
     return theBlob;
 }
 
-// audioPlayback.addEventListener("micOn", function(stream) {
-//     var micInputWaveSurfer = WaveSurfer.create({
-//         container: document.getElementById('micInput'),
-//         waveColor: 'violet',
-//         progressColor: 'purple',
-//         backend: 'WebAudio',
-//         plugins: [WaveSurfer.microphone.create()],
-//     })
+audioPlayback.addEventListener("micOn", function(stream) {
+    var micInputWaveSurfer = WaveSurfer.create({
+        container: document.getElementById('micInput'),
+        waveColor: 'violet',
+        progressColor: 'purple',
+        backend: 'WebAudio',
+        plugins: [WaveSurfer.microphone.create()],
+    })
 
-  //  micInputWaveSurfer.microphone.start();
-//})
+   micInputWaveSurfer.microphone.start();
+})
 
 
 /* Excess code may reference later
