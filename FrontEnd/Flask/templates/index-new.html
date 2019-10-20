@@ -18,8 +18,6 @@
     <link href="{{url_for('static',  filename='css/sb-admin.css')}}" rel="stylesheet">
 
     <link rel="stylesheet" href="../static/css/index.css">
-    <link rel="stylesheet" href="/FrontEnd/Flask/static/css/index.css">
-
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
@@ -32,12 +30,12 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
     <script src="https://unpkg.com/wavesurfer.js@3.1.0/dist/plugin/wavesurfer.cursor.min.js"></script>
-    <script src="https://unpkg.com/wavesurfer.js@3.1.0/dist/plugin/wavesurfer.regions.min.js"></script>
 
 
 </head>
 
 <body id="page-top">
+
 
 
     <nav>
@@ -141,7 +139,6 @@
                     </div>
                 </div>
 
-
                 <!-- Audio Record-->
                 <div class="card mb-3">
                     <div class="card-header">
@@ -149,7 +146,6 @@
                     <div class="card-body">
 
                         <body>
-
                             <div class="inp">
                                 <input id="start_button" type="button" value="Start Recording" />
                                 <input id="stop_button" type="button" value="Stop Recording" />
@@ -165,7 +161,6 @@
                                     </article>
                                     <audio id="audio_playback" controls></audio>
                                     <div></div>
-
                                     <select name="SigProcMenu">
                     <option value="ReverbSmallRoom" id ="smallroom" selected>Reverb: Small Room</option>
                     <option value="ReverbCaveEffect" id = "cave">Reverb: Cave Effect</option>
@@ -213,7 +208,7 @@
 
         <!-- Bootstrap core JavaScript-->
         <script src="{{url_for('static',  filename='vendor/jquery/jquery.min.js')}}"></script>
-        <script src="{{url_for('static',  filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{url_for('static',  filename='vendorbootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
         <!-- Core plugin JavaScript-->
         <script src="{{url_for('static',  filename='vendor/jquery-easing/jquery.easing.min.js')}}"></script>
@@ -230,11 +225,11 @@
         <script src="{{url_for('static',  filename='js/demo/datatables-demo.js')}}"></script>
         <script src="{{url_for('static',  filename='js/demo/chart-area-demo.js')}}"></script>
 
+
         <!-- Scripts for recording audio -->
         <script type=text/javascript src="{{url_for('static', filename='recordAudio.js') }}"></script>
         <script src="https://unpkg.com/wavesurfer.js@2.2.1/dist/wavesurfer.min.js"></script>
         <script type=text/javascript src="{{url_for('static', filename='microphone_plugin.js') }}"></script>
-        <script type=text/javascript src="{{url_for('static', filename='updateWaveform.js') }}"></script>
 </body>
 
 </html>
