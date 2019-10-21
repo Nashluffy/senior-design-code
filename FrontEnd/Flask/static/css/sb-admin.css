@@ -76,9 +76,9 @@ body {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #212529;
-    text-align: left;
-    background-color: #536390;
+    color: #171a1d;
+    text-align: center !important;
+    background-color: #fff;
 }
 
 [tabindex="-1"]:focus {
@@ -453,6 +453,7 @@ h6,
     font-size: 4.5rem;
     font-weight: 300;
     line-height: 1.2;
+    color: #007bff;
 }
 
 .display-4 {
@@ -585,6 +586,14 @@ pre code {
 .pre-scrollable {
     max-height: 340px;
     overflow-y: scroll;
+}
+
+.logo {
+    margin-right: 0 auto;
+    margin-left: 0 auto;
+    text-align: center !important;
+    color: #007bff !important;
+    display: flex; 
 }
 
 .container {
@@ -5156,6 +5165,7 @@ input[type="button"].btn-block {
     margin-bottom: 0;
     background-color: rgba(0, 0, 0, 0.03);
     border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    color: #020202 !important;
 }
 
 .card-header:first-child {
