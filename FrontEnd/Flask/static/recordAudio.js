@@ -3,14 +3,19 @@ var stopButton = document.getElementById('stop_button');
 var startButton = document.getElementById('start_button');
 var audioPlayback = document.getElementById('audio_playback');
 var downloadButton = document.getElementById('download');
-var reverbSmallRoom = document.getElementById('smallroom')
-var reverbCaveEffect = document.getElementById('cave');
-var ReverbConcertHall = document.getElementById('concert');
+// var reverbSmallRoom = document.getElementById('SigProcMen').options[0].value;
+// var reverbCaveEffect = document.getElementById('SigProcMen').options[1].value;
+// var ReverbConcertHall = document.getElementById('SigProcMen').options[2].value;
+var dropdown = document.getElementById("SigProcMen");
+var selectedEffect = dropdown.options[dropdown.selectedIndex].value;
 var process = document.getElementById('process');
 var save = document.getElementById('save');
 stopButton.disabled = true;
 audioPlayback.disabled = true;
 
+function getSelectValue() {
+    console.log(selectedEffect);
+}
 
 //List custom events
 var micOn = new Event('micOn');
@@ -51,7 +56,6 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
     //navigator is the web browser that it's running on (JS object)
     //making sure the features you need are compatible with the browser you're running on
-
     console.log('getUserMedia supported.');
     // constraints - only audio needed for this app
     var onSuccess = function(stream) {
@@ -78,53 +82,96 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         }
         mediaRecorder.ondataavailable = function(e) { chunks.push(e.data) }; //on data available event handler
         mediaRecorder.onstop = function(e) { //on stop event handler
-
             //var clipName = prompt("Enter a name for your sound clip: ");
             var blob = new Blob(chunks, { 'type': 'audio/wav' }); //Creating a new blob
             chunks = [];
             console.log("mediarecorder done");
 
+            var blobUrl = window.URL.createObjectURL(blob);
+
+            /**
+             * Display original waveform from initial recording
+             *  
+             * */
+
+            wavesurfer = WaveSurfer.create(wavesurferConstraints);
+            wavesurfer.load(blobUrl)
+
             // Promise- return either data you want or an error takes time to fetch. 
 
             //Promise - used for when you want a value but don't know how long it'll take to get it
             //Fetch - used for when you need a promise that uses HTTP request methods
-            var formData = new FormData();
-            formData.append('blob', blob, 'blob.ogg');
-            formData.append('test', 'test');
-            //console.log('Blob from data ' + blob.text())
-            var blobPromise = fetch('/', {
+            var effectsForBlob = new FormData();
+            effectsForBlob.append('blob', blob, 'blob.ogg');
+            if (blob.size > 0) {
+                console.log("blob is larger than 0")
+                if (selectedEffect == "ReverbSmallRoom") {
+                    console.log("transferring cave effect over")
+                    effectsForBlob.append('caveEffect', 'caveEffect');
+                    console.log("transferring cave effect over")
+                }
+                console.log("skipping this?")
+                process.onclick = function(blob) {
 
-                method: 'POST',
-                // headers: { 'Content-type': 'application/octet-stream' },
-                body: formData
-            })
 
-            blobPromise.then((resp) => {
-                return resp.clone().blob()
-            }).then((theBlob) => {
-                console.log("did theblob come? " + theBlob.type);
 
-                var blobUrl = window.URL.createObjectURL(theBlob);
-                var a = document.createElement("a");
-                a.href = blobUrl;
-                a.download = theBlob.fileName;
-                document.body.appendChild(a);
-                a.click();
-                audioPlayback.disabled = false;
-                audioPlayback.src = blobUrl;
-                console.log('Access your blob here: ' + blobUrl);
-                var wavesurfer = WaveSurfer.create(wavesurferConstraints);
-                wavesurfer.load()
-            })
-            blobPromise.catch((postErrors) => {
-                    console.log("error occured " + postErrors);
-                })
-                //var clipName = prompt("Enter a name for your sound clip: ");
-            var blob = new Blob(chunks, { 'type': 'audio/wav; codecs=opus' }); //Creating a new blob
-            chunks = []; //Reset our chunks
-            console.log("hey")
-            console.log(blob.size);
-            console.log("bye")
+                    if (reverbCaveEffect.selected == true) {
+                        effectsForBlob.append('caveEffect', 'caveEffect');
+                        console.log("transferring cave effect over")
+                    } else if (reverbSmallRoom.onclick) {
+                        effectsForBlob.append('smallRoom', 'smallRoom')
+                        console.log("transferring small room effect over")
+
+                    } else if (ReverbConcertHall.onclick) {
+                        effectsForBlob.append('concertHall', 'concertHall')
+                        console.log("transferring conert hall effect over")
+
+
+                    } else {
+                        if (!ReverbConcertHall.click || !reverbCaveEffect.click || !reverbSmallRoom.click) {
+                            alert("Please select an effect");
+                        }
+                        console.log("effects for blob: ");
+                        for (var value of effectsForBlob.values()) {
+                            console.log(value);
+                        }
+                        var blobPromise = fetch('/', {
+
+                            method: 'POST',
+                            // headers: { 'Content-type': 'application/octet-stream' },
+                            body: effectsForBlob
+                        })
+
+
+                        blobPromise.then((resp) => {
+                            return resp.clone().blob()
+                        }).then((theBlob) => {
+                            console.log("did theblob come? " + theBlob.type);
+
+                            var blobUrlEffect = window.URL.createObjectURL(theBlob);
+                            var a = document.createElement("a");
+                            a.href = blobUrlEffect;
+                            //a.download = theBlob.fileName;
+                            //document.body.appendChild(a);
+                            //a.click();
+                            audioPlayback.disabled = false;
+                            audioPlayback.src = blobUrlEffect;
+                            console.log('Access your blob here: ' + blobUrlEffect);
+                            wavesurfer = WaveSurfer.create(wavesurferConstraints);
+                            wavesurfer.load(blobUrlEffect)
+                        })
+                        blobPromise.catch((postErrors) => {
+                                console.log("error occured " + postErrors);
+                            })
+                            //var clipName = prompt("Enter a name for your sound clip: ");
+                        var blob = new Blob(chunks, { 'type': 'audio/wav; codecs=opus' }); //Creating a new blob
+                        chunks = []; //Reset our chunks
+                        console.log("hey")
+                        console.log(blob.size);
+                        console.log("bye")
+                    }
+                }
+            }
         }
     }
     var onError = function(err) { console.log("Something went wrong!" + err); }
@@ -141,17 +188,17 @@ function blobToFile(theBlob, fileName) {
     return theBlob;
 }
 
-audioPlayback.addEventListener("micOn", function(stream) {
-    var micInputWaveSurfer = WaveSurfer.create({
-        container: document.getElementById('micInput'),
-        waveColor: 'violet',
-        progressColor: 'purple',
-        backend: 'WebAudio',
-        plugins: [WaveSurfer.microphone.create()],
-    })
+// audioPlayback.addEventListener("micOn", function(stream) {
+//     var micInputWaveSurfer = WaveSurfer.create({
+//         container: document.getElementById('micInput'),
+//         waveColor: 'violet',
+//         progressColor: 'purple',
+//         backend: 'WebAudio',
+//         plugins: [WaveSurfer.microphone.create()],
+//     })
 
-    micInputWaveSurfer.microphone.start();
-})
+// micInputWaveSurfer.microphone.start();
+// })
 
 
 /* Excess code may reference later
