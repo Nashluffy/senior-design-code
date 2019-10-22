@@ -53,6 +53,9 @@ def index():
         elif selectedItem == 'concertHall':
             with ClusterRpcProxy(CONFIG) as rpc:
                 result = rpc.SigProc.reverbConcertHall()
+        elif selectedItem == 'reverse':
+            with ClusterRpcProxy(CONFIG) as rpc:
+                result = rpc.SigProc.miscReverseSong()
         
         #Then, return the file
         return send_file(os.path.join(application.config['UPLOAD_FOLDER'], 'processed.ogg'))

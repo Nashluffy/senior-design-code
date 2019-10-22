@@ -111,37 +111,42 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             var smallRoom = false;
             var caveEffect = false;
             var concertEffect = false;
+            var reverse = false;
 
 
 
             process.onclick = function(blob) {
                 if (effectHolder == "ReverbSmallRoom") {
                     alert("effect holder value is: " + effectHolder)
-
                     smallRoom = true;
-                    console.log("transferring small room effect over")
                     effectsForBlob.append('effectHolder', 'smallRoom');
-                    console.log("transferring small room effect over")
+                    console.log("transferring small room effect over");
                 }
 
                 if (effectHolder == "Cave") {
-                    alert("effect holder value is: " + effectHolder)
+                    alert("effect holder value is: " + effectHolder);
                     caveEffect = true;
                     effectsForBlob.append('effectHolder', 'caveEffect');
-                    console.log("transferring cave effect over")
+                    console.log("transferring cave effect over");
                 }
                 if (effectHolder == "Concert") {
-                    alert("effect holder value is: " + effectHolder)
+                    alert("effect holder value is: " + effectHolder);
                     concertEffect = true;
-                    effectsForBlob.append('effectHolder', 'concertHall')
-                    console.log("transferring conert hall effect over")
+                    effectsForBlob.append('effectHolder', 'concertHall');
+                    console.log("transferring concert hall effect over");
                 }
+		if (effectHolder == "Reverse"){
+		    alert("effect holder value is: " + effectHolder)
+		    reverse = true;
+		    effectsForBlob.append('effectHolder', 'reverse')
+	            console.log("transferring reverse effect over")
+		}
 
 
                 console.log("process button has been pressed")
 
 
-                if (!concertEffect && !caveEffect && !smallRoom) {
+                if (!concertEffect && !caveEffect && !smallRoom && !reverse) {
                     alert("Please select an effect");
                 }
                 console.log("effects for blob: ");
