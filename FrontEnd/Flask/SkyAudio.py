@@ -49,10 +49,10 @@ def index():
                 result = rpc.SigProc.reverbSmallRoom()
         elif selectedItem == 'caveEffect':
            with ClusterRpcProxy(CONFIG) as rpc:
-                result = rpc.SigProc.reverbCaveEffect()
-        elif selectedItem == 'conertHall':
+                result = rpc.SigProc.reverbReflectiveCave()
+        elif selectedItem == 'concertHall':
             with ClusterRpcProxy(CONFIG) as rpc:
-                result = rpc.SigProc.reverbConcertEffect()
+                result = rpc.SigProc.reverbConcertHall()
         
         #Then, return the file
         return send_file(os.path.join(application.config['UPLOAD_FOLDER'], 'processed.ogg'))
