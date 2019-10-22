@@ -32,32 +32,33 @@ s3_client = boto3.client('s3')
 def index():
 
     if request.method == 'POST':
-        selectedItem = request.form.get('SigProcMenu')
-        if selectedItem == 'ReverbSmallRoom':
-            waveform = request.form.get('waveform')
+        #First, we need to get the selected effect from the request
+        selectedItem = request.form.get('effectHolder')
+        print('Selected Effect is: ' + selectedItem)
+        
+        #Next, we need to get the blob file
+        if 'blob' in request.files:
+            file = request.files['blob']
+            file.save(os.path.join(application.config['UPLOAD_FOLDER'], 'download.ogg'))
+        else:
+            print('No file found!')
+
+        #Then, we need to process the file depending on the selected effect
+        if selectedItem == 'smallRoom':
             with ClusterRpcProxy(CONFIG) as rpc:
-                result2 = rpc.SigProc.reverbSmallRoom()
-            
-            result = 'FIX ME: REPLACE WITH SEND_FILE'
-        elif selectedItem == 'TestNamekoServices':
+                result = rpc.SigProc.reverbSmallRoom()
+        elif selectedItem == 'caveEffect':
            with ClusterRpcProxy(CONFIG) as rpc:
-                result = rpc.SigProc.hello(name="World, RPC is up and functioning")
-        else:        
-            if 'blob' in request.files:
-                print('hit file')
-                filename = 'download.ogg'
-                file = request.files['blob']
-                file.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
-                print(os.path.join(application.config['UPLOAD_FOLDER'], filename))
-                with ClusterRpcProxy(CONFIG) as rpc:
-                    print("in with statement")
-                    result = rpc.SigProc.miscReverseSong()
-                    print("result is ")
-            else:
-                print('No file found')
+                result = rpc.SigProc.reverbCaveEffect()
+        elif selectedItem == 'conertHall':
+            with ClusterRpcProxy(CONFIG) as rpc:
+                result = rpc.SigProc.reverbConcertEffect()
+        
+        #Then, return the file
         return send_file(os.path.join(application.config['UPLOAD_FOLDER'], 'processed.ogg'))
-        #return send_file('/home/leedagr8/Downloads/02 Bored To Death.mp3', attachment_filename='Testing.ogg')
+        
      
+
     elif request.method == 'GET':
         return render_template('index.html', title='Testing')
 

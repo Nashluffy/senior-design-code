@@ -120,20 +120,20 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
                     smallRoom = true;
                     console.log("transferring small room effect over")
-                    effectsForBlob.append('smallRoom', 'smallRoom');
+                    effectsForBlob.append('effectHolder', 'smallRoom');
                     console.log("transferring small room effect over")
                 }
 
                 if (effectHolder == "Cave") {
                     alert("effect holder value is: " + effectHolder)
                     caveEffect = true;
-                    effectsForBlob.append('caveEffect', 'caveEffect');
+                    effectsForBlob.append('effectHolder', 'caveEffect');
                     console.log("transferring cave effect over")
                 }
                 if (effectHolder == "Concert") {
                     alert("effect holder value is: " + effectHolder)
                     concertEffect = true;
-                    effectsForBlob.append('concertHall', 'concertHall')
+                    effectsForBlob.append('effectHolder', 'concertHall')
                     console.log("transferring conert hall effect over")
                 }
 
