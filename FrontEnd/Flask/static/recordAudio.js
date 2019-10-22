@@ -6,16 +6,19 @@ var downloadButton = document.getElementById('download');
 // var reverbSmallRoom = document.getElementById('SigProcMen').options[0].value;
 // var reverbCaveEffect = document.getElementById('SigProcMen').options[1].value;
 // var ReverbConcertHall = document.getElementById('SigProcMen').options[2].value;
-var dropdown = document.getElementById("SigProcMen");
-var selectedEffect = dropdown.options[dropdown.selectedIndex].value;
+//var  d = dropdown.options[dropdown.selectedIndex].value;
+var selectedEffect = document.getElementById("procMenu");
+var effectHolder;
 var process = document.getElementById('process');
 var save = document.getElementById('save');
 stopButton.disabled = true;
 audioPlayback.disabled = true;
 
-function getSelectValue() {
-    console.log(selectedEffect);
+function getSelectedEffect() {
+    console.log(selectedEffect.options[selectedEffect.selectedIndex].value)
+    effectHolder = selectedEffect.options[selectedEffect.selectedIndex].value
 }
+
 
 //List custom events
 var micOn = new Event('micOn');
@@ -103,75 +106,83 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             //Fetch - used for when you need a promise that uses HTTP request methods
             var effectsForBlob = new FormData();
             effectsForBlob.append('blob', blob, 'blob.ogg');
-            if (blob.size > 0) {
-                console.log("blob is larger than 0")
-                if (selectedEffect == "ReverbSmallRoom") {
-                    console.log("transferring cave effect over")
+            console.log("blob is appended");
+
+            var smallRoom = false;
+            var caveEffect = false;
+            var concertEffect = false;
+
+
+
+            process.onclick = function(blob) {
+                if (effectHolder == "ReverbSmallRoom") {
+                    alert("effect holder value is: " + effectHolder)
+
+                    smallRoom = true;
+                    console.log("transferring small room effect over")
+                    effectsForBlob.append('smallRoom', 'smallRoom');
+                    console.log("transferring small room effect over")
+                }
+
+                if (effectHolder == "Cave") {
+                    alert("effect holder value is: " + effectHolder)
+                    caveEffect = true;
                     effectsForBlob.append('caveEffect', 'caveEffect');
                     console.log("transferring cave effect over")
                 }
-                console.log("skipping this?")
-                process.onclick = function(blob) {
-
-
-
-                    if (reverbCaveEffect.selected == true) {
-                        effectsForBlob.append('caveEffect', 'caveEffect');
-                        console.log("transferring cave effect over")
-                    } else if (reverbSmallRoom.onclick) {
-                        effectsForBlob.append('smallRoom', 'smallRoom')
-                        console.log("transferring small room effect over")
-
-                    } else if (ReverbConcertHall.onclick) {
-                        effectsForBlob.append('concertHall', 'concertHall')
-                        console.log("transferring conert hall effect over")
-
-
-                    } else {
-                        if (!ReverbConcertHall.click || !reverbCaveEffect.click || !reverbSmallRoom.click) {
-                            alert("Please select an effect");
-                        }
-                        console.log("effects for blob: ");
-                        for (var value of effectsForBlob.values()) {
-                            console.log(value);
-                        }
-                        var blobPromise = fetch('/', {
-
-                            method: 'POST',
-                            // headers: { 'Content-type': 'application/octet-stream' },
-                            body: effectsForBlob
-                        })
-
-
-                        blobPromise.then((resp) => {
-                            return resp.clone().blob()
-                        }).then((theBlob) => {
-                            console.log("did theblob come? " + theBlob.type);
-
-                            var blobUrlEffect = window.URL.createObjectURL(theBlob);
-                            var a = document.createElement("a");
-                            a.href = blobUrlEffect;
-                            //a.download = theBlob.fileName;
-                            //document.body.appendChild(a);
-                            //a.click();
-                            audioPlayback.disabled = false;
-                            audioPlayback.src = blobUrlEffect;
-                            console.log('Access your blob here: ' + blobUrlEffect);
-                            wavesurfer = WaveSurfer.create(wavesurferConstraints);
-                            wavesurfer.load(blobUrlEffect)
-                        })
-                        blobPromise.catch((postErrors) => {
-                                console.log("error occured " + postErrors);
-                            })
-                            //var clipName = prompt("Enter a name for your sound clip: ");
-                        var blob = new Blob(chunks, { 'type': 'audio/wav; codecs=opus' }); //Creating a new blob
-                        chunks = []; //Reset our chunks
-                        console.log("hey")
-                        console.log(blob.size);
-                        console.log("bye")
-                    }
+                if (effectHolder == "Concert") {
+                    alert("effect holder value is: " + effectHolder)
+                    concertEffect = true;
+                    effectsForBlob.append('concertHall', 'concertHall')
+                    console.log("transferring conert hall effect over")
                 }
+
+
+                console.log("process button has been pressed")
+
+
+                if (!concertEffect && !caveEffect && !smallRoom) {
+                    alert("Please select an effect");
+                }
+                console.log("effects for blob: ");
+                for (var value of effectsForBlob.values()) {
+                    console.log(value);
+                }
+                var blobPromise = fetch('/', {
+
+                    method: 'POST',
+                    // headers: { 'Content-type': 'application/octet-stream' },
+                    body: effectsForBlob
+                })
+
+
+                blobPromise.then((resp) => {
+                    return resp.clone().blob()
+                }).then((theBlob) => {
+                    console.log("did theblob come? " + theBlob.type);
+
+                    var blobUrlEffect = window.URL.createObjectURL(theBlob);
+                    var a = document.createElement("a");
+                    a.href = blobUrlEffect;
+                    //a.download = theBlob.fileName;
+                    //document.body.appendChild(a);
+                    //a.click();
+                    audioPlayback.disabled = false;
+                    audioPlayback.src = blobUrlEffect;
+                    console.log('Access your blob here: ' + blobUrlEffect);
+                    wavesurfer = WaveSurfer.create(wavesurferConstraints);
+                    wavesurfer.load(blobUrlEffect)
+                })
+                blobPromise.catch((postErrors) => {
+                        console.log("error occured " + postErrors);
+                    })
+                    //var clipName = prompt("Enter a name for your sound clip: ");
+                var blob = new Blob(chunks, { 'type': 'audio/wav; codecs=opus' }); //Creating a new blob
+                chunks = []; //Reset our chunks
+                console.log("\nhey out of promise")
+                console.log("blob sisze is: " + blob.size);
             }
+
         }
     }
     var onError = function(err) { console.log("Something went wrong!" + err); }

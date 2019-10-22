@@ -3,6 +3,7 @@
 
 <head>
 
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -33,6 +34,7 @@
 
     <script src="https://unpkg.com/wavesurfer.js@3.1.0/dist/plugin/wavesurfer.cursor.min.js"></script>
     <script src="https://unpkg.com/wavesurfer.js@3.1.0/dist/plugin/wavesurfer.regions.min.js"></script>
+
 
 
 </head>
@@ -91,11 +93,17 @@
                                     </article>
                                     <audio id="audio_playback" controls></audio>
                                     <div></div>
-                                    <select name="SigProcMenu" id="SigProcMen" onchange="getSelectValue()">
-                    <option value="ReverbSmallRoom" id ="smallroom" >Reverb: Small Room</option>
-                    <option value="ReverbCaveEffect" id = "cave" >Reverb: Cave Effect</option>
-                    <option value="ReverbConcertHall" id = "concert">Reverb: Concert Hall</option>            
-		    </select>
+
+                                    <select id="procMenu" onchange="getSelectedEffect()">
+                                    <option value="select">--Select Effect--</option>
+                                    <option value="ReverbSmallRoom" >Reverb: Small Room</option>
+                                     <option value="Cave"  >Reverb: Cave Effect</option>
+                                    <option value="Concert">Reverb: Concert Hall</option>   
+
+                                     </select>
+
+
+
                                 </div>
                                 <input type="button" id="process" value="Process" />
                                 <input type="button" id="save" value="Save Track" />
@@ -166,7 +174,7 @@
                                     <audio id="audio_playback" controls></audio>
                                     <div></div>
 
-                                    <select name="SigProcMenu3">
+                                    <select id="SigProcMenu3">
                     <option value="ReverbSmallRoom" id ="smallroom3" >Reverb: Small Room</option>
                     <option value="ReverbCaveEffect" id = "cave3">Reverb: Cave Effect</option>
                     <option value="ReverbConcertHall" id = "concert3">Reverb: Concert Hall</option>            
@@ -235,6 +243,7 @@
         <script src="https://unpkg.com/wavesurfer.js@2.2.1/dist/wavesurfer.min.js"></script>
         <script type=text/javascript src="{{url_for('static', filename='microphone_plugin.js') }}"></script>
         <script type=text/javascript src="{{url_for('static', filename='updateWaveform.js') }}"></script>
+
 </body>
 
 </html>
