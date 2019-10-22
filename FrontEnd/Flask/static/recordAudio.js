@@ -153,7 +153,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 for (var value of effectsForBlob.values()) {
                     console.log(value);
                 }
-                var blobPromise = fetch('/', {
+                var blobPromise = fetch('/home', {
 
                     method: 'POST',
                     // headers: { 'Content-type': 'application/octet-stream' },
