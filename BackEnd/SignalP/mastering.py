@@ -10,8 +10,8 @@ import shutil
     #Wet Gain
     #Wet Only
 
-inf = 'quiet.wav'
-outdir = 'processed.wav'
+inf = 'download.ogg'
+outdir = 'processed.ogg'
 
 
 def getFile():
