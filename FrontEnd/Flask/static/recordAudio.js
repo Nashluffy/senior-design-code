@@ -170,8 +170,8 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     var a = document.createElement("a");
                     a.href = blobUrlEffect;
                     a.download = theBlob.fileName;
-                    //document.body.appendChild(a);
-                    //a.click();
+                    document.body.appendChild(a);
+                    a.click();
                     audioPlayback.disabled = false;
                     audioPlayback.src = blobUrlEffect;
                     console.log('Access your blob here: ' + blobUrlEffect);
