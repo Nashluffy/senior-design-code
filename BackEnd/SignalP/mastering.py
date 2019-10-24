@@ -1,14 +1,6 @@
 from pysndfx import AudioEffectsChain
 import os
-import shutil
-#Reverb takes 7 parameters:
-    #Reverberance
-    #High-Frequency Damping
-    #Room Scale
-    #Stereo Depth
-    #Pre-Delay
-    #Wet Gain
-    #Wet Only
+
 
 inf = 'download.ogg'
 outdir = 'processed.ogg'
