@@ -20,6 +20,7 @@ function getSelectedEffect() {
 }
 
 
+
 //List custom events
 var micOn = new Event('micOn');
 
@@ -112,10 +113,14 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             var caveEffect = false;
             var concertEffect = false;
             var reverse = false;
+            var a = document.createElement("a");
+            audioPlayback.src = blobUrl;
+            a.href = blobUrl;
+            a.download
+            document.body.appendChild(a)
+            console.log("a should be downloaded")
 
-
-
-            process.onclick = function(blob) {
+            process.onclick = (blob) => {
                 if (effectHolder == "ReverbSmallRoom") {
                     alert("effect holder value is: " + effectHolder)
                     smallRoom = true;
@@ -135,12 +140,12 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     effectsForBlob.append('effectHolder', 'concertHall');
                     console.log("transferring concert hall effect over");
                 }
-		if (effectHolder == "Reverse"){
-		    alert("effect holder value is: " + effectHolder)
-		    reverse = true;
-		    effectsForBlob.append('effectHolder', 'reverse')
-	            console.log("transferring reverse effect over")
-		}
+                if (effectHolder == "Reverse") {
+                    alert("effect holder value is: " + effectHolder)
+                    reverse = true;
+                    effectsForBlob.append('effectHolder', 'reverse')
+                    console.log("transferring reverse effect over")
+                }
 
 
                 console.log("process button has been pressed")
@@ -167,11 +172,15 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     console.log("did theblob come? " + theBlob.type);
 
                     var blobUrlEffect = window.URL.createObjectURL(theBlob);
-                    var a = document.createElement("a");
+                    console.log("in the process statement where bloburl is " + blobUrl)
                     a.href = blobUrlEffect;
-                    //a.download = theBlob.fileName;
-                    //document.body.appendChild(a);
-                    //a.click();
+                    console.log("after process new blob is " + blobUrlEffect)
+                    console.log("a.download is " + a.download)
+                    a.download
+                    document.body.appendChild(a)
+                        //a.download = theBlob.fileName;
+                        //document.body.appendChild(a);
+                        //a.click();
                     audioPlayback.disabled = false;
                     audioPlayback.src = blobUrlEffect;
                     console.log('Access your blob here: ' + blobUrlEffect);
@@ -186,6 +195,17 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 chunks = []; //Reset our chunks
                 console.log("\nhey out of promise")
                 console.log("blob sisze is: " + blob.size);
+            }
+
+            save.onclick = () => {
+                console.log("saved clicked")
+                console.log("blob file name " + blobUrl.fileName)
+                console.log("blobl size " + blobUrl.size)
+                console.log("blob " + blobUrl)
+                a.download = blobUrl.fileName
+                console.log("a.download" + a + "   " + a.download)
+                document.body.appendChild(a)
+                console.log("should download by now")
             }
 
         }
