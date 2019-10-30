@@ -148,6 +148,18 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     console.log("transferring reverse effect over")
                     applied = true;
 		}
+                else if (effectHolder == "phaserSpaceEffect"){
+                    alert("effect holder value is: " + effectHolder)
+                    effectsForBlob.append('effectHolder', 'phaserSpaceEffect')
+                    console.log("transferring reverse effect over")
+                    applied = true;
+                }
+                else if (effectHolder == "phaserSubtle"){
+                    alert("effect holder value is: " + effectHolder)
+                    effectsForBlob.append('effectHolder', 'phaserSubtle')
+                    console.log("transferring reverse effect over")
+                    applied = true;
+                }
 
                 console.log("process button has been pressed")
 
