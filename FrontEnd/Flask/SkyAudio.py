@@ -44,19 +44,33 @@ def index():
             print('No file found!')
 
         #Then, we need to process the file depending on the selected effect
-        if selectedItem == 'smallRoom':
+        if selectedItem == 'reverbSmallRoom':
             with ClusterRpcProxy(CONFIG) as rpc:
                 result = rpc.SigProc.reverbSmallRoom()
-        elif selectedItem == 'caveEffect':
+        elif selectedItem == 'reverbCaveEffect':
            with ClusterRpcProxy(CONFIG) as rpc:
                 result = rpc.SigProc.reverbReflectiveCave()
-        elif selectedItem == 'concertHall':
+        elif selectedItem == 'reverbConcertHall':
             with ClusterRpcProxy(CONFIG) as rpc:
                 result = rpc.SigProc.reverbConcertHall()
-        elif selectedItem == 'reverse':
+        elif selectedItem == 'miscReverseSong':
             with ClusterRpcProxy(CONFIG) as rpc:
                 result = rpc.SigProc.miscReverseSong()
-        
+        elif selectedItem == 'phaserDefault':
+            with ClusterRpcProxy(CONFIG) as rpc:
+                result = rpc.SigProc.phaserDefault()
+        elif selectedItem == 'phaserSpaceEffect':
+            with ClusterRpcProxy(CONFIG) as rpc:
+                result = rpc.SigProc.phaserSpaceEffect()
+        elif selectedItem == 'phaserSubtle':
+            with ClusterRpcProxy(CONFIG) as rpc:
+                result = rpc.SigProc.phaserSubtle()
+        elif selectedItem == 'miscSpeedUp2x':
+            with ClusterRpcProxy(CONFIG) as rpc:
+                result = rpc.SigProc.miscSpeedUp2x()
+        elif selectedItem == 'miscSlowDownHalf':
+            with ClusterRpcProxy(CONFIG) as rpc:
+                result = rpc.SigProc.miscSlowDownHalf()
         #Then, return the file
         return send_file(os.path.join(application.config['UPLOAD_FOLDER'], 'processed.ogg'))
         

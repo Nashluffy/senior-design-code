@@ -119,26 +119,26 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 if (effectHolder == "ReverbSmallRoom") {
                     alert("effect holder value is: " + effectHolder)
                     smallRoom = true;
-                    effectsForBlob.append('effectHolder', 'smallRoom');
+                    effectsForBlob.append('effectHolder', 'reverbSmallRoom');
                     console.log("transferring small room effect over");
                 }
 
                 if (effectHolder == "Cave") {
                     alert("effect holder value is: " + effectHolder);
                     caveEffect = true;
-                    effectsForBlob.append('effectHolder', 'caveEffect');
+                    effectsForBlob.append('effectHolder', 'reverbCaveEffect');
                     console.log("transferring cave effect over");
                 }
                 if (effectHolder == "Concert") {
                     alert("effect holder value is: " + effectHolder);
                     concertEffect = true;
-                    effectsForBlob.append('effectHolder', 'concertHall');
+                    effectsForBlob.append('effectHolder', 'reverbConcertHall');
                     console.log("transferring concert hall effect over");
                 }
 		if (effectHolder == "Reverse"){
 		    alert("effect holder value is: " + effectHolder)
 		    reverse = true;
-		    effectsForBlob.append('effectHolder', 'reverse')
+		    effectsForBlob.append('effectHolder', 'miscReverseSong')
 	            console.log("transferring reverse effect over")
 		}
 
