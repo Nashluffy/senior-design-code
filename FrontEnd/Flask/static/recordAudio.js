@@ -142,6 +142,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 }
 		else{
 		    alert("Please select an effect");
+		    return;
 		}
 
 
