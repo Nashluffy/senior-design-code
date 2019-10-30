@@ -8,13 +8,13 @@ outdir = 'processed.ogg'
 
 
 def getFile():
-    shutil.move('/opt/app/src/download.wav', '/usr/app/src/download.wav')
+    AudioSegment.from_file('/opt/app/src/download.ogg').export('/opt/app/src/download.ogg', format="ogg")
+    shutil.move('/opt/app/src/download.ogg', '/usr/app/src/download.ogg')
 
 def setFile():
-    shutil.move('/usr/app/src/processed.wav', '/opt/app/src/processed.wav')
+    shutil.move('/usr/app/src/processed.ogg', '/opt/app/src/processed.ogg')
 
-
-def phaserDefault():
+def PhaserDefault():
     try:
         getFile()
         fx = (AudioEffectsChain().normalize().phaser(1, 1, 2, 0.25, 2, False))
@@ -26,7 +26,7 @@ def phaserDefault():
         print(e)
         return e
 
-def phaserSpaceEffect():
+def PhaserSpaceEffect():
     try:
         getFile()
         fx = (AudioEffectsChain().normalize().phaser(1, 1, 2, 0.5, 2, False))
@@ -38,7 +38,7 @@ def phaserSpaceEffect():
         print(e)
         return e
 
-def phaserSubtle():
+def PhaserSubtle():
     try:
         getFile()
         fx = (AudioEffectsChain().normalize().phaser(1, 0.9, 2, 0.5, 0.5, False))

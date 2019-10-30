@@ -1,4 +1,6 @@
 from pydub import AudioSegment
+from pysndfx import AudioEffectsChain
+import pysndfx
 import shutil
 import pydub
 import os
@@ -26,3 +28,26 @@ def ReverseSong():
         print (e)
         return e
 
+def SpeedUp2x():
+    try:
+        getFile()
+        fx = (AudioEffectsChain().normalize().speed(2,False))
+        outf = outdir 
+        fx(inf, outf)
+        setFile()
+        return 'Successfully applied speed up 2x!'
+    except Exception as e:
+        print(e)
+        return e
+
+def SlowDownHalf():
+    try:
+        getFile()
+        fx = (AudioEffectsChain().normalize().speed(0.5,False))
+        outf = outdir 
+        fx(inf, outf)
+        setFile()
+        return 'Successfully applied slow down by half!'
+    except Exception as e:
+        print(e)
+        return e
