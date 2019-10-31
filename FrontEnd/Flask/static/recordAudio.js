@@ -88,9 +88,10 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         mediaRecorder.onstop = function(e) { //on stop event handler
             //var clipName = prompt("Enter a name for your sound clip: ");
             var blob = new Blob(chunks, { 'type': 'audio/wav' }); //Creating a new blob
-            chunks = [];
             console.log("mediarecorder done");
-
+            console.log("blob file name " + blob.fileName)
+            console.log("blobl size " + blob.size)
+            console.log("blob is " + blob)
             var blobUrl = window.URL.createObjectURL(blob);
 
             /**
@@ -106,21 +107,40 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             //Promise - used for when you want a value but don't know how long it'll take to get it
             //Fetch - used for when you need a promise that uses HTTP request methods
             var effectsForBlob = new FormData();
-            effectsForBlob.append('blob', blob, 'blob.ogg');
-            console.log("blob is appended");
+            effectsForBlob.append('blob', blob, 'blob.wav');
+            console.log("blob is appended" + blob);
 
             var smallRoom = false;
             var caveEffect = false;
             var concertEffect = false;
             var reverse = false;
-            var a = document.createElement("a");
             audioPlayback.src = blobUrl;
-            a.href = blobUrl;
-            a.download
-            document.body.appendChild(a)
-            console.log("a should be downloaded")
+
+            const onclick = (blobUrl, blob) => {
+                console.log("blob is " + blob)
+                    // var downloadable = new Blob(chunks, { 'type': 'audio/wav' }); //Creating a new blob
+                    // var blobDown = window.URL.createObjectURL(downloadable)
+                var a = document.createElement("a");
+                a.href = blobUrl
+                a.setAttribute("download", blob.fileName)
+                    //download(downloadable, "song.wav", "audio/wav")
+                    //a.target = '_blank'
+                console.log("saved clicked")
+                console.log("blob file name " + blob.fileName)
+                console.log("blobl size " + blob.size)
+                console.log("blob is " + blob)
+                    //a.download = downloadable.fileName
+                document.body.appendChild(a)
+
+                a.click()
+                console.log("a.download" + a + "   " + a.download)
+                console.log("should download by now")
+            }
+
+
 
             process.onclick = (blob) => {
+                console.log("blob is " + blob)
                 if (effectHolder == "ReverbSmallRoom") {
                     alert("effect holder value is: " + effectHolder)
                     smallRoom = true;
@@ -170,43 +190,41 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     return resp.clone().blob()
                 }).then((theBlob) => {
                     console.log("did theblob come? " + theBlob.type);
+                    var a = document.createElement("a");
 
                     var blobUrlEffect = window.URL.createObjectURL(theBlob);
                     console.log("in the process statement where bloburl is " + blobUrl)
                     a.href = blobUrlEffect;
                     console.log("after process new blob is " + blobUrlEffect)
                     console.log("a.download is " + a.download)
-                    a.download
-                    document.body.appendChild(a)
-                        //a.download = theBlob.fileName;
-                        //document.body.appendChild(a);
-                        //a.click();
+                        //a.download
+                        //document.body.appendChild(a)
+                    a.download = theBlob.fileName;
+                    document.body.appendChild(a);
+                    //a.click();
                     audioPlayback.disabled = false;
                     audioPlayback.src = blobUrlEffect;
                     console.log('Access your blob here: ' + blobUrlEffect);
                     wavesurfer = WaveSurfer.create(wavesurferConstraints);
                     wavesurfer.load(blobUrlEffect)
+
+
                 })
                 blobPromise.catch((postErrors) => {
                         console.log("error occured " + postErrors);
                     })
                     //var clipName = prompt("Enter a name for your sound clip: ");
-                var blob = new Blob(chunks, { 'type': 'audio/wav; codecs=opus' }); //Creating a new blob
-                chunks = []; //Reset our chunks
-                console.log("\nhey out of promise")
-                console.log("blob sisze is: " + blob.size);
+                    // var blob = new Blob(chunks, { 'type': 'audio/wav; codecs=opus' }); //Creating a new blob
+                    // chunks = []; //Reset our chunks
+                    // console.log("\nhey out of promise")
+                    // console.log("blob sisze is: " + blob.size);
             }
 
-            save.onclick = () => {
-                console.log("saved clicked")
-                console.log("blob file name " + blobUrl.fileName)
-                console.log("blobl size " + blobUrl.size)
-                console.log("blob " + blobUrl)
-                a.download = blobUrl.fileName
-                console.log("a.download" + a + "   " + a.download)
-                document.body.appendChild(a)
-                console.log("should download by now")
-            }
+            save.addEventListener("click", function() {
+                onclick(blobUrl, blob)
+            })
+
+
 
         }
     }
