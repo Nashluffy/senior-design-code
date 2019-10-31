@@ -1,7 +1,7 @@
 from pysndfx import AudioEffectsChain
 import os
 import shutil
-
+from pydub import AudioSegment
 
 inf = 'download.ogg'
 outdir = 'processed.ogg'
