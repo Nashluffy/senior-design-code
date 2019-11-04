@@ -1,12 +1,11 @@
-from pydub import AudioSegment
 from pysndfx import AudioEffectsChain
-import pysndfx
-import shutil
-import pydub
 import os
+import shutil
 
-inf = "download.ogg"
-outdir = "processed.ogg"
+
+inf = 'download.ogg'
+outdir = 'processed.ogg'
+
 
 def getFile():
     AudioSegment.from_file('/opt/app/src/download.ogg').export('/opt/app/src/download.ogg', format="ogg")
@@ -15,39 +14,39 @@ def getFile():
 def setFile():
     shutil.move('/usr/app/src/processed.ogg', '/opt/app/src/processed.ogg')
 
-
-def ReverseSong():
+def PhaserDefault():
     try:
         getFile()
-        song = AudioSegment.from_ogg(inf)
-        backwards = song.reverse()
-        backwards.export(outdir, format = "ogg")
-        setFile()
-        return 'Successfully applied small room!'
-    except Exception as e:
-        print (e)
-        return e
-
-def SpeedUp2x():
-    try:
-        getFile()
-        fx = (AudioEffectsChain().normalize().speed(2,False))
+        fx = (AudioEffectsChain().normalize().phaser(1, 1, 2, 0.25, 2, False))
         outf = outdir 
         fx(inf, outf)
         setFile()
-        return 'Successfully applied speed up 2x!'
+        return 'Successfully applied simple mastering!'
     except Exception as e:
         print(e)
         return e
 
-def SlowDownHalf():
+def PhaserSpaceEffect():
     try:
         getFile()
-        fx = (AudioEffectsChain().normalize().speed(0.5,False))
+        fx = (AudioEffectsChain().normalize().phaser(1, 1, 2, 0.5, 2, False))
         outf = outdir 
         fx(inf, outf)
         setFile()
-        return 'Successfully applied slow down by half!'
+        return 'Successfully applied simple mastering!'
     except Exception as e:
         print(e)
         return e
+
+def PhaserSubtle():
+    try:
+        getFile()
+        fx = (AudioEffectsChain().normalize().phaser(1, 0.9, 2, 0.5, 0.5, False))
+        outf = outdir 
+        fx(inf, outf)
+        setFile()
+        return 'Successfully applied simple mastering!'
+    except Exception as e:
+        print(e)
+        return e
+
