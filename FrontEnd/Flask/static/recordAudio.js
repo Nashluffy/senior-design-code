@@ -4,6 +4,7 @@ var startButton = document.getElementById('start_button');
 var audioPlayback = document.getElementById('audio_playback');
 var downloadButton = document.getElementById('download');
 var selectedEffect = document.getElementById("procMenu");
+var fileElement = document.getElementById("fileSel");
 var effectHolder;
 var process = document.getElementById('process');
 var save = document.getElementById('save');
@@ -50,6 +51,24 @@ const wavesurferConstraints = {
 
 var getmediaConstraints = {
     audio: true
+}
+fileElement.addEventListener("change", handleFiles, false);
+
+function handleFiles() {
+
+    // alert(this.value);
+
+    console.log("in the onchange")
+
+    var curFiles = this.files;
+
+    console.log("type" + curFiles.type)
+    console.log("file name " + curFiles.size)
+
+    var blobAudio = window.URL.createObjectURL(curFiles[0]);
+    wavesurfer = WaveSurfer.create(wavesurferConstraints);
+    wavesurfer.load(blobAudio);
+    audioPlayback.src = blobAudio   
 }
 
 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
