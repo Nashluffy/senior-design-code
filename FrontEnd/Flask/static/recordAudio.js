@@ -4,6 +4,7 @@ var startButton = document.getElementById('start_button');
 var audioPlayback = document.getElementById('audio_playback');
 var downloadButton = document.getElementById('download');
 var selectedEffect = document.getElementById("procMenu");
+var fileElement = document.getElementById("fileSel");
 var effectHolder;
 var process = document.getElementById('process');
 var save = document.getElementById('save');
@@ -50,6 +51,31 @@ const wavesurferConstraints = {
 var getmediaConstraints = {
     audio: true
 }
+console.log("file element value is " + fileElement.value)
+
+fileElement.addEventListener("change", handleFiles, false);
+
+function handleFiles() {
+
+    // alert(this.value);
+
+    console.log("in the onchange")
+
+    var curFiles = this.files;
+
+    console.log("type" + curFiles.type)
+    console.log("file name " + curFiles.size)
+
+    var blobAudio = window.URL.createObjectURL(curFiles[0]);
+    wavesurfer = WaveSurfer.create(wavesurferConstraints);
+    wavesurfer.load(blobAudio);
+    audioPlayback.src = blobAudio
+
+}
+
+if (fileElement.value != undefined) {
+
+}
 
 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
@@ -95,6 +121,8 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
             wavesurfer = WaveSurfer.create(wavesurferConstraints);
             wavesurfer.load(blobUrl)
+            audioPlayback.src = blobUrl;
+
 
             var applied = false;
             // Promise- return either data you want or an error takes time to fetch. 
@@ -110,51 +138,43 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     alert("effect holder value is: " + effectHolder)
                     effectsForBlob.append('effectHolder', 'reverbSmallRoom');
                     console.log("transferring small room effect over");
-		    applied = true;
-                }
-		else if (effectHolder == "reverbCafeEffect") {
+                    applied = true;
+                } else if (effectHolder == "reverbCafeEffect") {
                     alert("effect holder value is: " + effectHolder);
                     effectsForBlob.append('effectHolder', 'reverbCaveEffect');
                     console.log("transferring cave effect over");
                     applied = true;
-		}
-		else if (effectHolder == "reverbConcertHall") {
+                } else if (effectHolder == "reverbConcertHall") {
                     alert("effect holder value is: " + effectHolder);
                     effectsForBlob.append('effectHolder', 'reverbConcertHall');
                     console.log("transferring concert hall effect over");
                     applied = true;
-		}
-		else if (effectHolder == "miscReverseSong"){
-		    alert("effect holder value is: " + effectHolder)
-		    effectsForBlob.append('effectHolder', 'miscReverseSong')
-	            console.log("transferring reverse effect over")
-		    applied = true;
-		}
-		else if (effectHolder == "miscSpeedUp2x"){
+                } else if (effectHolder == "miscReverseSong") {
+                    alert("effect holder value is: " + effectHolder)
+                    effectsForBlob.append('effectHolder', 'miscReverseSong')
+                    console.log("transferring reverse effect over")
+                    applied = true;
+                } else if (effectHolder == "miscSpeedUp2x") {
                     alert("effect holder value is: " + effectHolder)
                     effectsForBlob.append('effectHolder', 'miscSpeedUp2x')
                     console.log("transferring reverse effect over")
                     applied = true;
-		}
-		else if (effectHolder == "miscSlowDownHalf"){
+                } else if (effectHolder == "miscSlowDownHalf") {
                     alert("effect holder value is: " + effectHolder)
                     effectsForBlob.append('effectHolder', 'miscSlowDownHalf')
                     console.log("transferring reverse effect over")
                     applied = true;
-		}
-		else if (effectHolder == "phaserDefault"){
+                } else if (effectHolder == "phaserDefault") {
                     alert("effect holder value is: " + effectHolder)
                     effectsForBlob.append('effectHolder', 'phaserDefault')
                     console.log("transferring reverse effect over")
                     applied = true;
-		}
-                else if (effectHolder == "phaserSpaceEffect"){
+                } else if (effectHolder == "phaserSpaceEffect") {
                     alert("effect holder value is: " + effectHolder)
                     effectsForBlob.append('effectHolder', 'phaserSpaceEffect')
                     console.log("transferring reverse effect over")
                     applied = true;
-                }
-                else if (effectHolder == "phaserSubtle"){
+                } else if (effectHolder == "phaserSubtle") {
                     alert("effect holder value is: " + effectHolder)
                     effectsForBlob.append('effectHolder', 'phaserSubtle')
                     console.log("transferring reverse effect over")
@@ -164,9 +184,9 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 console.log("process button has been pressed")
 
 
-               if (!applied) {
-                   alert("Please select an effect");
-               }
+                if (!applied) {
+                    alert("Please select an effect");
+                }
                 console.log("effects for blob: ");
                 for (var value of effectsForBlob.values()) {
                     console.log(value);
