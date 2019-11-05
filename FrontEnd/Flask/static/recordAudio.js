@@ -10,6 +10,34 @@ var save = document.getElementById('save');
 stopButton.disabled = true;
 audioPlayback.disabled = true;
 
+//Iframe stuff
+var tag = document.createElement('script');
+
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// 3. This function creates an <iframe> (and YouTube player)
+//    after the API code downloads.
+var player;
+
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player("card-bodyPlay", {
+        height: '315',
+        width: '560',
+        videoId: "yPLLhlX0YXM",
+    })
+}
+
+function play() {
+    player.playVideo();
+}
+
+function stop() {
+    player.stopVideo();
+}
+
+
 function getSelectedEffect() {
     console.log(selectedEffect.options[selectedEffect.selectedIndex].value)
     effectHolder = selectedEffect.options[selectedEffect.selectedIndex].value
@@ -65,6 +93,8 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             stopButton.disabled = false; //Enable stopping now that we are recording
             mediaRecorder.start();
 
+            play();
+
             mediaRecorder.ondataavailable = e => {
                 chunks.push(e.data);
             }
@@ -76,6 +106,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         //3) 
         stopButton.onclick = function() {
             mediaRecorder.stop();
+            stop()
             stopButton.disabled = true;
             console.log("Media Recorder State: " + mediaRecorder.state);
         }
@@ -95,6 +126,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
             wavesurfer = WaveSurfer.create(wavesurferConstraints);
             wavesurfer.load(blobUrl)
+            audioPlayback.src = blobUrl;
 
             var applied = false;
             // Promise- return either data you want or an error takes time to fetch. 
@@ -110,51 +142,43 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     alert("effect holder value is: " + effectHolder)
                     effectsForBlob.append('effectHolder', 'reverbSmallRoom');
                     console.log("transferring small room effect over");
-		    applied = true;
-                }
-		else if (effectHolder == "reverbCafeEffect") {
+                    applied = true;
+                } else if (effectHolder == "reverbCafeEffect") {
                     alert("effect holder value is: " + effectHolder);
                     effectsForBlob.append('effectHolder', 'reverbCaveEffect');
                     console.log("transferring cave effect over");
                     applied = true;
-		}
-		else if (effectHolder == "reverbConcertHall") {
+                } else if (effectHolder == "reverbConcertHall") {
                     alert("effect holder value is: " + effectHolder);
                     effectsForBlob.append('effectHolder', 'reverbConcertHall');
                     console.log("transferring concert hall effect over");
                     applied = true;
-		}
-		else if (effectHolder == "miscReverseSong"){
-		    alert("effect holder value is: " + effectHolder)
-		    effectsForBlob.append('effectHolder', 'miscReverseSong')
-	            console.log("transferring reverse effect over")
-		    applied = true;
-		}
-		else if (effectHolder == "miscSpeedUp2x"){
+                } else if (effectHolder == "miscReverseSong") {
+                    alert("effect holder value is: " + effectHolder)
+                    effectsForBlob.append('effectHolder', 'miscReverseSong')
+                    console.log("transferring reverse effect over")
+                    applied = true;
+                } else if (effectHolder == "miscSpeedUp2x") {
                     alert("effect holder value is: " + effectHolder)
                     effectsForBlob.append('effectHolder', 'miscSpeedUp2x')
                     console.log("transferring reverse effect over")
                     applied = true;
-		}
-		else if (effectHolder == "miscSlowDownHalf"){
+                } else if (effectHolder == "miscSlowDownHalf") {
                     alert("effect holder value is: " + effectHolder)
                     effectsForBlob.append('effectHolder', 'miscSlowDownHalf')
                     console.log("transferring reverse effect over")
                     applied = true;
-		}
-		else if (effectHolder == "phaserDefault"){
+                } else if (effectHolder == "phaserDefault") {
                     alert("effect holder value is: " + effectHolder)
                     effectsForBlob.append('effectHolder', 'phaserDefault')
                     console.log("transferring reverse effect over")
                     applied = true;
-		}
-                else if (effectHolder == "phaserSpaceEffect"){
+                } else if (effectHolder == "phaserSpaceEffect") {
                     alert("effect holder value is: " + effectHolder)
                     effectsForBlob.append('effectHolder', 'phaserSpaceEffect')
                     console.log("transferring reverse effect over")
                     applied = true;
-                }
-                else if (effectHolder == "phaserSubtle"){
+                } else if (effectHolder == "phaserSubtle") {
                     alert("effect holder value is: " + effectHolder)
                     effectsForBlob.append('effectHolder', 'phaserSubtle')
                     console.log("transferring reverse effect over")
@@ -164,9 +188,9 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 console.log("process button has been pressed")
 
 
-               if (!applied) {
-                   alert("Please select an effect");
-               }
+                if (!applied) {
+                    alert("Please select an effect");
+                }
                 console.log("effects for blob: ");
                 for (var value of effectsForBlob.values()) {
                     console.log(value);
