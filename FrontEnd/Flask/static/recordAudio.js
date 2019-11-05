@@ -211,7 +211,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     var blobUrlEffect = window.URL.createObjectURL(theBlob);
                     var a = document.createElement("a");
                     a.href = blobUrlEffect;
-                    a.download = theBlob.fileName;
+                    //a.download = theBlob.fileName;
                     document.body.appendChild(a);
                     a.click();
                     audioPlayback.disabled = false;
