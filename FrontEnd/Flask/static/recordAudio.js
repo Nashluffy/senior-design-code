@@ -155,6 +155,8 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
 
             process.onclick = (blob) => {
+                blob = new Blob(chunks, { 'type': 'audio/wav' }); //Creating a new blob
+
                 var effectsForBlob = new FormData();
                 effectsForBlob.append('blob', blob, 'blob.wav');
                 console.log("blob is appended" + blob);
