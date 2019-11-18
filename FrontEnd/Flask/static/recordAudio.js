@@ -166,7 +166,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     effectsForBlob.append('effectHolder', 'reverbSmallRoom');
                     console.log("transferring small room effect over");
                     applied = true;
-                } else if (effectHolder == "reverbCafeEffect") {
+                } else if (effectHolder == "reverbCaveEffect") {
                     alert("effect holder value is: " + effectHolder);
                     effectsForBlob.append('effectHolder', 'reverbCaveEffect');
                     console.log("transferring cave effect over");
