@@ -157,7 +157,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
 
             process.onclick = (blob) => {
-                console.log("blob is " + blob)
+                console.log("blob is type " + blob.type + "  " + blob.URL)
                 if (effectHolder == "reverbSmallRoom") {
                     alert("effect holder value is: " + effectHolder)
                     effectsForBlob.append('effectHolder', 'reverbSmallRoom');
@@ -244,7 +244,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     console.log('Access your blob here: ' + blobUrlEffect);
                     wavesurfer = WaveSurfer.create(wavesurferConstraints);
                     wavesurfer.load(blobUrlEffect)
-                    return theBlob
+                    return theBlob.URL
 
                 })
                 blobPromise.catch((postErrors) => {
@@ -256,6 +256,9 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     // console.log("\nhey out of promise")
                     // console.log("blob sisze is: " + blob.size);
             }
+
+            console.log("What is new blob " + blob.URL)
+            console.log("Blob being sent from process? " + theBlob.URL + " " + theBlob.type)
 
             save.addEventListener("click", function() {
                 onclick(blobUrl, blob)
