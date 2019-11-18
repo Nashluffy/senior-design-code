@@ -122,9 +122,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
             //Promise - used for when you want a value but don't know how long it'll take to get it
             //Fetch - used for when you need a promise that uses HTTP request methods
-            var effectsForBlob = new FormData();
-            effectsForBlob.append('blob', blob, 'blob.wav');
-            console.log("blob is appended" + blob);
+
 
 
             var smallRoom = false;
@@ -157,6 +155,9 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
 
             process.onclick = (blob) => {
+                var effectsForBlob = new FormData();
+                effectsForBlob.append('blob', blob, 'blob.wav');
+                console.log("blob is appended" + blob);
                 console.log("blob is type " + blob.type + "  " + blob.URL)
                 if (effectHolder == "reverbSmallRoom") {
                     alert("effect holder value is: " + effectHolder)
