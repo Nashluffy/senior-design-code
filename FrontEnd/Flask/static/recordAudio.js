@@ -244,7 +244,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     console.log('Access your blob here: ' + blobUrlEffect);
                     wavesurfer = WaveSurfer.create(wavesurferConstraints);
                     wavesurfer.load(blobUrlEffect)
-                    return blobUrlEffect
+                    return blobUrl = blobUrlEffect
 
                 })
                 blobPromise.catch((postErrors) => {
@@ -258,7 +258,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             }
 
             save.addEventListener("click", function() {
-                onclick(blobUrlEffect, blob)
+                onclick(blobUrl, blob)
             })
 
 
