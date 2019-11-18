@@ -244,7 +244,8 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     console.log('Access your blob here: ' + blobUrlEffect);
                     wavesurfer = WaveSurfer.create(wavesurferConstraints);
                     wavesurfer.load(blobUrlEffect)
-                    return theBlob.URL
+                    return theBlob
+
 
                 })
                 blobPromise.catch((postErrors) => {
