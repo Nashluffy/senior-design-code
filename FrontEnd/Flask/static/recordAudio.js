@@ -11,6 +11,34 @@ var save = document.getElementById('save');
 stopButton.disabled = true;
 audioPlayback.disabled = true;
 
+//Iframe stuff
+var tag = document.createElement('script');
+
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// 3. This function creates an <iframe> (and YouTube player)
+//    after the API code downloads.
+var player;
+
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player("card-bodyPlay", {
+        height: '315',
+        width: '560',
+        videoId: "yPLLhlX0YXM",
+    })
+}
+
+function play() {
+    player.playVideo();
+}
+
+function stop() {
+    player.stopVideo();
+}
+
+
 function getSelectedEffect() {
     console.log(selectedEffect.options[selectedEffect.selectedIndex].value)
     effectHolder = selectedEffect.options[selectedEffect.selectedIndex].value
@@ -85,6 +113,8 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             stopButton.disabled = false; //Enable stopping now that we are recording
             mediaRecorder.start();
 
+            play();
+
             mediaRecorder.ondataavailable = e => {
                 chunks.push(e.data);
             }
@@ -96,6 +126,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         //3) 
         stopButton.onclick = function() {
             mediaRecorder.stop();
+            stop()
             stopButton.disabled = true;
             console.log("Media Recorder State: " + mediaRecorder.state);
         }
@@ -116,6 +147,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
             wavesurfer = WaveSurfer.create(wavesurferConstraints);
             wavesurfer.load(blobUrl)
+            audioPlayback.src = blobUrl;
 
             var applied = false;
             // Promise- return either data you want or an error takes time to fetch. 
@@ -236,9 +268,6 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     var blobUrlEffect = window.URL.createObjectURL(theBlob);
                     console.log("in the process statement where bloburl is " + blobUrl)
                     a.href = blobUrlEffect;
-
-                    //a.download
-                    //document.body.appendChild(a)
                     //a.download = theBlob.fileName;
                     document.body.appendChild(a);
 
