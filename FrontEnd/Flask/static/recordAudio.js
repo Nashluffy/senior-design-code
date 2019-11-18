@@ -68,7 +68,7 @@ function handleFiles() {
     var blobAudio = window.URL.createObjectURL(curFiles[0]);
     wavesurfer = WaveSurfer.create(wavesurferConstraints);
     wavesurfer.load(blobAudio);
-    audioPlayback.src = blobAudio   
+    audioPlayback.src = blobAudio
 }
 
 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -162,52 +162,44 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     alert("effect holder value is: " + effectHolder)
                     effectsForBlob.append('effectHolder', 'reverbSmallRoom');
                     console.log("transferring small room effect over");
-		                applied = true;
-                }
-		else if (effectHolder == "reverbCafeEffect") {
+                    applied = true;
+                } else if (effectHolder == "reverbCafeEffect") {
                     alert("effect holder value is: " + effectHolder);
                     effectsForBlob.append('effectHolder', 'reverbCaveEffect');
                     console.log("transferring cave effect over");
                     applied = true;
-		}
-		else if (effectHolder == "reverbConcertHall") {
+                } else if (effectHolder == "reverbConcertHall") {
                     alert("effect holder value is: " + effectHolder);
                     effectsForBlob.append('effectHolder', 'reverbConcertHall');
                     console.log("transferring concert hall effect over");
 
                     applied = true;
-		}
-		else if (effectHolder == "miscReverseSong"){
-		    alert("effect holder value is: " + effectHolder)
-		    effectsForBlob.append('effectHolder', 'miscReverseSong')
-	            console.log("transferring reverse effect over")
-		    applied = true;
-		}
-		else if (effectHolder == "miscSpeedUp2x"){
+                } else if (effectHolder == "miscReverseSong") {
+                    alert("effect holder value is: " + effectHolder)
+                    effectsForBlob.append('effectHolder', 'miscReverseSong')
+                    console.log("transferring reverse effect over")
+                    applied = true;
+                } else if (effectHolder == "miscSpeedUp2x") {
                     alert("effect holder value is: " + effectHolder)
                     effectsForBlob.append('effectHolder', 'miscSpeedUp2x')
                     console.log("transferring reverse effect over")
                     applied = true;
-		}
-		else if (effectHolder == "miscSlowDownHalf"){
+                } else if (effectHolder == "miscSlowDownHalf") {
                     alert("effect holder value is: " + effectHolder)
                     effectsForBlob.append('effectHolder', 'miscSlowDownHalf')
                     console.log("transferring reverse effect over")
                     applied = true;
-		}
-		else if (effectHolder == "phaserDefault"){
+                } else if (effectHolder == "phaserDefault") {
                     alert("effect holder value is: " + effectHolder)
                     effectsForBlob.append('effectHolder', 'phaserDefault')
                     console.log("transferring reverse effect over")
                     applied = true;
-		}
-                else if (effectHolder == "phaserSpaceEffect"){
+                } else if (effectHolder == "phaserSpaceEffect") {
                     alert("effect holder value is: " + effectHolder)
                     effectsForBlob.append('effectHolder', 'phaserSpaceEffect')
                     console.log("transferring reverse effect over")
                     applied = true;
-                }
-                else if (effectHolder == "phaserSubtle"){
+                } else if (effectHolder == "phaserSubtle") {
                     alert("effect holder value is: " + effectHolder)
                     effectsForBlob.append('effectHolder', 'phaserSubtle')
                     console.log("transferring reverse effect over")
@@ -217,9 +209,9 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 console.log("process button has been pressed")
 
 
-               if (!applied) {
-                   alert("Please select an effect");
-               }
+                if (!applied) {
+                    alert("Please select an effect");
+                }
                 console.log("effects for blob: ");
                 for (var value of effectsForBlob.values()) {
                     console.log(value);
@@ -242,17 +234,17 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     console.log("in the process statement where bloburl is " + blobUrl)
                     a.href = blobUrlEffect;
 
-                        //a.download
-                        //document.body.appendChild(a)
-                    a.download = theBlob.fileName;
+                    //a.download
+                    //document.body.appendChild(a)
+                    //a.download = theBlob.fileName;
                     document.body.appendChild(a);
-                    
+
                     audioPlayback.disabled = false;
                     audioPlayback.src = blobUrlEffect;
                     console.log('Access your blob here: ' + blobUrlEffect);
                     wavesurfer = WaveSurfer.create(wavesurferConstraints);
                     wavesurfer.load(blobUrlEffect)
-
+                    return blobUrlEffect
 
                 })
                 blobPromise.catch((postErrors) => {
@@ -266,7 +258,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             }
 
             save.addEventListener("click", function() {
-                onclick(blobUrl, blob)
+                onclick(blobUrlEffect, blob)
             })
 
 
@@ -286,4 +278,3 @@ function blobToFile(theBlob, fileName) {
     theBlob.name = fileName;
     return theBlob;
 }
-
