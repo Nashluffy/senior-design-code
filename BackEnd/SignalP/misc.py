@@ -16,6 +16,18 @@ def setFile():
     shutil.move('/usr/app/src/processed.ogg', '/opt/app/src/processed.ogg')
 
 
+def NoEffect():
+    try:
+        getFile()
+        song = AudioSegment.from_ogg(inf)
+        backwards = song.normalize()
+        backwards.export(outdir, format = "ogg")
+        setFile()
+        return 'Successfully applied no effect!'
+    except Exception as e:
+        print (e)
+        return e
+
 def ReverseSong():
     try:
         getFile()
