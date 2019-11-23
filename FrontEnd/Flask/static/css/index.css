@@ -75,10 +75,11 @@ input[type='file'] {
 }
 
 .recor {
-    display: inline-block;
-    padding: 5px 15px;
+    display: inline-flex;
 }
 
-#file {
-    display: inline-block;
-}
+
+/* 
+.filebutt {
+    margin: 10% 0;
+} */

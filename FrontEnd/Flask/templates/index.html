@@ -74,13 +74,13 @@
                 <!-- Audio Record-->
                 <div class="card mb-3">
                     <div class="card-header">
-                        <i class="fas fa-headphones-alt"></i> Track 1</div>
+                        <i class="fas fa-headphones-alt"></i> Karaoke Track </div>
                     <div class="card-body">
 
                         <body>
                             <div class="inp">
                                 <div class="recor">
-                                    <input id="start_button" type="button" value="Start Recording" />
+                                    <input id="start_button" type="button" value="Start Recording" style="margin-left: 12%;" />
                                     <input id="stop_button" type="button" value="Stop Recording" />
                                     <input id="fileSel" type="file" title=" " />
                                 </div>
@@ -120,9 +120,57 @@
                 <!-- Audio Record-->
                 <div class="card mb-3">
                     <div class="card-header">
+                        <i class="fas fa-headphones-alt"></i> Track</div>
+                    <div class="card-body">
+
+                        <body>
+                            <div class="inp">
+                                <div class="recor">
+
+                                    <input id="start_button" type="button" value="Start Recording" style="margin-left: 12%;" />
+                                    <input id="stop_button" type="button" value="Stop Recording" />
+                                    <input id="fileSel" type="file" title=" " />
+
+                                </div>
+                            </div>
+                            <form action="/home" method="POST">
+                                <div>
+                                    <article class="clip">
+                                        <div id="waveform"></div>
+                                        <div id="micInput"></div>
+                                    </article>
+                                    <audio id="audio_playback" controls></audio>
+                                    <div></div>
+
+                                    <select id="procMenu" onchange="getSelectedEffect()">
+                                    <option value="select">--Select Effect--</option>
+                                    <option value="reverbSmallRoom" >Reverb: Small Room</option>
+                                    <option value="reverbCaveEffect">Reverb: Cave Effect</option>
+                                    <option value="reverbConcertHall">Reverb: Concert Hall</option>   
+				    <option value="miscReverseSong">Misc: Reverse</option>
+				    <option value="miscSpeedUp2x">Misc: 2x Speed</option>
+				    <option value="miscSlowDownHalf">Misc: Half Speed</option>
+				    <option value="phaserDefault">Phaser: Default</option>
+				    <option value="phaserSpaceEffect">Phaser: Space Effect</option>
+				    <option value="phaserSubtle">Phaser: Subtle</option>
+                                     </select>
+
+
+
+                                </div>
+                                <input type="button" id="process" value="Process" />
+                                <input type="button" id="save" value="Save Track" />
+                            </form>
+                        </body>
+                    </div>
+                </div>
+
+                <!-- Audio Record-->
+                <div class="card mb-3">
+                    <div class="card-header">
 
                         <i class="fas fa-headphones-alt"></i>Karaoke Song!</div>
-                    <div class="card-body" id="card-bodyPlay">
+                    <div class="card-body" id="card-bodyPlay" style="margin: auto; width: 50%;">
 
                         <!-- <body>
                             <iframe id="playerFrame" width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLqGkpApxFsX_jRp4sDFz9_gwztqqpDZ2U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
