@@ -8873,6 +8873,14 @@ button.bg-dark:focus {
     margin-top: 3rem !important;
 }
 
+.landing{
+    margin-top: 3rem !important;
+    background-image: url('/static/background1.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
 .mr-5,
 .mx-5 {
     margin-right: 3rem !important;
