@@ -291,7 +291,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             }
 
             console.log("What is new blob " + blob.URL)
-            console.log("Blob being sent from process? " + theBlob.URL + " " + theBlob.type)
+                //console.log("Blob being sent from process? " + blobPromise.URL + " " + theBlob.type)
 
             save.addEventListener("click", function() {
                 onclick(blobUrl, blob)
