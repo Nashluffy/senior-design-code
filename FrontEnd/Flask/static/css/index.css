@@ -7,6 +7,7 @@
     padding: 1.618rem;
     line-height: 1.618;
     font-size: 16px;
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
 }
 
 .card-header {
@@ -75,10 +76,11 @@ input[type='file'] {
 }
 
 .recor {
-    display: inline-block;
-    padding: 5px 15px;
+    display: inline-flex;
 }
 
-#file {
-    display: inline-block;
-}
+
+/* 
+.filebutt {
+    margin: 10% 0;
+} */
