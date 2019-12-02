@@ -26,7 +26,7 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player("card-bodyPlay", {
         height: '315',
         width: '560',
-        videoId: "fiEVj2ex8S8",
+        videoId: "uOf-JRlyzqA",
     })
 }
 
@@ -207,8 +207,11 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     alert("effect holder value is: " + effectHolder);
                     effectsForBlob.append('effectHolder', 'reverbConcertHall');
                     console.log("transferring concert hall effect over");
-
                     applied = true;
+		} else if (effectHolder == "miscReset") {
+		    alert("effect holder value is: " + effectHolder)
+		    effectsForBlob.append('effectHolder', 'miscReset');
+		    applied = true;
                 } else if (effectHolder == "miscReverseSong") {
                     alert("effect holder value is: " + effectHolder)
                     effectsForBlob.append('effectHolder', 'miscReverseSong')

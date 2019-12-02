@@ -24,7 +24,7 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player("card-bodyPlay", {
         height: '315',
         width: '560',
-        videoId: "yPLLhlX0YXM",
+        videoId: "d51hLq3Ldb0",
         frameborder: "0",
     })
 }

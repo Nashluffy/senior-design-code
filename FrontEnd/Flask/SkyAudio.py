@@ -71,6 +71,9 @@ def index():
         elif selectedItem == 'miscSlowDownHalf':
             with ClusterRpcProxy(CONFIG) as rpc:
                 result = rpc.SigProc.miscSlowDownHalf()
+        elif selectedItem == 'miscReset':
+            with ClusterRpcProxy(CONFIG) as rpc:
+                result = rpc.SigProc.miscSlowDownHalf()
         #Then, return the file
         return send_file(os.path.join(application.config['UPLOAD_FOLDER'], 'processed.ogg'))
         
