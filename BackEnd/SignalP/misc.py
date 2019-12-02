@@ -16,7 +16,7 @@ def setFile():
     shutil.move('/usr/app/src/processed.ogg', '/opt/app/src/processed.ogg')
 
 
-def NoEffect():
+def Reset():
     try:
         getFile()
         song = AudioSegment.from_ogg(inf)
