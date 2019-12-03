@@ -80,9 +80,8 @@
                         <body>
                             <div class="inp">
                                 <div class="recor">
-                                    <input id="start_button" type="button" value="Start Recording" style="margin-left: 12%;" />
+                                    <input id="start_button" type="button" value="Start Recording" style="margin-left: 5%;" />
                                     <input id="stop_button" type="button" value="Stop Recording" />
-                                    <input id="fileSel" type="file" title=" " />
                                 </div>
                             </div>
                             <form action="/home" method="POST">
@@ -91,7 +90,7 @@
                                         <div id="waveform"></div>
                                         <div id="micInput"></div>
                                     </article>
-                                    <audio id="audio_playback" controls></audio>
+                                    <audio id="audio_playback" controls onplay="restart()"></audio>
                                     <div></div>
 
                                     <select id="procMenu" onchange="getSelectedEffect()">
@@ -124,29 +123,29 @@
                 <!-- Audio Record-->
                 <div class="card mb-3">
                     <div class="card-header">
-                        <i class="fas fa-headphones-alt"></i> Track</div>
+                        <i class="fas fa-headphones-alt"></i> Audio Track</div>
                     <div class="card-body">
 
                         <body>
                             <div class="inp">
                                 <div class="recor">
 
-                                    <input id="start_button" type="button" value="Start Recording" style="margin-left: 12%;" />
-                                    <input id="stop_button" type="button" value="Stop Recording" />
-                                    <input id="fileSel" type="file" title=" " />
+                                    <input id="start_button2" type="button" value="Start Recording" style="margin-left: 12%;" />
+                                    <input id="stop_button2" type="button" value="Stop Recording" />
+                                    <input id="fileSel2" type="file" title=" " />
 
                                 </div>
                             </div>
                             <form action="/home" method="POST">
                                 <div>
                                     <article class="clip">
-                                        <div id="waveform"></div>
-                                        <div id="micInput"></div>
+                                        <div id="waveform2"></div>
+                                        <div id="micInput2"></div>
                                     </article>
-                                    <audio id="audio_playback" controls></audio>
+                                    <audio id="audio_playback2" controls></audio>
                                     <div></div>
 
-                                    <select id="procMenu" onchange="getSelectedEffect()">
+                                    <select id="procMenu2" onchange="getSelectedEffect2()">
                         <option value="select">--Select Effect--</option>
                         <option value="reverbSmallRoom" >Reverb: Small Room</option>
                         <option value="reverbCaveEffect">Reverb: Cave Effect</option>
@@ -163,8 +162,8 @@
 
 
                                 </div>
-                                <input type="button" id="process" value="Process" />
-                                <input type="button" id="save" value="Save Track" />
+                                <input type="button" id="process2" value="Process" />
+                                <input type="button" id="save2" value="Save Track" />
                             </form>
                         </body>
                     </div>

@@ -2,17 +2,29 @@
 var stopButton = document.getElementById('stop_button');
 var startButton = document.getElementById('start_button');
 var audioPlayback = document.getElementById('audio_playback');
-var downloadButton = document.getElementById('download');
 var selectedEffect = document.getElementById("procMenu");
-var fileElement = document.getElementById("fileSel");
 var effectHolder;
 var process = document.getElementById('process');
 var save = document.getElementById('save');
 stopButton.disabled = true;
-audioPlayback.disabled = true;
+//audioPlayback.disabled = true;
 
+var stopButton2 = document.getElementById('stop_button2');
+var startButton2 = document.getElementById('start_button2');
+var audioPlayback2 = document.getElementById('audio_playback2');
+var selectedEffect2 = document.getElementById("procMenu2");
+var fileElement2 = document.getElementById("fileSel2");
+var effectHolder2;
+var process2 = document.getElementById('process2');
+var save2 = document.getElementById('save2');
+stopButton2.disabled = true;
+audioPlayback2.disabled = true;
 //Iframe stuff
 var tag = document.createElement('script');
+
+var fileblob;
+
+var timeForBlob;
 
 tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -38,10 +50,35 @@ function stop() {
     player.stopVideo();
 }
 
+function restart() {
+    console.log(audioPlayback.duration);
+    if (audioPlayback.duration === Infinity) {
+        // set it to bigger than the actual duration
+        audioPlayback.currentTime = 1e101;
+        audioPlayback.ontimeupdate = function() {
+            this.ontimeupdate = () => {
+                return;
+            }
+            audioPlayback.currentTime = 0;
+        }
+    }
+    player.loadVideoById({
+        'videoId': 'uOf-JRlyzqA',
+        'startSeconds': 0,
+        'endSeconds': timeForBlob
+    });
+
+}
+
 
 function getSelectedEffect() {
     console.log(selectedEffect.options[selectedEffect.selectedIndex].value)
     effectHolder = selectedEffect.options[selectedEffect.selectedIndex].value
+}
+
+function getSelectedEffect2() {
+    console.log(selectedEffect2.options[selectedEffect2.selectedIndex].value)
+    effectHolder2 = selectedEffect2.options[selectedEffect2.selectedIndex].value
 }
 
 
@@ -77,12 +114,42 @@ const wavesurferConstraints = {
     ]
 }
 
+const wavesurferConstraints2 = {
+    container: document.getElementById('waveform2'),
+    waveColor: 'green',
+    progressColor: 'red',
+    backend: 'WebAudio',
+    plugins: [
+        WaveSurfer.cursor.create({
+            showTime: true,
+            opacity: 1,
+            customShowTimeStyle: {
+                'background-color': '#000',
+                color: '#fff',
+                padding: '4px',
+                'font-size': '14px'
+            }
+        }),
+        WaveSurfer.regions.create({
+            regions: [{
+                drag: true,
+                start: 1,
+                end: 3,
+                color: 'hsla(400, 100%, 30%, 0.5)',
+                resize: true
+            }]
+        })
+    ]
+}
+
 var getmediaConstraints = {
     audio: true
 }
-fileElement.addEventListener("change", handleFiles, false);
+fileElement2.addEventListener("change", handleFiles2, false);
 
-function handleFiles() {
+
+
+function handleFiles2() {
 
     // alert(this.value);
 
@@ -94,9 +161,124 @@ function handleFiles() {
     console.log("file name " + curFiles.size)
 
     var blobAudio = window.URL.createObjectURL(curFiles[0]);
-    wavesurfer = WaveSurfer.create(wavesurferConstraints);
+    wavesurfer = WaveSurfer.create(wavesurferConstraints2);
     wavesurfer.load(blobAudio);
-    audioPlayback.src = blobAudio
+    audioPlayback2.src = blobAudio
+
+    var chunks = [];
+
+    process2.onclick = (blob) => {
+        blob = new Blob(chunks, { 'type': 'audio/wav' }); //Creating a new blob
+
+        var effectsForBlob = new FormData();
+        effectsForBlob.append('blob', blob, 'blob.wav');
+        console.log("blob is appended" + blob);
+        console.log("blob is type " + blob.type + "  " + blob.URL)
+        if (effectHolder2 == "reverbSmallRoom") {
+            alert("effect holder value is: " + effectHolder2)
+            effectsForBlob.append('effectHolder', 'reverbSmallRoom');
+            console.log("transferring small room effect over");
+            applied = true;
+        } else if (effectHolder2 == "reverbCaveEffect") {
+            alert("effect holder value is: " + effectHolder2);
+            effectsForBlob.append('effectHolder', 'reverbCaveEffect');
+            console.log("transferring cave effect over");
+            applied = true;
+        } else if (effectHolder2 == "reverbConcertHall") {
+            alert("effect holder value is: " + effectHolder2);
+            effectsForBlob.append('effectHolder', 'reverbConcertHall');
+            console.log("transferring concert hall effect over");
+            applied = true;
+        } else if (effectHolder2 == "miscReset") {
+            alert("effect holder value is: " + effectHolder2)
+            effectsForBlob.append('effectHolder', 'miscReset');
+            applied = true;
+        } else if (effectHolder2 == "miscReverseSong") {
+            alert("effect holder value is: " + effectHolder2)
+            effectsForBlob.append('effectHolder', 'miscReverseSong')
+            console.log("transferring reverse effect over")
+            applied = true;
+        } else if (effectHolder2 == "miscSpeedUp2x") {
+            alert("effect holder value is: " + effectHolder2)
+            effectsForBlob.append('effectHolder', 'miscSpeedUp2x')
+            console.log("transferring reverse effect over")
+            applied = true;
+        } else if (effectHolder2 == "miscSlowDownHalf") {
+            alert("effect holder value is: " + effectHolder2)
+            effectsForBlob.append('effectHolder', 'miscSlowDownHalf')
+            console.log("transferring reverse effect over")
+            applied = true;
+        } else if (effectHolder2 == "phaserDefault") {
+            alert("effect holder value is: " + effectHolder2)
+            effectsForBlob.append('effectHolder', 'phaserDefault')
+            console.log("transferring reverse effect over")
+            applied = true;
+        } else if (effectHolder2 == "phaserSpaceEffect") {
+            alert("effect holder value is: " + effectHolder2)
+            effectsForBlob.append('effectHolder', 'phaserSpaceEffect')
+            console.log("transferring reverse effect over")
+            applied = true;
+        } else if (effectHolder2 == "phaserSubtle") {
+            alert("effect holder value is: " + effectHolder2)
+            effectsForBlob.append('effectHolder', 'phaserSubtle')
+            console.log("transferring reverse effect over")
+            applied = true;
+        }
+
+        console.log("process button has been pressed")
+
+
+        if (!applied) {
+            alert("Please select an effect");
+        }
+        console.log("effects for blob: ");
+        for (var value of effectsForBlob.values()) {
+            console.log(value);
+        }
+        var blobPromise = fetch('/home', {
+
+            method: 'POST',
+            // headers: { 'Content-type': 'application/octet-stream' },
+            body: effectsForBlob
+        })
+
+
+        blobPromise.then((resp) => {
+            return resp.clone().blob()
+        }).then((theBlob) => {
+            console.log("did theblob come? " + theBlob.type);
+            var a = document.createElement("a");
+
+            var blobUrlEffect = window.URL.createObjectURL(theBlob);
+            //console.log("in the process statement where bloburl is " + blobUrl)
+            a.href = blobUrlEffect;
+            //a.download = theBlob.fileName;
+            document.body.appendChild(a);
+
+            audioPlayback2.disabled = false;
+            audioPlayback2.src = blobUrlEffect;
+            console.log('Access your blob here: ' + blobUrlEffect);
+            wavesurfer = WaveSurfer.create(wavesurferConstraints2);
+            wavesurfer.load(blobUrlEffect)
+            return theBlob
+
+
+        })
+        blobPromise.catch((postErrors) => {
+                console.log("error occured " + postErrors);
+            })
+            //var clipName = prompt("Enter a name for your sound clip: ");
+            // var blob = new Blob(chunks, { 'type': 'audio/wav; codecs=opus' }); //Creating a new blob
+            // chunks = []; //Reset our chunks
+            // console.log("\nhey out of promise")
+            // console.log("blob sisze is: " + blob.size);
+    }
+
+    //console.log("Blob being sent from process? " + blobPromise.URL + " " + theBlob.type)
+
+    save2.addEventListener("click", function() {
+        onclick(blobUrl, blob)
+    })
 }
 
 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -108,6 +290,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     var onSuccess = function(stream) {
         var mediaRecorder = new MediaRecorder(stream);
         var chunks = [];
+        var chunks2 = [];
         audioPlayback.dispatchEvent(micOn);
         startButton.onclick = function() {
             stopButton.disabled = false; //Enable stopping now that we are recording
@@ -117,6 +300,16 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
             mediaRecorder.ondataavailable = e => {
                 chunks.push(e.data);
+            }
+            console.log("Media Recorder State: " + mediaRecorder.state);
+        }
+        audioPlayback2.dispatchEvent(micOn);
+        startButton2.onclick = function() {
+            stopButton2.disabled = false; //Enable stopping now that we are recording
+            mediaRecorder.start();
+
+            mediaRecorder.ondataavailable = e => {
+                chunks2.push(e.data);
             }
             console.log("Media Recorder State: " + mediaRecorder.state);
         }
@@ -130,38 +323,89 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             stopButton.disabled = true;
             console.log("Media Recorder State: " + mediaRecorder.state);
         }
+        stopButton2.onclick = function() {
+            mediaRecorder.stop();
+            stopButton2.disabled = true;
+            console.log("Media Recorder State: " + mediaRecorder.state);
+        }
         mediaRecorder.ondataavailable = function(e) { chunks.push(e.data) }; //on data available event handler
         mediaRecorder.onstop = function(e) { //on stop event handler
-            //var clipName = prompt("Enter a name for your sound clip: ");
-            var blob = new Blob(chunks, { 'type': 'audio/wav' }); //Creating a new blob
-            console.log("mediarecorder done");
-            console.log("blob file name " + blob.fileName)
-            console.log("blobl size " + blob.size)
-            console.log("blob is " + blob)
-            var blobUrl = window.URL.createObjectURL(blob);
-
-            /**
-             * Display original waveform from initial recording
-             *  
-             * */
-
-            wavesurfer = WaveSurfer.create(wavesurferConstraints);
-            wavesurfer.load(blobUrl)
-            audioPlayback.src = blobUrl;
-
-            var applied = false;
-            // Promise- return either data you want or an error takes time to fetch. 
-
-            //Promise - used for when you want a value but don't know how long it'll take to get it
-            //Fetch - used for when you need a promise that uses HTTP request methods
 
 
+            if (chunks2.length == 0 || chunks.length > 0) {
+                var chunksEff = chunks;
+                var blob = new Blob(chunks, { 'type': 'audio/wav' }); //Creating a new blob
+                console.log("mediarecorder done");
+                console.log("blob file name " + blob.fileName)
+                console.log("blobl size " + blob.size)
+                console.log("blob is " + blob)
+                console.log("Chunks length" + chunks.length)
+                var blobUrl = window.URL.createObjectURL(blob);
+                chunks = [];
 
-            var smallRoom = false;
-            var caveEffect = false;
-            var concertEffect = false;
-            var reverse = false;
-            audioPlayback.src = blobUrl;
+                /**
+                 * Display original waveform from initial recording
+                 *  
+                 * */
+
+                wavesurfer = WaveSurfer.create(wavesurferConstraints);
+                wavesurfer.load(blobUrl)
+                audioPlayback.src = blobUrl;
+                wavesurfer.on('ready', function() {
+                    timeForBlob = wavesurfer.getDuration();
+                });
+                var applied = false;
+                // Promise- return either data you want or an error takes time to fetch. 
+
+                //Promise - used for when you want a value but don't know how long it'll take to get it
+                //Fetch - used for when you need a promise that uses HTTP request methods
+
+
+
+                var smallRoom = false;
+                var caveEffect = false;
+                var concertEffect = false;
+                var reverse = false;
+                audioPlayback.src = blobUrl;
+
+
+            } else {
+                var chunksEff2 = chunks2;
+                var blob = new Blob(chunks2, { 'type': 'audio/wav' }); //Creating a new blob
+                console.log("mediarecorder done");
+                console.log("blob file name " + blob.fileName)
+                console.log("blobl size " + blob.size)
+                console.log("blob is " + blob)
+                chunks2 = [];
+                console.log("Chunks2 length" + chunks2.length)
+                var blobUrl = window.URL.createObjectURL(blob);
+
+                /**
+                 * Display original waveform from initial recording
+                 *  
+                 * */
+
+                wavesurfer = WaveSurfer.create(wavesurferConstraints2);
+                wavesurfer.load(blobUrl)
+                audioPlayback2.src = blobUrl;
+
+                var applied = false;
+                // Promise- return either data you want or an error takes time to fetch. 
+
+                //Promise - used for when you want a value but don't know how long it'll take to get it
+                //Fetch - used for when you need a promise that uses HTTP request methods
+
+
+
+                var smallRoom = false;
+                var caveEffect = false;
+                var concertEffect = false;
+                var reverse = false;
+                audioPlayback2.src = blobUrl;
+
+
+            }
+
 
             const onclick = (blobUrl, blob) => {
                 console.log("blob is " + blob)
@@ -182,12 +426,13 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 a.click()
                 console.log("a.download" + a + "   " + a.download)
                 console.log("should download by now")
+
+
             }
 
-
-
             process.onclick = (blob) => {
-                blob = new Blob(chunks, { 'type': 'audio/wav' }); //Creating a new blob
+                blob = new Blob(chunksEff, { 'type': 'audio/wav' }); //Creating a new blob
+                console.log("blobl size in process " + blob.size)
 
                 var effectsForBlob = new FormData();
                 effectsForBlob.append('blob', blob, 'blob.wav');
@@ -208,10 +453,10 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     effectsForBlob.append('effectHolder', 'reverbConcertHall');
                     console.log("transferring concert hall effect over");
                     applied = true;
-		} else if (effectHolder == "miscReset") {
-		    alert("effect holder value is: " + effectHolder)
-		    effectsForBlob.append('effectHolder', 'miscReset');
-		    applied = true;
+                } else if (effectHolder == "miscReset") {
+                    alert("effect holder value is: " + effectHolder)
+                    effectsForBlob.append('effectHolder', 'miscReset');
+                    applied = true;
                 } else if (effectHolder == "miscReverseSong") {
                     alert("effect holder value is: " + effectHolder)
                     effectsForBlob.append('effectHolder', 'miscReverseSong')
@@ -293,12 +538,123 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     // console.log("blob sisze is: " + blob.size);
             }
 
-            console.log("What is new blob " + blob.URL)
-                //console.log("Blob being sent from process? " + blobPromise.URL + " " + theBlob.type)
+            process2.onclick = (blob) => {
+                blob = new Blob(chunksEff2, { 'type': 'audio/wav' }); //Creating a new blob
+
+                var effectsForBlob = new FormData();
+                effectsForBlob.append('blob', blob, 'blob.wav');
+                console.log("blob is appended" + blob);
+                console.log("blob is type " + blob.type + "  " + blob.URL)
+                if (effectHolder2 == "reverbSmallRoom") {
+                    alert("effect holder value is: " + effectHolder2)
+                    effectsForBlob.append('effectHolder', 'reverbSmallRoom');
+                    console.log("transferring small room effect over");
+                    applied = true;
+                } else if (effectHolder2 == "reverbCaveEffect") {
+                    alert("effect holder value is: " + effectHolder2);
+                    effectsForBlob.append('effectHolder', 'reverbCaveEffect');
+                    console.log("transferring cave effect over");
+                    applied = true;
+                } else if (effectHolder2 == "reverbConcertHall") {
+                    alert("effect holder value is: " + effectHolder2);
+                    effectsForBlob.append('effectHolder', 'reverbConcertHall');
+                    console.log("transferring concert hall effect over");
+                    applied = true;
+                } else if (effectHolder2 == "miscReset") {
+                    alert("effect holder value is: " + effectHolder2)
+                    effectsForBlob.append('effectHolder', 'miscReset');
+                    applied = true;
+                } else if (effectHolder2 == "miscReverseSong") {
+                    alert("effect holder value is: " + effectHolder2)
+                    effectsForBlob.append('effectHolder', 'miscReverseSong')
+                    console.log("transferring reverse effect over")
+                    applied = true;
+                } else if (effectHolder2 == "miscSpeedUp2x") {
+                    alert("effect holder value is: " + effectHolder2)
+                    effectsForBlob.append('effectHolder', 'miscSpeedUp2x')
+                    console.log("transferring reverse effect over")
+                    applied = true;
+                } else if (effectHolder2 == "miscSlowDownHalf") {
+                    alert("effect holder value is: " + effectHolder2)
+                    effectsForBlob.append('effectHolder', 'miscSlowDownHalf')
+                    console.log("transferring reverse effect over")
+                    applied = true;
+                } else if (effectHolder2 == "phaserDefault") {
+                    alert("effect holder value is: " + effectHolder2)
+                    effectsForBlob.append('effectHolder', 'phaserDefault')
+                    console.log("transferring reverse effect over")
+                    applied = true;
+                } else if (effectHolder2 == "phaserSpaceEffect") {
+                    alert("effect holder value is: " + effectHolder2)
+                    effectsForBlob.append('effectHolder', 'phaserSpaceEffect')
+                    console.log("transferring reverse effect over")
+                    applied = true;
+                } else if (effectHolder2 == "phaserSubtle") {
+                    alert("effect holder value is: " + effectHolder2)
+                    effectsForBlob.append('effectHolder', 'phaserSubtle')
+                    console.log("transferring reverse effect over")
+                    applied = true;
+                }
+
+                console.log("process button has been pressed")
+
+
+                if (!applied) {
+                    alert("Please select an effect");
+                }
+                console.log("effects for blob: ");
+                for (var value of effectsForBlob.values()) {
+                    console.log(value);
+                }
+                var blobPromise = fetch('/home', {
+
+                    method: 'POST',
+                    // headers: { 'Content-type': 'application/octet-stream' },
+                    body: effectsForBlob
+                })
+
+
+                blobPromise.then((resp) => {
+                    return resp.clone().blob()
+                }).then((theBlob) => {
+                    console.log("did theblob come? " + theBlob.type);
+                    var a = document.createElement("a");
+
+                    var blobUrlEffect = window.URL.createObjectURL(theBlob);
+                    console.log("in the process statement where bloburl is " + blobUrl)
+                    a.href = blobUrlEffect;
+                    //a.download = theBlob.fileName;
+                    document.body.appendChild(a);
+
+                    audioPlayback2.disabled = false;
+                    audioPlayback2.src = blobUrlEffect;
+                    console.log('Access your blob here: ' + blobUrlEffect);
+                    wavesurfer = WaveSurfer.create(wavesurferConstraints2);
+                    wavesurfer.load(blobUrlEffect)
+                    return theBlob
+
+
+                })
+                blobPromise.catch((postErrors) => {
+                        console.log("error occured " + postErrors);
+                    })
+                    //var clipName = prompt("Enter a name for your sound clip: ");
+                    // var blob = new Blob(chunks, { 'type': 'audio/wav; codecs=opus' }); //Creating a new blob
+                    // chunks = []; //Reset our chunks
+                    // console.log("\nhey out of promise")
+                    // console.log("blob sisze is: " + blob.size);
+            }
+
+            //console.log("What is new blob " + blob.URL)
+            //console.log("Blob being sent from process? " + blobPromise.URL + " " + theBlob.type)
 
             save.addEventListener("click", function() {
                 onclick(blobUrl, blob)
             })
+            save2.addEventListener("click", function() {
+                onclick(blobUrl, blob)
+            })
+
 
 
 
