@@ -333,14 +333,15 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
 
             if (chunks2.length == 0 || chunks.length > 0) {
+                var chunksEff = chunks;
                 var blob = new Blob(chunks, { 'type': 'audio/wav' }); //Creating a new blob
                 console.log("mediarecorder done");
                 console.log("blob file name " + blob.fileName)
                 console.log("blobl size " + blob.size)
                 console.log("blob is " + blob)
-                chunks = [];
                 console.log("Chunks length" + chunks.length)
                 var blobUrl = window.URL.createObjectURL(blob);
+                chunks = [];
 
                 /**
                  * Display original waveform from initial recording
@@ -387,6 +388,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
                 }
             } else {
+                var chunksEff2 = chunks2;
                 var blob = new Blob(chunks2, { 'type': 'audio/wav' }); //Creating a new blob
                 console.log("mediarecorder done");
                 console.log("blob file name " + blob.fileName)
@@ -447,7 +449,8 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
 
             process.onclick = (blob) => {
-                blob = new Blob(chunks, { 'type': 'audio/wav' }); //Creating a new blob
+                blob = new Blob(chunksEff, { 'type': 'audio/wav' }); //Creating a new blob
+                console.log("blobl size in process " + blob.size)
 
                 var effectsForBlob = new FormData();
                 effectsForBlob.append('blob', blob, 'blob.wav');
@@ -554,7 +557,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             }
 
             process2.onclick = (blob) => {
-                blob = new Blob(chunks, { 'type': 'audio/wav' }); //Creating a new blob
+                blob = new Blob(chunksEff2, { 'type': 'audio/wav' }); //Creating a new blob
 
                 var effectsForBlob = new FormData();
                 effectsForBlob.append('blob', blob, 'blob.wav');
@@ -666,6 +669,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             save.addEventListener("click", function() {
                 onclick(blobUrl, blob)
             })
+
 
 
 
