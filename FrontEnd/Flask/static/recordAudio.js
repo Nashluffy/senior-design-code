@@ -276,7 +276,7 @@ function handleFiles2() {
 
     //console.log("Blob being sent from process? " + blobPromise.URL + " " + theBlob.type)
 
-    save.addEventListener("click", function() {
+    save2.addEventListener("click", function() {
         onclick(blobUrl, blob)
     })
 }
@@ -368,25 +368,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 var reverse = false;
                 audioPlayback.src = blobUrl;
 
-                const onclick = (blobUrl, blob) => {
-                    console.log("blob is " + blob)
-                        // var downloadable = new Blob(chunks, { 'type': 'audio/wav' }); //Creating a new blob
-                        // var blobDown = window.URL.createObjectURL(downloadable)
-                    var a = document.createElement("a");
-                    a.href = blobUrl
-                    a.setAttribute("download", blob.fileName)
-                        //download(downloadable, "song.wav", "audio/wav")
-                        //a.target = '_blank'
 
-                    console.log("saved clicked")
-                    console.log("blob file name " + blob.fileName)
-                    console.log("blobl size " + blob.size)
-                    console.log("blob is " + blob)
-                        //a.download = downloadable.fileName
-
-
-
-                }
             } else {
                 var chunksEff2 = chunks2;
                 var blob = new Blob(chunks2, { 'type': 'audio/wav' }); //Creating a new blob
@@ -421,32 +403,32 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 var reverse = false;
                 audioPlayback2.src = blobUrl;
 
-                const onclick = (blobUrl, blob) => {
-                    console.log("blob is " + blob)
-                        // var downloadable = new Blob(chunks, { 'type': 'audio/wav' }); //Creating a new blob
-                        // var blobDown = window.URL.createObjectURL(downloadable)
-                    var a = document.createElement("a");
-                    a.href = blobUrl
-                    a.setAttribute("download", blob.fileName)
-                        //download(downloadable, "song.wav", "audio/wav")
-                        //a.target = '_blank'
-                    console.log("saved clicked")
-                    console.log("blob file name " + blob.fileName)
-                    console.log("blobl size " + blob.size)
-                    console.log("blob is " + blob)
-                        //a.download = downloadable.fileName
-                    document.body.appendChild(a)
 
-                    a.click()
-                    console.log("a.download" + a + "   " + a.download)
-                    console.log("should download by now")
-
-
-                }
             }
 
 
+            const onclick = (blobUrl, blob) => {
+                console.log("blob is " + blob)
+                    // var downloadable = new Blob(chunks, { 'type': 'audio/wav' }); //Creating a new blob
+                    // var blobDown = window.URL.createObjectURL(downloadable)
+                var a = document.createElement("a");
+                a.href = blobUrl
+                a.setAttribute("download", blob.fileName)
+                    //download(downloadable, "song.wav", "audio/wav")
+                    //a.target = '_blank'
+                console.log("saved clicked")
+                console.log("blob file name " + blob.fileName)
+                console.log("blobl size " + blob.size)
+                console.log("blob is " + blob)
+                    //a.download = downloadable.fileName
+                document.body.appendChild(a)
 
+                a.click()
+                console.log("a.download" + a + "   " + a.download)
+                console.log("should download by now")
+
+
+            }
 
             process.onclick = (blob) => {
                 blob = new Blob(chunksEff, { 'type': 'audio/wav' }); //Creating a new blob
@@ -669,7 +651,9 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             save.addEventListener("click", function() {
                 onclick(blobUrl, blob)
             })
-
+            save2.addEventListener("click", function() {
+                onclick(blobUrl, blob)
+            })
 
 
 
